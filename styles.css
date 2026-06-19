@@ -57,29 +57,6 @@ h2{
     background:rgba(0,0,0,0.2);
 }
 
-.f1-title{
-    position:relative;
-    z-index:2;
-
-    font-size:4rem;
-    font-weight:900;
-
-    color:#E10600;
-
-    text-transform:uppercase;
-    letter-spacing:3px;
-
-    text-shadow:
-        1px 1px 0 #b30000,
-        2px 2px 0 #990000,
-        3px 3px 0 #7a0000,
-        4px 4px 0 #5c0000,
-        5px 5px 15px rgba(0,0,0,.8);
-
-    margin:0;
-    line-height:1;
-}
-
 .hero-subtitle{
     position:relative;
     z-index:2;
@@ -398,7 +375,7 @@ hr{
     }
 
     .f1-title{
-        font-size:2.5rem;
+        line-height:1.1;
     }
 
     .hamburger-btn{
@@ -447,8 +424,10 @@ hr{
     padding:20px;
 }
 .f1-title{
+    position:relative;
+    z-index:3;
 
-    font-size:4.5rem;
+    font-size:clamp(2rem, 8vw, 4.5rem);
     font-weight:900;
 
     color:white;
@@ -463,6 +442,7 @@ hr{
         0 5px 12px rgba(0,0,0,.8);
 
     margin:0;
+    line-height:1.1;
 }
 .hero-subtitle{
 
@@ -498,3 +478,4 @@ hr{
 
     z-index:4;
 }
+
