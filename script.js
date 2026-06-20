@@ -23,71 +23,164 @@ const drivers = [
   "Antonelli"
 ];
 
-const driversSorted = [...drivers].sort();
+const driversSorted = [...drivers].sort((a, b) =>
+  a.localeCompare(b)
+);
 
 /* =========================
    CONTENITORI DOM
 ========================= */
-const qualiContainer = document.getElementById("quali-predictions");
-const qualiResults = document.getElementById("quali-results");
 
-const racePredictions = document.getElementById("race-predictions");
-const raceResults = document.getElementById("race-results");
+const qualiContainer =
+  document.getElementById("quali-predictions");
+
+const qualiResults =
+  document.getElementById("quali-results");
+
+const sprintQualiPredictions =
+  document.getElementById("sprintquali-predictions");
+
+const sprintQualiResults =
+  document.getElementById("sprintquali-results");
+
+const sprintPredictions =
+  document.getElementById("sprint-predictions");
+
+const sprintResults =
+  document.getElementById("sprint-results");
+
+const racePredictions =
+  document.getElementById("race-predictions");
+
+const raceResults =
+  document.getElementById("race-results");
 
 /* =========================
-   GENERAZIONE SELECT QUALIFICHE
+   GENERAZIONE QUALIFICHE
 ========================= */
+
 for (let i = 1; i <= 5; i++) {
 
-  let options =
+  const options =
     `<option value="">Seleziona pilota</option>` +
-    driversSorted.map(d => `<option value="${d}">${d}</option>`).join("");
+    driversSorted.map(
+      d => `<option value="${d}">${d}</option>`
+    ).join("");
 
   qualiContainer.innerHTML += `
     <div class="input-row">
-        <span>${i}°</span>
-        <select id="qp${i}" class="driver-select">
-            ${options}
-        </select>
-    </div>`;
+      <span>${i}°</span>
+      <select id="qp${i}" class="driver-select">
+        ${options}
+      </select>
+    </div>
+  `;
 
   qualiResults.innerHTML += `
     <div class="input-row">
-        <span>${i}°</span>
-        <select id="qr${i}" class="driver-select">
-            ${options}
-        </select>
-    </div>`;
+      <span>${i}°</span>
+      <select id="qr${i}" class="driver-select">
+        ${options}
+      </select>
+    </div>
+  `;
 }
 
 /* =========================
-   GENERAZIONE SELECT GARA
+   GENERAZIONE SPRINT QUALIFYING
 ========================= */
+
+for (let i = 1; i <= 5; i++) {
+
+  const options =
+    `<option value="">Seleziona pilota</option>` +
+    driversSorted.map(
+      d => `<option value="${d}">${d}</option>`
+    ).join("");
+
+  sprintQualiPredictions.innerHTML += `
+    <div class="input-row">
+      <span>${i}°</span>
+      <select id="sqp${i}" class="driver-select">
+        ${options}
+      </select>
+    </div>
+  `;
+
+  sprintQualiResults.innerHTML += `
+    <div class="input-row">
+      <span>${i}°</span>
+      <select id="sqr${i}" class="driver-select">
+        ${options}
+      </select>
+    </div>
+  `;
+}
+
+/* =========================
+   GENERAZIONE SPRINT RACE
+========================= */
+
+for (let i = 1; i <= 8; i++) {
+
+  const options =
+    `<option value="">Seleziona pilota</option>` +
+    driversSorted.map(
+      d => `<option value="${d}">${d}</option>`
+    ).join("");
+
+  sprintPredictions.innerHTML += `
+    <div class="input-row">
+      <span>${i}°</span>
+      <select id="sp${i}" class="driver-select">
+        ${options}
+      </select>
+    </div>
+  `;
+
+  sprintResults.innerHTML += `
+    <div class="input-row">
+      <span>${i}°</span>
+      <select id="sr${i}" class="driver-select">
+        ${options}
+      </select>
+    </div>
+  `;
+}
+
+/* =========================
+   GENERAZIONE GARA
+========================= */
+
 for (let i = 1; i <= 10; i++) {
 
-  let options =
+  const options =
     `<option value="">Seleziona pilota</option>` +
-    driversSorted.map(d => `<option value="${d}">${d}</option>`).join("");
+    driversSorted.map(
+      d => `<option value="${d}">${d}</option>`
+    ).join("");
 
   racePredictions.innerHTML += `
     <div class="input-row">
-        <span>${i}°</span>
-        <select id="rp${i}" class="driver-select">
-            ${options}
-        </select>
-    </div>`;
+      <span>${i}°</span>
+      <select id="rp${i}" class="driver-select">
+        ${options}
+      </select>
+    </div>
+  `;
 
   raceResults.innerHTML += `
     <div class="input-row">
-        <span>${i}°</span>
-        <select id="rr${i}" class="driver-select">
-            ${options}
-        </select>
-    </div>`;
+      <span>${i}°</span>
+      <select id="rr${i}" class="driver-select">
+        ${options}
+      </select>
+    </div>
+  `;
 }
 
 /* =========================
-   BLOCCO DUPLICATI PILOTI
+   BLOCCO DUPLICATI
 ========================= */
 
 function getSelectsInContainer(containerId) {
@@ -100,7 +193,6 @@ function getSelectsInContainer(containerId) {
   return Array.from(
     container.querySelectorAll(".driver-select")
   );
-
 }
 
 function updateDriverLocks(containerId) {
@@ -108,7 +200,6 @@ function updateDriverLocks(containerId) {
   const selects =
     getSelectsInContainer(containerId);
 
-  // reset opzioni
   selects.forEach(select => {
 
     Array.from(select.options).forEach(option => {
@@ -117,12 +208,10 @@ function updateDriverLocks(containerId) {
 
   });
 
-  // piloti selezionati
   const selectedDrivers = selects
     .map(select => select.value)
     .filter(value => value !== "");
 
-  // blocca duplicati
   selects.forEach(select => {
 
     Array.from(select.options).forEach(option => {
@@ -139,45 +228,44 @@ function updateDriverLocks(containerId) {
     });
 
   });
-
 }
 
 /* =========================
    AVVIO PAGINA
 ========================= */
 
-document.addEventListener("DOMContentLoaded", () => {
+const containers = [
+  "quali-predictions",
+  "quali-results",
+  "sprintquali-predictions",
+  "sprintquali-results",
+  "sprint-predictions",
+  "sprint-results",
+  "race-predictions",
+  "race-results"
+];
 
-  const containers = [
-    "quali-predictions",
-    "quali-results",
-    "race-predictions",
-    "race-results"
-  ];
+containers.forEach(containerId => {
 
-  containers.forEach(containerId => {
+  const selects =
+    getSelectsInContainer(containerId);
 
-    const selects =
-      getSelectsInContainer(containerId);
+  selects.forEach(select => {
 
-    selects.forEach(select => {
-
-      select.addEventListener("change", () => {
-        updateDriverLocks(containerId);
-      });
-
+    select.addEventListener("change", () => {
+      updateDriverLocks(containerId);
     });
-
-    updateDriverLocks(containerId);
 
   });
 
-  showSection("app");
+  updateDriverLocks(containerId);
 
 });
+
 /* =========================
    PUNTEGGI QUALIFICHE
 ========================= */
+
 const qualiBonus = {
   1: 10,
   2: 8,
@@ -185,53 +273,25 @@ const qualiBonus = {
   4: 4,
   5: 2
 };
+/* =========================
+   SPRINT RACE
+========================= */
 
-function calculateQuali() {
-
-  let score = 0;
-  let details = "";
-
-  const prediction = [];
-  const result = [];
-
-  for (let i = 1; i <= 5; i++) {
-
-    prediction.push(
-      document.getElementById(`qp${i}`).value?.trim().toLowerCase() || ""
-    );
-
-    result.push(
-      document.getElementById(`qr${i}`).value?.trim().toLowerCase() || ""
-    );
-  }
-
-  for (let i = 0; i < 5; i++) {
-
-    const driver = prediction[i];
-
-    if (driver === result[i]) {
-      const pts = qualiBonus[i + 1];
-      score += pts;
-      details += `${i + 1}° ${driver} ✔️ +${pts}<br>`;
-    }
-    else if (result.includes(driver) && driver !== "") {
-      score += 1;
-      details += `${i + 1}° ${driver} ✔️ (posizione sbagliata) +1<br>`;
-    }
-    else {
-      details += `${i + 1}° ${driver} ❌ +0<br>`;
-    }
-  }
-
-  document.getElementById("qualiScore").textContent = `${score} punti`;
-  document.getElementById("qualiDetail").innerHTML = details;
-
-  return score;
-}
+const sprintRacePoints = {
+  1: 8,
+  2: 7,
+  3: 6,
+  4: 5,
+  5: 4,
+  6: 3,
+  7: 2,
+  8: 1
+};
 
 /* =========================
-   PUNTEGGI GARA
+   GARA
 ========================= */
+
 const racePoints = {
   1: 25,
   2: 18,
@@ -245,7 +305,19 @@ const racePoints = {
   10: 1
 };
 
-function calculateRace() {
+/* =========================
+   FUNZIONE GENERICA PUNTEGGI
+========================= */
+
+function calculateScore({
+  predictionPrefix,
+  resultPrefix,
+  positions,
+  pointsTable,
+  wrongPositionPoints,
+  scoreElement,
+  detailElement
+}) {
 
   let score = 0;
   let details = "";
@@ -253,62 +325,163 @@ function calculateRace() {
   const prediction = [];
   const result = [];
 
-  for (let i = 1; i <= 10; i++) {
+  for (let i = 1; i <= positions; i++) {
 
     prediction.push(
-      document.getElementById(`rp${i}`).value?.trim().toLowerCase() || ""
+      document.getElementById(`${predictionPrefix}${i}`)
+        ?.value
+        ?.trim()
+        .toLowerCase() || ""
     );
 
     result.push(
-      document.getElementById(`rr${i}`).value?.trim().toLowerCase() || ""
+      document.getElementById(`${resultPrefix}${i}`)
+        ?.value
+        ?.trim()
+        .toLowerCase() || ""
     );
   }
 
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < positions; i++) {
 
     const driver = prediction[i];
 
     if (driver === result[i]) {
-      const pts = racePoints[i + 1];
+
+      const pts = pointsTable[i + 1] || 0;
+
       score += pts;
-      details += `${i + 1}° ${driver} ✔️ +${pts}<br>`;
-    }
-    else if (result.includes(driver) && driver !== "") {
-      score += 2;
-      details += `${i + 1}° ${driver} ✔️ (posizione sbagliata) +2<br>`;
-    }
-    else {
-      details += `${i + 1}° ${driver} ❌ +0<br>`;
+
+      details +=
+        `${i + 1}° ${driver} ✔️ +${pts}<br>`;
+
+    } else if (
+      result.includes(driver) &&
+      driver !== ""
+    ) {
+
+      score += wrongPositionPoints;
+
+      details +=
+        `${i + 1}° ${driver} ✔️ +${wrongPositionPoints}<br>`;
+
+    } else {
+
+      details +=
+        `${i + 1}° ${driver} ❌ +0<br>`;
     }
   }
 
-  document.getElementById("raceScore").textContent = `${score} punti`;
-  document.getElementById("raceDetail").innerHTML = details;
+  document.getElementById(scoreElement).textContent =
+    `${score} punti`;
+
+  document.getElementById(detailElement).innerHTML =
+    details;
 
   return score;
 }
+/* =========================
+   FUNZIONI CALCOLO
+========================= */
 
+function calculateQuali() {
+
+  return calculateScore({
+    predictionPrefix: "qp",
+    resultPrefix: "qr",
+    positions: 5,
+    pointsTable: qualiBonus,
+    wrongPositionPoints: 1,
+    scoreElement: "qualiScore",
+    detailElement: "qualiDetail"
+  });
+
+}
+
+function calculateSprintQuali() {
+
+  return calculateScore({
+    predictionPrefix: "sqp",
+    resultPrefix: "sqr",
+    positions: 5,
+    pointsTable: qualiBonus,
+    wrongPositionPoints: 1,
+    scoreElement: "sprintQualiScore",
+    detailElement: "sprintQualiDetail"
+  });
+
+}
+
+function calculateSprintRace() {
+
+  return calculateScore({
+    predictionPrefix: "sp",
+    resultPrefix: "sr",
+    positions: 8,
+    pointsTable: sprintRacePoints,
+    wrongPositionPoints: 1, // metti 2 se vuoi come la gara
+    scoreElement: "sprintRaceScore",
+    detailElement: "sprintRaceDetail"
+  });
+
+}
+
+function calculateRace() {
+
+  return calculateScore({
+    predictionPrefix: "rp",
+    resultPrefix: "rr",
+    positions: 10,
+    pointsTable: racePoints,
+    wrongPositionPoints: 2,
+    scoreElement: "raceScore",
+    detailElement: "raceDetail"
+  });
+
+}
 /* =========================
    BOTTONI
 ========================= */
-document.getElementById("calculateQuali")
-.addEventListener("click", calculateQuali);
 
-document.getElementById("calculateRace")
-.addEventListener("click", calculateRace);
+document
+  .getElementById("calculateQuali")
+  .addEventListener("click", calculateQuali);
 
-document.getElementById("calculateTotal")
-.addEventListener("click", () => {
+document
+  .getElementById("calculateSprintQuali")
+  .addEventListener("click", calculateSprintQuali);
 
-  const total = calculateQuali() + calculateRace();
+document
+  .getElementById("calculateSprintRace")
+  .addEventListener("click", calculateSprintRace);
 
-  document.getElementById("totalScore")
-    .textContent = `Totale Weekend: ${total} punti`;
-});
+document
+  .getElementById("calculateRace")
+  .addEventListener("click", calculateRace);
+
+/* =========================
+   TOTALE WEEKEND
+========================= */
+
+document
+  .getElementById("calculateTotal")
+  .addEventListener("click", () => {
+
+    const total =
+      calculateQuali() +
+      calculateSprintQuali() +
+      calculateSprintRace() +
+      calculateRace();
+
+    document.getElementById("totalScore").textContent =
+      `Totale Weekend: ${total} punti`;
+
+  });
 
 /* =========================
    MENU
 ========================= */
+
 function showSection(id) {
 
   document
@@ -316,41 +489,42 @@ function showSection(id) {
     .forEach(panel => {
       panel.style.display = "none";
     });
-
-  const target =
+  
+    const target =
     document.getElementById(id);
 
-  if(target){
+  if (target) {
     target.style.display = "block";
   }
 
-  if(sideMenu){
+  if (sideMenu) {
     sideMenu.classList.remove("open");
   }
 
-  if(menuToggle){
+  if (menuToggle) {
     menuToggle.classList.remove("active");
   }
 
 }
+
 /* =========================
    MENU HAMBURGER
 ========================= */
 
 const menuToggle =
-document.getElementById("menuToggle");
+  document.getElementById("menuToggle");
 
 const sideMenu =
-document.getElementById("sideMenu");
+  document.getElementById("sideMenu");
 
 if (menuToggle && sideMenu) {
 
   menuToggle.addEventListener("click", () => {
 
     menuToggle.classList.toggle("active");
-
     sideMenu.classList.toggle("open");
 
   });
 
 }
+showSection("app");
