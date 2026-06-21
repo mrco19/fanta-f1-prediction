@@ -79,21 +79,19 @@
     <div class="container">
 
         <!-- QUALIFICHE -->
-        <section>
+        <div class="prediction-grid">
 
-            <h2>Pronostico Qualifiche</h2>
+            <section>
+                <h2>Pronostico Qualifiche</h2>
+                <div id="quali-predictions"></div>
+            </section>
 
-            <div id="quali-predictions"></div>
+            <section>
+                <h2>Risultati Qualifiche</h2>
+                <div id="quali-results"></div>
+            </section>
 
-        </section>
-
-        <section>
-
-            <h2>Risultati Qualifiche</h2>
-
-            <div id="quali-results"></div>
-
-        </section>
+        </div>
 
         <section>
 
@@ -102,13 +100,10 @@
             </button>
 
             <div class="score-box" id="qualiBreakdown">
-
                 <h3>Riepilogo punti qualifiche</h3>
-
                 <p id="qualiDetail">
                     Nessun calcolo ancora
                 </p>
-
             </div>
 
             <p id="qualiScore">
@@ -118,101 +113,99 @@
         </section>
 
         <hr>
-<hr>
 
-<section>
+        <!-- SPRINT QUALIFYING -->
+        <div class="prediction-grid">
 
-    <h2>Pronostico Sprint Qualifying</h2>
+            <section>
+                <h2>Pronostico Sprint Qualifying</h2>
+                <div id="sprintquali-predictions"></div>
+            </section>
 
-    <div id="sprintquali-predictions"></div>
+            <section>
+                <h2>Risultati Sprint Qualifying</h2>
+                <div id="sprintquali-results"></div>
+            </section>
 
-</section>
+        </div>
 
-<section>
+        <section>
 
-    <h2>Risultati Sprint Qualifying</h2>
+            <button id="calculateSprintQuali">
+                Calcola Sprint Qualifying
+            </button>
 
-    <div id="sprintquali-results"></div>
+            <div class="score-box">
 
-</section>
+                <h3>Riepilogo Sprint Qualifying</h3>
 
-<section>
+                <p id="sprintQualiDetail">
+                    Nessun calcolo ancora
+                </p>
 
-    <button id="calculateSprintQuali">
-        Calcola Sprint Qualifying
-    </button>
+            </div>
 
-    <div class="score-box">
+            <p id="sprintQualiScore">
+                0 punti
+            </p>
 
-        <h3>Riepilogo Sprint Qualifying</h3>
+        </section>
 
-        <p id="sprintQualiDetail">
-            Nessun calcolo ancora
-        </p>
+        <hr>
 
-    </div>
+        <!-- SPRINT RACE -->
+        <div class="prediction-grid">
 
-    <p id="sprintQualiScore">
-        0 punti
-    </p>
+            <section>
+                <h2>Pronostico Sprint Race</h2>
+                <div id="sprint-predictions"></div>
+            </section>
 
-</section>
+            <section>
+                <h2>Risultati Sprint Race</h2>
+                <div id="sprint-results"></div>
+            </section>
 
-<hr>
+        </div>
 
-<section>
+        <section>
 
-    <h2>Pronostico Sprint Race</h2>
+            <button id="calculateSprintRace">
+                Calcola Sprint Race
+            </button>
 
-    <div id="sprint-predictions"></div>
+            <div class="score-box">
 
-</section>
+                <h3>Riepilogo Sprint Race</h3>
 
-<section>
+                <p id="sprintRaceDetail">
+                    Nessun calcolo ancora
+                </p>
 
-    <h2>Risultati Sprint Race</h2>
+            </div>
 
-    <div id="sprint-results"></div>
+            <p id="sprintRaceScore">
+                0 punti
+            </p>
 
-</section>
+        </section>
 
-<section>
+        <hr>
 
-    <button id="calculateSprintRace">
-        Calcola Sprint Race
-    </button>
-
-    <div class="score-box">
-
-        <h3>Riepilogo Sprint Race</h3>
-
-        <p id="sprintRaceDetail">
-            Nessun calcolo ancora
-        </p>
-
-    </div>
-
-    <p id="sprintRaceScore">
-        0 punti
-    </p>
-
-</section>
         <!-- GARA -->
-        <section>
+        <div class="prediction-grid">
 
-            <h2>Pronostico Gara</h2>
+            <section>
+                <h2>Pronostico Gara</h2>
+                <div id="race-predictions"></div>
+            </section>
 
-            <div id="race-predictions"></div>
+            <section>
+                <h2>Risultati Gara</h2>
+                <div id="race-results"></div>
+            </section>
 
-        </section>
-
-        <section>
-
-            <h2>Risultati Gara</h2>
-
-            <div id="race-results"></div>
-
-        </section>
+        </div>
 
         <section>
 
@@ -238,7 +231,7 @@
 
         <hr>
 
-        <!-- TOTALE -->
+        <!-- TOTALE WEEKEND -->
         <section>
 
             <button id="calculateTotal">
@@ -258,51 +251,56 @@
 <!-- REGOLAMENTO -->
 <div id="rules" class="panel" style="display:none;">
 
-    <section>
+    <div class="container">
 
-        <h2>Regolamento Fanta F1</h2>
+        <section>
 
-        <p>
-            Inserisci qui le regole del tuo gioco.
-        </p>
+            <h2>📜 Regolamento Fanta F1</h2>
 
-    </section>
+            <p>
+                Inserisci qui le regole del tuo gioco.
+            </p>
+
+        </section>
+
+    </div>
 
 </div>
 
 <!-- CLASSIFICA -->
 <div id="ranking" class="panel" style="display:none;">
 
-    <section>
+    <div class="container">
 
-        <h2>Classifica</h2>
+        <section>
 
-        <p>
-            Qui comparirà la classifica dei giocatori.
-        </p>
+            <h2>📊 Classifica</h2>
 
-    </section>
+            <p>
+                Qui comparirà la classifica dei giocatori.
+            </p>
+
+        </section>
+
+    </div>
 
 </div>
 
 <!-- INFO -->
 <div id="info" class="panel" style="display:none;">
 
-    <section>
+    <div class="container">
 
-        <h2>Info</h2>
+        <section>
 
-        <p>
-            App Fanta F1 creata per divertimento.
-        </p>
+            <h2>ℹ️ Informazioni</h2>
 
-    </section>
+            <p>
+                App Fanta F1 creata per divertimento.
+            </p>
+
+        </section>
+
+    </div>
 
 </div>
-
-<script src="script.js"></script>
-```
-
-</body>
-</html>
-
