@@ -475,8 +475,9 @@ hr{
 
     background-image:url("f1-2026-fia-car-renders.jpg");
 
-    background-size:cover;
-    background-position: 55% center;
+    background-size:contain;
+    background-repeat:no-repeat;
+    background-position:center;
 
     filter:brightness(.65);
 
