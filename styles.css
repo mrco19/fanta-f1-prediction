@@ -447,7 +447,7 @@ hr{
     }
 
     .hero{
-        min-height:300px;
+        min-height:260px;
     }
 
     .f1-title{
@@ -477,7 +477,7 @@ hr{
 
     background-size:contain;
     background-repeat:no-repeat;
-    background-position:center center;
+    background-position:center;
 
     filter:brightness(.65);
 
