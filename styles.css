@@ -496,4 +496,45 @@ hr{
     }
 
 }
+.input-row{
+    position:relative;
+}
+
+.input-row::after{
+
+    content:"▼";
+
+    position:absolute;
+
+    right:18px;
+    top:50%;
+
+    transform:translateY(-50%);
+
+    width:28px;
+    height:28px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-size:12px;
+    font-weight:900;
+
+    color:white;
+
+    border-radius:8px;
+
+    background:linear-gradient(
+        145deg,
+        #E10600,
+        #8b0000
+    );
+
+    box-shadow:
+        0 3px 0 #5a0000,
+        0 6px 12px rgba(0,0,0,.4);
+
+    pointer-events:none;
+}
 
