@@ -447,11 +447,11 @@ hr{
     }
 
     .hero{
-        min-height:320px;
+        min-height:380px;
     }
 
   .hero-bg{
-    background-size:100% auto;
+    background-size:contain;
     background-repeat:no-repeat;
     background-position:center;
 }
