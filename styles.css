@@ -475,4 +475,25 @@ hr{
 
     z-index:4;
 }
+.prediction-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:30px;
+    margin-bottom:20px;
+}
+
+.prediction-grid section{
+    background:rgba(255,255,255,0.05);
+    padding:20px;
+    border-radius:20px;
+    border:1px solid rgba(255,255,255,0.08);
+}
+
+@media(max-width:768px){
+
+    .prediction-grid{
+        grid-template-columns:1fr;
+    }
+
+}
 
