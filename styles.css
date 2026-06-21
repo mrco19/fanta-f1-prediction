@@ -450,6 +450,11 @@ hr{
         min-height:260px;
     }
 
+    .hero-bg{
+        background-size:contain;
+        background-position:center;
+    }
+
     .f1-title{
         letter-spacing:1px;
         font-size:clamp(1.8rem, 9vw, 3rem);
@@ -475,9 +480,9 @@ hr{
 
     background-image:url("f1-2026-fia-car-renders.jpg");
 
-    background-size:contain;
-    background-repeat:no-repeat;
+    background-size:cover;
     background-position:center;
+    background-repeat:no-repeat;
 
     filter:brightness(.65);
 
