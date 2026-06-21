@@ -450,11 +450,11 @@ hr{
         min-height:320px;
     }
 
-    .hero-bg{
-        background-size:90%;
-        background-repeat:no-repeat;
-        background-position:center;
-    }
+  .hero-bg{
+    background-size:100% auto;
+    background-repeat:no-repeat;
+    background-position:center;
+}
 
     .f1-title{
         letter-spacing:1px;
