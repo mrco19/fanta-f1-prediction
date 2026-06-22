@@ -525,6 +525,8 @@ async function loadResults() {
     const response = await fetch("results.json");
 
     const data = await response.json();
+  
+  console.log(data.sprintQualifying);
 
     // Qualifiche
     setResultPositions(
