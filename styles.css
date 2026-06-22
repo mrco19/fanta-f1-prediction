@@ -658,5 +658,41 @@ hr{
     }
 
 }
+/* RISULTATI AUTOMATICI */
 
+.result-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    gap:15px;
+
+    margin-bottom:12px;
+
+    padding:14px 16px;
+
+    border-radius:14px;
+
+    background:rgba(255,255,255,.06);
+
+    border:1px solid rgba(255,255,255,.10);
+}
+
+.result-field{
+    flex:1;
+
+    background:transparent;
+
+    border:none;
+
+    color:white;
+
+    font-size:1rem;
+
+    font-weight:800;
+
+    text-align:right;
+
+    outline:none;
+}
 
