@@ -536,4 +536,53 @@ async function loadResults() {
 
     console.log(data);
 }
+async function loadResults() {
+
+```
+const response = await fetch("results.json");
+const data = await response.json();
+
+// QUALIFICHE
+data.qualifying.forEach((driver, index) => {
+    const select =
+        document.getElementById(`qr${index + 1}`);
+
+    if(select){
+        select.value = driver;
+    }
+});
+
+// SPRINT QUALIFYING
+data.sprintQualifying.forEach((driver, index) => {
+    const select =
+        document.getElementById(`sqr${index + 1}`);
+
+    if(select){
+        select.value = driver;
+    }
+});
+
+// SPRINT RACE
+data.sprintRace.forEach((driver, index) => {
+    const select =
+        document.getElementById(`sr${index + 1}`);
+
+    if(select){
+        select.value = driver;
+    }
+});
+
+// GARA
+data.race.forEach((driver, index) => {
+    const select =
+        document.getElementById(`rr${index + 1}`);
+
+    if(select){
+        select.value = driver;
+    }
+});
+```
+
+}
 loadResults();
+
