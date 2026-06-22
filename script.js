@@ -531,58 +531,49 @@ showSection("app");
 async function loadResults() {
 
     const response = await fetch("results.json");
-
     const data = await response.json();
 
-    console.log(data);
-}
-async function loadResults() {
+    // QUALIFICHE
+    data.qualifying.forEach((driver, index) => {
+        const select =
+            document.getElementById(`qr${index + 1}`);
 
-```
-const response = await fetch("results.json");
-const data = await response.json();
+        if (select) {
+            select.value = driver;
+        }
+    });
 
-// QUALIFICHE
-data.qualifying.forEach((driver, index) => {
-    const select =
-        document.getElementById(`qr${index + 1}`);
+    // SPRINT QUALIFYING
+    data.sprintQualifying.forEach((driver, index) => {
+        const select =
+            document.getElementById(`sqr${index + 1}`);
 
-    if(select){
-        select.value = driver;
-    }
-});
+        if (select) {
+            select.value = driver;
+        }
+    });
 
-// SPRINT QUALIFYING
-data.sprintQualifying.forEach((driver, index) => {
-    const select =
-        document.getElementById(`sqr${index + 1}`);
+    // SPRINT RACE
+    data.sprintRace.forEach((driver, index) => {
+        const select =
+            document.getElementById(`sr${index + 1}`);
 
-    if(select){
-        select.value = driver;
-    }
-});
+        if (select) {
+            select.value = driver;
+        }
+    });
 
-// SPRINT RACE
-data.sprintRace.forEach((driver, index) => {
-    const select =
-        document.getElementById(`sr${index + 1}`);
+    // GARA
+    data.race.forEach((driver, index) => {
+        const select =
+            document.getElementById(`rr${index + 1}`);
 
-    if(select){
-        select.value = driver;
-    }
-});
-
-// GARA
-data.race.forEach((driver, index) => {
-    const select =
-        document.getElementById(`rr${index + 1}`);
-
-    if(select){
-        select.value = driver;
-    }
-});
-```
+        if (select) {
+            select.value = driver;
+        }
+    });
 
 }
+
 loadResults();
 
