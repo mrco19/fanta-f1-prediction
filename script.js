@@ -526,8 +526,6 @@ async function loadResults() {
 
     const data = await response.json();
   
-  console.log(data.sprintQualifying);
-
     // Qualifiche
     setResultPositions(
         "qr",
