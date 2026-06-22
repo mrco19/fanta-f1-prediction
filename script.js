@@ -528,3 +528,12 @@ if (menuToggle && sideMenu) {
 
 }
 showSection("app");
+async function loadResults() {
+
+    const response = await fetch("results.json");
+
+    const data = await response.json();
+
+    console.log(data);
+}
+loadResults();
