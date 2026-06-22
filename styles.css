@@ -136,19 +136,34 @@ h2{
 
 /* NASCONDE LA FRECCIA NELLE CASELLE RISULTATI */
 .result-row{
-    border-left:4px solid #E10600;
+    position:relative;
+
+    display:flex;
+    align-items:center;
+    gap:15px;
+
+    margin-bottom:12px;
+
+    padding:12px;
+
+    border-radius:14px;
 
     background:
     linear-gradient(
         90deg,
         rgba(225,6,0,.10),
-        transparent
+        rgba(255,255,255,.03)
     );
+
+    border-left:4px solid #E10600;
 }
 
+/* ELIMINA LA FRECCIA */
+.result-row::after{
+    display:none;
+}
 .result-field{
-    width:100%;
-    padding:14px 16px;
+    flex:1;
 
     background:transparent;
 
@@ -157,11 +172,11 @@ h2{
     color:white;
 
     font-weight:800;
+
     font-size:1rem;
 
-    text-align:center;
+    outline:none;
 }
-
 /* SELECT */
 select{
     flex:1;
