@@ -215,9 +215,9 @@ option{
     padding:14px 16px;
 
     border-radius:16px;
-    border:1px solid rgba(255,255,255,.15);
-
-    background:rgba(255,255,255,.08);
+   
+    border:1px solid rgba(225,6,0,.25);
+    background:rgba(225,6,0,.08);
 
     color:white;
     font-size:15px;
