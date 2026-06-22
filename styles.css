@@ -456,7 +456,7 @@ hr{
     }
 
   .hero-bg{
-    background-size:contain;
+    background-size:90%;
     background-repeat:no-repeat;
     background-position:center;
 }
