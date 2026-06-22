@@ -209,7 +209,22 @@ option{
     color:#d1d5db;
     font-weight:600;
 }
+/* CAMPI RISULTATI AUTOMATICI */
+.result-field{
+    flex:1;
+    padding:14px 16px;
 
+    border-radius:16px;
+    border:1px solid rgba(255,255,255,.15);
+
+    background:rgba(255,255,255,.08);
+
+    color:white;
+    font-size:15px;
+    font-weight:700;
+
+    pointer-events:none;
+}
 /* BUTTON */
 button{
     background:linear-gradient(
