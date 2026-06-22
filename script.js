@@ -77,7 +77,7 @@ for (let i = 1; i <= 5; i++) {
   `;
 
   qualiResults.innerHTML += `
-  <div class="input-row">
+  <div class="input-row result-row">
     <span>${i}°</span>
     <input id="qr${i}" class="result-field" readonly>
   </div>
@@ -106,7 +106,7 @@ for (let i = 1; i <= 5; i++) {
   `;
 
   sprintQualiResults.innerHTML += `
-  <div class="input-row">
+  <div class="input-row result-row">
     <span>${i}°</span>
     <input id="sqr${i}" class="result-field" readonly>
   </div>
@@ -135,7 +135,7 @@ for (let i = 1; i <= 8; i++) {
   `;
 
   sprintResults.innerHTML += `
-  <div class="input-row">
+  <div class="input-row result-row">
     <span>${i}°</span>
     <input id="sr${i}" class="result-field" readonly>
   </div>
@@ -164,7 +164,7 @@ for (let i = 1; i <= 10; i++) {
   `;
 
   raceResults.innerHTML += `
-  <div class="input-row">
+  <div class="input-row result-row">
     <span>${i}°</span>
     <input id="rr${i}" class="result-field" readonly>
   </div>
