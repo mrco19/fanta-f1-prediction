@@ -526,14 +526,34 @@ async function loadResults() {
     const data = await response.json();
 
     // QUALIFICHE
-    data.qualifying.forEach((driver, index) => {
-        const select =
-            document.getElementById(`qr${index + 1}`);
+   data.qualifying.forEach((driver, index) => {
 
-        if (select) {
-            document.getElementById(`qr${index+1}`).value = driver;
+    const field =
+        document.getElementById(`qr${index + 1}`);
+
+    const pos =
+        document.getElementById(`qrPos${index + 1}`);
+
+    if(field){
+
+        field.value = driver;
+
+        if(index === 0){
+            pos.textContent = "🏆 1°";
         }
-    });
+        else if(index === 1){
+            pos.textContent = "🥈 2°";
+        }
+        else if(index === 2){
+            pos.textContent = "🥉 3°";
+        }
+        else{
+            pos.textContent = `${index + 1}°`;
+        }
+
+    }
+
+});
 
     // SPRINT QUALIFYING
     data.sprintQualifying.forEach((driver, index) => {
