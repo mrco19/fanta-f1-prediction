@@ -77,13 +77,11 @@ for (let i = 1; i <= 5; i++) {
   `;
 
   qualiResults.innerHTML += `
-    <div class="input-row">
-      <span>${i}°</span>
-      <select id="qr${i}" class="driver-select">
-        ${options}
-      </select>
-    </div>
-  `;
+  <div class="input-row">
+    <span>${i}°</span>
+    <input id="qr${i}" class="result-field" readonly>
+  </div>
+`;
 }
 
 /* =========================
@@ -108,13 +106,11 @@ for (let i = 1; i <= 5; i++) {
   `;
 
   sprintQualiResults.innerHTML += `
-    <div class="input-row">
-      <span>${i}°</span>
-      <select id="sqr${i}" class="driver-select">
-        ${options}
-      </select>
-    </div>
-  `;
+  <div class="input-row">
+    <span>${i}°</span>
+    <input id="sqr${i}" class="result-field" readonly>
+  </div>
+`;
 }
 
 /* =========================
@@ -139,13 +135,11 @@ for (let i = 1; i <= 8; i++) {
   `;
 
   sprintResults.innerHTML += `
-    <div class="input-row">
-      <span>${i}°</span>
-      <select id="sr${i}" class="driver-select">
-        ${options}
-      </select>
-    </div>
-  `;
+  <div class="input-row">
+    <span>${i}°</span>
+    <input id="sr${i}" class="result-field" readonly>
+  </div>
+`;
 }
 
 /* =========================
@@ -170,13 +164,11 @@ for (let i = 1; i <= 10; i++) {
   `;
 
   raceResults.innerHTML += `
-    <div class="input-row">
-      <span>${i}°</span>
-      <select id="rr${i}" class="driver-select">
-        ${options}
-      </select>
-    </div>
-  `;
+  <div class="input-row">
+    <span>${i}°</span>
+    <input id="rr${i}" class="result-field" readonly>
+  </div>
+`;
 }
 
 /* =========================
@@ -539,7 +531,7 @@ async function loadResults() {
             document.getElementById(`qr${index + 1}`);
 
         if (select) {
-            select.value = driver;
+            document.getElementById(`qr${index+1}`).value = driver;
         }
     });
 
@@ -549,7 +541,7 @@ async function loadResults() {
             document.getElementById(`sqr${index + 1}`);
 
         if (select) {
-            select.value = driver;
+            document.getElementById(`qr${index+1}`).value = driver;
         }
     });
 
@@ -559,7 +551,7 @@ async function loadResults() {
             document.getElementById(`sr${index + 1}`);
 
         if (select) {
-            select.value = driver;
+            document.getElementById(`qr${index+1}`).value = driver;
         }
     });
 
@@ -569,7 +561,7 @@ async function loadResults() {
             document.getElementById(`rr${index + 1}`);
 
         if (select) {
-            select.value = driver;
+           document.getElementById(`qr${index+1}`).value = driver;
         }
     });
 
