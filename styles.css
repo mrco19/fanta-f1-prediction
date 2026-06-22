@@ -695,4 +695,26 @@ hr{
 
     outline:none;
 }
+.result-row:first-child{
+    border-left:4px solid gold;
+}
 
+.result-row:nth-child(2){
+    border-left:4px solid silver;
+}
+
+.result-row:nth-child(3){
+    border-left:4px solid #cd7f32;
+}
+.result-row{
+    transition:.25s ease;
+}
+
+.result-row:hover{
+
+    transform:translateX(4px);
+
+    box-shadow:
+        0 6px 18px rgba(0,0,0,.25);
+
+}
