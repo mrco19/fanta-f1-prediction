@@ -133,6 +133,11 @@ h2{
 
     pointer-events:none;
 }
+
+/* NASCONDE LA FRECCIA NELLE CASELLE RISULTATI */
+.result-row::after{
+    display:none;
+}
 .input-row:focus-within::after{
     transform:
         translateY(-50%)
