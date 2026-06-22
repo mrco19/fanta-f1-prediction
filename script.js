@@ -556,34 +556,40 @@ async function loadResults() {
 });
 
     // SPRINT QUALIFYING
-    data.sprintQualifying.forEach((driver, index) => {
-        const select =
-            document.getElementById(`sqr${index + 1}`);
+  data.sprintQualifying.forEach((driver, index) => {
 
-        if (select) {
-            document.getElementById(`qr${index+1}`).value = driver;
-        }
-    });
+    const field =
+        document.getElementById(`sqr${index + 1}`);
+
+    if(field){
+        field.value = driver;
+    }
+
+});
 
     // SPRINT RACE
-    data.sprintRace.forEach((driver, index) => {
-        const select =
-            document.getElementById(`sr${index + 1}`);
+ data.sprintRace.forEach((driver, index) => {
 
-        if (select) {
-            document.getElementById(`qr${index+1}`).value = driver;
-        }
-    });
+    const field =
+        document.getElementById(`sr${index + 1}`);
+
+    if(field){
+        field.value = driver;
+    }
+
+});
 
     // GARA
     data.race.forEach((driver, index) => {
-        const select =
-            document.getElementById(`rr${index + 1}`);
 
-        if (select) {
-           document.getElementById(`qr${index+1}`).value = driver;
-        }
-    });
+    const field =
+        document.getElementById(`rr${index + 1}`);
+
+    if(field){
+        field.value = driver;
+    }
+
+});
 
 }
 
