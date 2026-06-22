@@ -78,7 +78,7 @@ for (let i = 1; i <= 5; i++) {
 
   qualiResults.innerHTML += `
   <div class="result-row">
-    <span>${i}°</span>
+    <span id="qrPos${i}">${i}°</span>
     <input id="qr${i}" class="result-field" readonly>
   </div>
 `;
