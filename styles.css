@@ -135,18 +135,31 @@ h2{
 }
 
 /* NASCONDE LA FRECCIA NELLE CASELLE RISULTATI */
-.result-row::after{
-    display:none;
+.result-row{
+    border-left:4px solid #E10600;
+
+    background:
+    linear-gradient(
+        90deg,
+        rgba(225,6,0,.10),
+        transparent
+    );
 }
-.input-row:focus-within::after{
-    transform:
-        translateY(-50%)
-        rotate(180deg);
-}
-.input-row span{
-    width:40px;
-    font-weight:700;
-    color:#E10600;
+
+.result-field{
+    width:100%;
+    padding:14px 16px;
+
+    background:transparent;
+
+    border:none;
+
+    color:white;
+
+    font-weight:800;
+    font-size:1rem;
+
+    text-align:center;
 }
 
 /* SELECT */
