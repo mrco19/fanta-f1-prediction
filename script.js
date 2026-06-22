@@ -78,7 +78,7 @@ for (let i = 1; i <= 5; i++) {
 
   qualiResults.innerHTML += `
   <div class="result-row">
-    <span id="qrPos${i}">${i}°</span>
+    <span id="sqrPos${i}">${i}°</span>
     <input id="qr${i}" class="result-field" readonly>
   </div>
 `;
@@ -107,7 +107,7 @@ for (let i = 1; i <= 5; i++) {
 
   sprintQualiResults.innerHTML += `
   <div class="result-row">
-    <span>${i}°</span>
+   <span id="sqrPos${i}">${i}°</span>
     <input id="sqr${i}" class="result-field" readonly>
   </div>
 `;
@@ -136,7 +136,7 @@ for (let i = 1; i <= 8; i++) {
 
   sprintResults.innerHTML += `
   <div class="result-row">
-    <span>${i}°</span>
+    <span id="srPos${i}">${i}°</span>
     <input id="sr${i}" class="result-field" readonly>
   </div>
 `;
@@ -165,7 +165,7 @@ for (let i = 1; i <= 10; i++) {
 
   raceResults.innerHTML += `
   <div class="result-row">
-    <span>${i}°</span>
+    <span id="rrPos${i}">${i}°</span>
     <input id="rr${i}" class="result-field" readonly>
   </div>
 `;
@@ -523,75 +523,67 @@ showSection("app");
 async function loadResults() {
 
     const response = await fetch("results.json");
+
     const data = await response.json();
 
-    // QUALIFICHE
-   data.qualifying.forEach((driver, index) => {
+    // Qualifiche
+    setResultPositions(
+        "qr",
+        data.qualifying
+    );
 
-    const field =
-        document.getElementById(`qr${index + 1}`);
+    // Sprint Qualifying
+    setResultPositions(
+        "sqr",
+        data.sprintQualifying
+    );
 
-    const pos =
-        document.getElementById(`qrPos${index + 1}`);
+    // Sprint Race
+    setResultPositions(
+        "sr",
+        data.sprintRace
+    );
 
-    if(field){
-
-        field.value = driver;
-
-        if(index === 0){
-            pos.textContent = "🏆 1°";
-        }
-        else if(index === 1){
-            pos.textContent = "🥈 2°";
-        }
-        else if(index === 2){
-            pos.textContent = "🥉 3°";
-        }
-        else{
-            pos.textContent = `${index + 1}°`;
-        }
-
-    }
-
-});
-
-    // SPRINT QUALIFYING
-  data.sprintQualifying.forEach((driver, index) => {
-
-    const field =
-        document.getElementById(`sqr${index + 1}`);
-
-    if(field){
-        field.value = driver;
-    }
-
-});
-
-    // SPRINT RACE
- data.sprintRace.forEach((driver, index) => {
-
-    const field =
-        document.getElementById(`sr${index + 1}`);
-
-    if(field){
-        field.value = driver;
-    }
-
-});
-
-    // GARA
-    data.race.forEach((driver, index) => {
-
-    const field =
-        document.getElementById(`rr${index + 1}`);
-
-    if(field){
-        field.value = driver;
-    }
-
-});
+    // Gara
+    setResultPositions(
+        "rr",
+        data.race
+    );
 
 }
+function setResultPositions(prefix, results) {
 
+    results.forEach((driver, index) => {
+
+        const field =
+            document.getElementById(`${prefix}${index + 1}`);
+
+        const pos =
+            document.getElementById(`${prefix}Pos${index + 1}`);
+
+        if (!field) return;
+
+        field.value = driver;
+
+        if (pos) {
+
+            if (index === 0) {
+                pos.textContent = "🏆 1°";
+            }
+            else if (index === 1) {
+                pos.textContent = "🥈 2°";
+            }
+            else if (index === 2) {
+                pos.textContent = "🥉 3°";
+            }
+            else {
+                pos.textContent = `${index + 1}°`;
+            }
+
+        }
+
+    });
+
+}
 loadResults();
 
