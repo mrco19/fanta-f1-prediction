@@ -672,25 +672,25 @@ document
 
     for(let i=1;i<=5;i++){
         json.qualifying.push(
-            document.getElementById(`qr${i}`)?.value || ""
+            document.getElementById(`adminQr${i}`)?.value || ""
         );
     }
 
     for(let i=1;i<=5;i++){
         json.sprintQualifying.push(
-            document.getElementById(`sqr${i}`)?.value || ""
+            document.getElementById(`adminSqr${i}`)?.value || ""
         );
     }
 
     for(let i=1;i<=8;i++){
         json.sprintRace.push(
-            document.getElementById(`sr${i}`)?.value || ""
+            document.getElementById(`adminSr${i}`)?.value || ""
         );
     }
 
     for(let i=1;i<=10;i++){
         json.race.push(
-            document.getElementById(`rr${i}`)?.value || ""
+            document.getElementById(`adminRr${i}`)?.value || ""
         );
     }
 
