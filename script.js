@@ -586,4 +586,56 @@ function setResultPositions(prefix, results) {
 
 }
 loadResults();
+document
+.getElementById("generateJson")
+?.addEventListener("click", () => {
+
+    const json = {
+
+        qualifying: [],
+
+        sprintQualifying: [],
+
+        sprintRace: [],
+
+        race: []
+
+    };
+
+    for(let i=1;i<=5;i++){
+
+        json.qualifying.push(
+            document.getElementById(`qr${i}`)?.value || ""
+        );
+
+    }
+
+    for(let i=1;i<=5;i++){
+
+        json.sprintQualifying.push(
+            document.getElementById(`sqr${i}`)?.value || ""
+        );
+
+    }
+
+    for(let i=1;i<=8;i++){
+
+        json.sprintRace.push(
+            document.getElementById(`sr${i}`)?.value || ""
+        );
+
+    }
+
+    for(let i=1;i<=10;i++){
+
+        json.race.push(
+            document.getElementById(`rr${i}`)?.value || ""
+        );
+
+    }
+
+    document.getElementById("jsonOutput").value =
+        JSON.stringify(json,null,2);
+
+});
 
