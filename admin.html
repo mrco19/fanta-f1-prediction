@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Fanta F1</title>
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🔧 Admin Risultati</h1>
+
+<div id="quali-results"></div>
+<div id="sprintquali-results"></div>
+<div id="sprint-results"></div>
+<div id="race-results"></div>
+
+<br>
+
+<button id="generateJson">
+Genera JSON
+</button>
+
+<button id="copyJson">
+📋 Copia JSON
+</button>
+
+<button id="downloadJson">
+⬇️ Scarica results.json
+</button>
+
+<br><br>
+
+<textarea
+id="jsonOutput"
+style="
+width:100%;
+height:300px;
+background:#111827;
+color:white;
+padding:15px;
+border-radius:12px;
+"></textarea>
+
+<script src="admin.js"></script>
+
+</div>
+
+</body>
+</html>
