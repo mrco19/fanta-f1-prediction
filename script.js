@@ -638,4 +638,16 @@ document
         JSON.stringify(json,null,2);
 
 });
+document
+.getElementById("copyJson")
+?.addEventListener("click", () => {
+
+    const jsonText =
+        document.getElementById("jsonOutput").value;
+
+    navigator.clipboard.writeText(jsonText);
+
+    alert("✅ JSON copiato negli appunti");
+
+});
 
