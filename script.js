@@ -586,58 +586,56 @@ function setResultPositions(prefix, results) {
 
 }
 loadResults();
+
+/* =========================
+   GENERA JSON
+========================= */
+
 document
 .getElementById("generateJson")
 ?.addEventListener("click", () => {
 
     const json = {
-
         qualifying: [],
-
         sprintQualifying: [],
-
         sprintRace: [],
-
         race: []
-
     };
 
     for(let i=1;i<=5;i++){
-
         json.qualifying.push(
             document.getElementById(`qr${i}`)?.value || ""
         );
-
     }
 
     for(let i=1;i<=5;i++){
-
         json.sprintQualifying.push(
             document.getElementById(`sqr${i}`)?.value || ""
         );
-
     }
 
     for(let i=1;i<=8;i++){
-
         json.sprintRace.push(
             document.getElementById(`sr${i}`)?.value || ""
         );
-
     }
 
     for(let i=1;i<=10;i++){
-
         json.race.push(
             document.getElementById(`rr${i}`)?.value || ""
         );
-
     }
 
     document.getElementById("jsonOutput").value =
-        JSON.stringify(json,null,2);
+        JSON.stringify(json, null, 2);
 
 });
+
+
+/* =========================
+   COPIA JSON
+========================= */
+
 document
 .getElementById("copyJson")
 ?.addEventListener("click", () => {
@@ -648,6 +646,35 @@ document
     navigator.clipboard.writeText(jsonText);
 
     alert("✅ JSON copiato negli appunti");
+
+});
+
+
+/* =========================
+   SCARICA JSON
+========================= */
+
+document
+.getElementById("downloadJson")
+?.addEventListener("click", () => {
+
+    const jsonText =
+        document.getElementById("jsonOutput").value;
+
+    const blob = new Blob(
+        [jsonText],
+        { type: "application/json" }
+    );
+
+    const link =
+        document.createElement("a");
+
+    link.href =
+        URL.createObjectURL(blob);
+
+    link.download = "results.json";
+
+    link.click();
 
 });
 
