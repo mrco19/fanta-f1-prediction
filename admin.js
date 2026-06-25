@@ -86,6 +86,15 @@ document
 
         console.log(results);
 
+        const driversResponse = await fetch(
+    "https://api.openf1.org/v1/drivers"
+);
+
+const drivers =
+    await driversResponse.json();
+
+console.log(drivers);
+
         alert(
             "Risultati trovati: " +
             results.length
