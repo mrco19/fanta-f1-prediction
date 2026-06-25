@@ -56,3 +56,28 @@ document
     }
 
 });
+document
+.getElementById("loadRace")
+?.addEventListener("click", async () => {
+
+    try {
+
+        const response = await fetch(
+            "https://api.openf1.org/v1/sessions?session_name=Race"
+        );
+
+        const data = await response.json();
+
+        console.log(data);
+
+        alert("Dati ricevuti da OpenF1");
+
+    } catch(error) {
+
+        console.error(error);
+
+        alert("Errore OpenF1");
+
+    }
+
+});
