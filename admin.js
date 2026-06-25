@@ -109,8 +109,14 @@ try {
     );
 
     const top10 =
-        results.filter(
-            r => r.position <= 10
+    results
+        .filter(
+            r =>
+                r.position !== null &&
+                r.position <= 10
+        )
+        .sort(
+            (a, b) => a.position - b.position
         );
 
     for (let i = 0; i < top10.length; i++) {
