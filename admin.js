@@ -60,34 +60,13 @@ createAdminInputs(adminQuali, "adminQr", 5);
 createAdminInputs(adminSprintQuali, "adminSqr", 5);
 createAdminInputs(adminSprint, "adminSr", 8);
 createAdminInputs(adminRace, "adminRr", 10);
-document
-.getElementById("loadRace")
-?.addEventListener("click", async () => {
 
-    try {
-
-        const response = await fetch(
-            "https://api.openf1.org/v1/sessions?session_name=Race"
-        );
-
-        const sessions = await response.json();
-
-        console.log(sessions);
-
-    } catch(error) {
-
-        console.error(error);
-
-    }
-
-});
 document
 .getElementById("loadRace")
 ?.addEventListener("click", async () => {
 
 try {
 
-    // Ultima gara disputata
     const sessionResponse = await fetch(
         "https://api.openf1.org/v1/sessions?session_name=Race"
     );
@@ -96,56 +75,61 @@ try {
         await sessionResponse.json();
 
     const pastRaces =
-        sessions.filter(
-            s => new Date(s.date_start) < new Date()
-        );
+        sessions
+            .filter(
+                s => new Date(s.date_start) < new Date()
+            )
+            .sort(
+                (a, b) =>
+                    new Date(b.date_start) -
+                    new Date(a.date_start)
+            );
 
-    const lastRace =
-        pastRaces[pastRaces.length - 1];
+    const lastRace = pastRaces[0];
+
+    console.log("LAST RACE");
     console.log(lastRace);
 
-    // Classifica finale gara
     const resultResponse = await fetch(
         `https://api.openf1.org/v1/session_result?session_key=${lastRace.session_key}`
     );
 
     const results =
         await resultResponse.json();
-    console.log("RESULTS");
-console.table(results);
 
-    // Ordina per posizione
+    console.table(results);
+
     results.sort(
         (a, b) => a.position - b.position
     );
 
-    // Solo Top 10
     const top10 =
-        results.filter(r => r.position <= 10);
-
-  
-for (let i = 0; i < top10.length; i++) {
-
-    const driverNumber =
-        top10[i].driver_number;
-
-   const driverName =
-    DRIVER_NAMES[driverNumber] ||
-    `#${driverNumber}`;
-
-    const field =
-        document.getElementById(
-            `adminRr${i + 1}`
+        results.filter(
+            r => r.position <= 10
         );
 
-    if (field) {
-        field.value = driverName;
+    for (let i = 0; i < top10.length; i++) {
+
+        const driverNumber =
+            top10[i].driver_number;
+
+        const driverName =
+            DRIVER_NAMES[driverNumber] ||
+            `#${driverNumber}`;
+
+        const field =
+            document.getElementById(
+                `adminRr${i + 1}`
+            );
+
+        if (field) {
+            field.value = driverName;
+        }
     }
-}
 
     alert(
-    `${lastRace.country_name} - ${lastRace.session_name}`
-);
+        `✅ Caricata gara: ${lastRace.country_name}`
+    );
 
 } catch(error) {
 
@@ -156,4 +140,5 @@ for (let i = 0; i < top10.length; i++) {
 }
 
 });
+
 
