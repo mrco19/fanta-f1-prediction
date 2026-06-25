@@ -1,24 +1,25 @@
 const DRIVER_NAMES = {
 
-    3: "Max VERSTAPPEN",
     1: "Lando NORRIS",
+    3: "Max VERSTAPPEN",
     5: "Gabriel BORTOLETO",
-    6: "Isack HADJAR",
     7: "Jack DOOHAN",
     10: "Pierre GASLY",
+    11: "Sergio PEREZ",
     12: "Kimi ANTONELLI",
     14: "Fernando ALONSO",
     16: "Charles LECLERC",
     18: "Lance STROLL",
-    22: "Yuki TSUNODA",
     23: "Alexander ALBON",
     27: "Nico HULKENBERG",
     30: "Liam LAWSON",
     31: "Esteban OCON",
+    41: "Arvin LINDBLAD",
     43: "Franco COLAPINTO",
     44: "Lewis HAMILTON",
     55: "Carlos SAINZ",
     63: "George RUSSELL",
+    77: "Valtteri BOTTAS",
     81: "Oscar PIASTRI",
     87: "Oliver BEARMAN"
 
