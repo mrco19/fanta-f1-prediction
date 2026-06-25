@@ -101,6 +101,8 @@ try {
 
 const drivers =
     await driversResponse.json();
+    
+    console.log("DRIVERS");
     console.log(drivers);
 
 for (let i = 0; i < top10.length; i++) {
