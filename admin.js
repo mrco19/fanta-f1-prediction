@@ -72,8 +72,8 @@ try {
     const lastRace =
         sessions[sessions.length - 1];
 
-    console.log(lastRace);
-
+    console.table(sessions);
+    
     alert(
         "Ultima gara trovata: " +
         lastRace.country_name
