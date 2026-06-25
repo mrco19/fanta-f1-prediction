@@ -86,6 +86,10 @@ try {
             );
 
     const lastRace = pastRaces[0];
+    console.log(
+    "SESSION KEY:",
+    lastRace.session_key
+);
 
     console.log("LAST RACE");
     console.log(lastRace);
@@ -96,6 +100,7 @@ try {
 
     const results =
         await resultResponse.json();
+    console.log(results.length);
 
     console.table(results);
 
