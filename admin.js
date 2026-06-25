@@ -78,13 +78,15 @@ document
             pastRaces[pastRaces.length - 1];
 
         const resultResponse = await fetch(
-            `https://api.openf1.org/v1/session_result?session_key=${lastRace.session_key}`
-        );
+    `https://api.openf1.org/v1/session_result?session_key=${lastRace.session_key}&position<=10`
+);
 
         const results =
             await resultResponse.json();
 
         console.log(results);
+
+        console.table(results);
 
         const driversResponse = await fetch(
     "https://api.openf1.org/v1/drivers"
