@@ -118,13 +118,22 @@ try {
             `#${driverNumber}`;
 
         const field =
-            document.getElementById(
-                `adminRr${i + 1}`
-            );
+    document.getElementById(
+        `adminRr${i + 1}`
+    );
 
-        if (field) {
-            field.value = driverName;
-        }
+console.log(
+    "POS:",
+    i + 1,
+    "NUM:",
+    driverNumber,
+    "NOME:",
+    driverName
+);
+
+if (field) {
+    field.value = driverName;
+}
     }
 
     alert(
