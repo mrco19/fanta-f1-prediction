@@ -95,32 +95,36 @@ try {
     const top10 =
         results.filter(r => r.position <= 10);
 
-    for (let i = 0; i < top10.length; i++) {
+    const driversResponse = await fetch(
+    `https://api.openf1.org/v1/drivers?session_key=${lastRace.session_key}`
+);
 
-        const driverNumber =
-            top10[i].driver_number;
+const drivers =
+    await driversResponse.json();
 
-        const driverResponse =
-            await fetch(
-                `https://api.openf1.org/v1/drivers?driver_number=${driverNumber}`
-            );
+for (let i = 0; i < top10.length; i++) {
 
-        const driverData =
-            await driverResponse.json();
+    const driverNumber =
+        top10[i].driver_number;
 
-        const driverName =
-            driverData[0]?.full_name ||
-            `#${driverNumber}`;
+    const driver =
+        drivers.find(
+            d => d.driver_number === driverNumber
+        );
 
-        const field =
-            document.getElementById(
-                `adminRr${i + 1}`
-            );
+    const driverName =
+        driver?.full_name ||
+        `#${driverNumber}`;
 
-        if (field) {
-            field.value = driverName;
-        }
+    const field =
+        document.getElementById(
+            `adminRr${i + 1}`
+        );
+
+    if (field) {
+        field.value = driverName;
     }
+}
 
     alert(
         "✅ Top 10 caricata automaticamente"
