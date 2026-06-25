@@ -62,24 +62,37 @@ document
 
 try {
 
-    const sessionResponse = await fetch(
+    const response = await fetch(
         "https://api.openf1.org/v1/sessions?session_name=Race"
     );
 
     const sessions =
-        await sessionResponse.json();
+        await response.json();
+
+    const now = new Date();
+
+    const completedRaces =
+        sessions.filter(session =>
+            new Date(session.date_start) < now
+        );
+
+    completedRaces.sort(
+        (a, b) =>
+            new Date(b.date_start) -
+            new Date(a.date_start)
+    );
 
     const lastRace =
-        sessions[sessions.length - 1];
+        completedRaces[0];
 
-    console.table(sessions);
-    
+    console.log(lastRace);
+
     alert(
-        "Ultima gara trovata: " +
+        "Ultima gara disputata: " +
         lastRace.country_name
     );
 
-} catch (error) {
+} catch(error) {
 
     console.error(error);
 
