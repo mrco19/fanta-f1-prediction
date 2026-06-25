@@ -1,6 +1,3 @@
-console.log("ADMIN JS CARICATO");
-
-alert("ADMIN JS CARICATO");
 const adminQuali =
     document.getElementById("admin-quali");
 
