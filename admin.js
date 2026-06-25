@@ -58,8 +58,36 @@ document
 });
 document
 .getElementById("loadRace")
-?.addEventListener("click", () => {
+?.addEventListener("click", async () => {
 
-    alert("Pulsante cliccato");
+```
+try {
+
+    // Trova l'ultima gara
+    const sessionResponse = await fetch(
+        "https://api.openf1.org/v1/sessions?session_name=Race"
+    );
+
+    const sessions =
+        await sessionResponse.json();
+
+    const lastRace =
+        sessions[sessions.length - 1];
+
+    console.log(lastRace);
+
+    alert(
+        "Ultima gara trovata: " +
+        lastRace.country_name
+    );
+
+} catch(error) {
+
+    console.error(error);
+
+    alert("Errore OpenF1");
+
+}
+```
 
 });
