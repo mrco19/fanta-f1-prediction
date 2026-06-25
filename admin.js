@@ -60,10 +60,8 @@ document
 .getElementById("loadRace")
 ?.addEventListener("click", async () => {
 
-```
 try {
 
-    // Trova l'ultima gara
     const sessionResponse = await fetch(
         "https://api.openf1.org/v1/sessions?session_name=Race"
     );
@@ -81,13 +79,13 @@ try {
         lastRace.country_name
     );
 
-} catch(error) {
+} catch (error) {
 
     console.error(error);
 
     alert("Errore OpenF1");
 
 }
-```
 
 });
+
