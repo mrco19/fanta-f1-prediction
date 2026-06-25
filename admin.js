@@ -102,6 +102,7 @@ try {
 
     const lastRace =
         pastRaces[pastRaces.length - 1];
+    console.log(lastRace);
 
     // Classifica finale gara
     const resultResponse = await fetch(
@@ -143,8 +144,8 @@ for (let i = 0; i < top10.length; i++) {
 }
 
     alert(
-        "✅ Top 10 caricata automaticamente"
-    );
+    `${lastRace.country_name} - ${lastRace.session_name}`
+);
 
 } catch(error) {
 
