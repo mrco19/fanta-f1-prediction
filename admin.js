@@ -3,7 +3,7 @@ const DRIVER_NAMES = {
     1: "Lando NORRIS",
     3: "Max VERSTAPPEN",
     5: "Gabriel BORTOLETO",
-    7: "Jack DOOHAN",
+    6: "Isack HADJAR",
     10: "Pierre GASLY",
     11: "Sergio PEREZ",
     12: "Kimi ANTONELLI",
