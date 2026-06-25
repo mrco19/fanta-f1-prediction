@@ -110,6 +110,8 @@ try {
 
     const results =
         await resultResponse.json();
+    console.log("RESULTS");
+console.table(results);
 
     // Ordina per posizione
     results.sort(
