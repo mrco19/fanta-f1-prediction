@@ -60,55 +60,79 @@ document
 .getElementById("loadRace")
 ?.addEventListener("click", async () => {
 
-    try {
+try {
 
-        const sessionResponse = await fetch(
-            "https://api.openf1.org/v1/sessions?session_name=Race"
+    // Ultima gara disputata
+    const sessionResponse = await fetch(
+        "https://api.openf1.org/v1/sessions?session_name=Race"
+    );
+
+    const sessions =
+        await sessionResponse.json();
+
+    const pastRaces =
+        sessions.filter(
+            s => new Date(s.date_start) < new Date()
         );
 
-        const sessions =
-            await sessionResponse.json();
+    const lastRace =
+        pastRaces[pastRaces.length - 1];
 
-        const pastRaces =
-            sessions.filter(
-                s => new Date(s.date_start) < new Date()
+    // Classifica finale gara
+    const resultResponse = await fetch(
+        `https://api.openf1.org/v1/session_result?session_key=${lastRace.session_key}`
+    );
+
+    const results =
+        await resultResponse.json();
+
+    // Ordina per posizione
+    results.sort(
+        (a, b) => a.position - b.position
+    );
+
+    // Solo Top 10
+    const top10 =
+        results.filter(r => r.position <= 10);
+
+    for (let i = 0; i < top10.length; i++) {
+
+        const driverNumber =
+            top10[i].driver_number;
+
+        const driverResponse =
+            await fetch(
+                `https://api.openf1.org/v1/drivers?driver_number=${driverNumber}`
             );
 
-        const lastRace =
-            pastRaces[pastRaces.length - 1];
+        const driverData =
+            await driverResponse.json();
 
-        const resultResponse = await fetch(
-    `https://api.openf1.org/v1/session_result?session_key=${lastRace.session_key}&position<=10`
-);
+        const driverName =
+            driverData[0]?.full_name ||
+            `#${driverNumber}`;
 
-        const results =
-            await resultResponse.json();
+        const field =
+            document.getElementById(
+                `adminRr${i + 1}`
+            );
 
-        console.log(results);
-
-        console.table(results);
-
-        const driversResponse = await fetch(
-    "https://api.openf1.org/v1/drivers"
-);
-
-const drivers =
-    await driversResponse.json();
-
-console.log(drivers);
-
-        alert(
-            "Risultati trovati: " +
-            results.length
-        );
-
-    } catch(error) {
-
-        console.error(error);
-
-        alert("Errore OpenF1");
-
+        if (field) {
+            field.value = driverName;
+        }
     }
+
+    alert(
+        "✅ Top 10 caricata automaticamente"
+    );
+
+} catch(error) {
+
+    console.error(error);
+
+    alert("Errore OpenF1");
+
+}
 
 });
 
