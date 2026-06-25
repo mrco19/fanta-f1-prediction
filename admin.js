@@ -60,45 +60,44 @@ document
 .getElementById("loadRace")
 ?.addEventListener("click", async () => {
 
-try {
+    try {
 
-    const response = await fetch(
-        "https://api.openf1.org/v1/sessions?session_name=Race"
-    );
-
-    const sessions =
-        await response.json();
-
-    const now = new Date();
-
-    const completedRaces =
-        sessions.filter(session =>
-            new Date(session.date_start) < now
+        const sessionResponse = await fetch(
+            "https://api.openf1.org/v1/sessions?session_name=Race"
         );
 
-    completedRaces.sort(
-        (a, b) =>
-            new Date(b.date_start) -
-            new Date(a.date_start)
-    );
+        const sessions =
+            await sessionResponse.json();
 
-    const lastRace =
-        completedRaces[0];
+        const pastRaces =
+            sessions.filter(
+                s => new Date(s.date_start) < new Date()
+            );
 
-    console.log(lastRace);
+        const lastRace =
+            pastRaces[pastRaces.length - 1];
 
-    alert(
-        "Ultima gara disputata: " +
-        lastRace.country_name
-    );
+        const resultResponse = await fetch(
+            `https://api.openf1.org/v1/session_result?session_key=${lastRace.session_key}`
+        );
 
-} catch(error) {
+        const results =
+            await resultResponse.json();
 
-    console.error(error);
+        console.log(results);
 
-    alert("Errore OpenF1");
+        alert(
+            "Risultati trovati: " +
+            results.length
+        );
 
-}
+    } catch(error) {
+
+        console.error(error);
+
+        alert("Errore OpenF1");
+
+    }
 
 });
 
