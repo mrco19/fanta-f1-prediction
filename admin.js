@@ -35,3 +35,24 @@ createAdminInputs(adminQuali, "adminQr", 5);
 createAdminInputs(adminSprintQuali, "adminSqr", 5);
 createAdminInputs(adminSprint, "adminSr", 8);
 createAdminInputs(adminRace, "adminRr", 10);
+document
+.getElementById("loadRace")
+?.addEventListener("click", async () => {
+
+    try {
+
+        const response = await fetch(
+            "https://api.openf1.org/v1/sessions?session_name=Race"
+        );
+
+        const sessions = await response.json();
+
+        console.log(sessions);
+
+    } catch(error) {
+
+        console.error(error);
+
+    }
+
+});
