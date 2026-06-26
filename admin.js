@@ -283,5 +283,17 @@ document
         JSON.stringify(data, null, 4);
 
 });
+document
+.getElementById("copyJson")
+?.addEventListener("click", async () => {
+
+    const text =
+        document.getElementById("jsonOutput").value;
+
+    await navigator.clipboard.writeText(text);
+
+    alert("✅ JSON copiato!");
+
+});
 
 
