@@ -1225,3 +1225,52 @@ font-size:1rem;
 letter-spacing:1px;
 
 }
+/* ===== JSON ACTIONS ===== */
+
+.json-actions{
+
+display:flex;
+
+justify-content:center;
+
+gap:18px;
+
+margin-top:20px;
+
+flex-wrap:wrap;
+
+}
+
+.json-actions button{
+
+min-width:190px;
+
+padding:16px;
+
+border-radius:16px;
+
+font-size:1rem;
+
+font-weight:800;
+
+background:linear-gradient(
+135deg,
+#E10600,
+#b30000
+);
+
+box-shadow:
+0 8px 20px rgba(225,6,0,.35);
+
+transition:.25s;
+
+}
+
+.json-actions button:hover{
+
+transform:translateY(-4px);
+
+box-shadow:
+0 14px 30px rgba(225,6,0,.55);
+
+}
