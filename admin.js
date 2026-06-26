@@ -188,6 +188,15 @@ document
 const lastQuali =
     pastQuali[0];
 
+        const resultResponse = await fetch(
+    `https://api.openf1.org/v1/session_result?session_key=${lastQuali.session_key}`
+);
+
+const results =
+    await resultResponse.json();
+
+console.table(results);
+
 console.log(lastQuali);
 
 alert(
