@@ -917,3 +917,59 @@ hr{
         inset 0 0 18px rgba(255,255,255,.08);
 
 }
+/* ===== ADMIN GRID ===== */
+
+.admin-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:25px;
+
+    margin-bottom:35px;
+
+}
+
+.admin-panel{
+
+    background:linear-gradient(
+        145deg,
+        rgba(255,255,255,.08),
+        rgba(255,255,255,.03)
+    );
+
+    border-radius:22px;
+
+    padding:22px;
+
+    backdrop-filter:blur(14px);
+
+    border:1px solid rgba(255,255,255,.10);
+
+    box-shadow:
+        0 12px 30px rgba(0,0,0,.35);
+
+}
+
+.admin-panel h2{
+
+    margin-top:0;
+
+    margin-bottom:18px;
+
+    font-size:1.4rem;
+
+    color:white;
+
+}
+
+@media(max-width:900px){
+
+.admin-grid{
+
+grid-template-columns:1fr;
+
+}
+
+}
