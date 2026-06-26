@@ -174,10 +174,25 @@ document
         const sessions =
             await sessionResponse.json();
 
-        console.log(sessions);
+        const pastQuali =
+    sessions
+        .filter(
+            s => new Date(s.date_start) < new Date()
+        )
+        .sort(
+            (a, b) =>
+                new Date(b.date_start) -
+                new Date(a.date_start)
+        );
 
-        alert("Qualifiche trovate: " + sessions.length);
+const lastQuali =
+    pastQuali[0];
 
+console.log(lastQuali);
+
+alert(
+    `Ultima qualifica: ${lastQuali.country_name}`
+);
     } catch(error) {
 
         console.error(error);
