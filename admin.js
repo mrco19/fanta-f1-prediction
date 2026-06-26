@@ -161,5 +161,31 @@ if (field) {
 }
 
 });
+document
+.getElementById("loadQuali")
+?.addEventListener("click", async () => {
+
+    try {
+
+        const sessionResponse = await fetch(
+            "https://api.openf1.org/v1/sessions?session_name=Qualifying"
+        );
+
+        const sessions =
+            await sessionResponse.json();
+
+        console.log(sessions);
+
+        alert("Qualifiche trovate: " + sessions.length);
+
+    } catch(error) {
+
+        console.error(error);
+
+        alert("Errore OpenF1");
+
+    }
+
+});
 
 
