@@ -1090,3 +1090,58 @@ grid-template-columns:1fr;
     letter-spacing:1px;
 
 }
+/* ===== JSON EDITOR ===== */
+
+.json-box{
+
+    background:#0f172a;
+
+    border:2px solid rgba(225,6,0,.25);
+
+    border-radius:20px;
+
+    padding:20px;
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,.35);
+
+}
+
+#jsonOutput{
+
+    width:100%;
+
+    height:320px;
+
+    background:#05070d;
+
+    color:#00ff9d;
+
+    border:none;
+
+    resize:vertical;
+
+    outline:none;
+
+    font-size:15px;
+
+    font-family:
+        Consolas,
+        Monaco,
+        monospace;
+
+    line-height:1.6;
+
+    padding:20px;
+
+    border-radius:14px;
+
+    box-sizing:border-box;
+
+}
+
+#jsonOutput::placeholder{
+
+    color:#6b7280;
+
+}
