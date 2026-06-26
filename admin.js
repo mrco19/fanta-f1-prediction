@@ -195,12 +195,39 @@ const lastQuali =
 const results =
     await resultResponse.json();
 
-console.table(results);
+results.sort(
+    (a, b) => a.position - b.position
+);
 
-console.log(lastQuali);
+const top5 =
+    results
+        .filter(
+            r =>
+                r.position !== null &&
+                r.position <= 5
+        );
+
+for (let i = 0; i < top5.length; i++) {
+
+    const driverNumber =
+        top5[i].driver_number;
+
+    const driverName =
+        DRIVER_NAMES[driverNumber] ||
+        `#${driverNumber}`;
+
+    const field =
+        document.getElementById(
+            `adminQr${i + 1}`
+        );
+
+    if (field) {
+        field.value = driverName;
+    }
+}
 
 alert(
-    `Ultima qualifica: ${lastQuali.country_name}`
+    `✅ Qualifiche ${lastQuali.country_name} caricate`
 );
     } catch(error) {
 
