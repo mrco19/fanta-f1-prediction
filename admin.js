@@ -318,6 +318,85 @@ alert(
     }
 
 });
+
+document
+.getElementById("loadSprint")
+?.addEventListener("click", async () => {
+
+    try {
+
+        const sessionResponse = await fetch(
+            "https://api.openf1.org/v1/sessions?session_name=Sprint"
+        );
+
+        const sessions =
+            await sessionResponse.json();
+
+        const pastSessions =
+            sessions
+                .filter(
+                    s => new Date(s.date_start) < new Date()
+                )
+                .sort(
+                    (a, b) =>
+                        new Date(b.date_start) -
+                        new Date(a.date_start)
+                );
+
+        const lastSession =
+            pastSessions[0];
+
+        const resultResponse = await fetch(
+            `https://api.openf1.org/v1/session_result?session_key=${lastSession.session_key}`
+        );
+
+        const results =
+            await resultResponse.json();
+
+        results.sort(
+            (a, b) => a.position - b.position
+        );
+
+        const top8 =
+            results.filter(
+                r =>
+                    r.position !== null &&
+                    r.position <= 8
+            );
+
+        for (let i = 0; i < top8.length; i++) {
+
+            const driverNumber =
+                top8[i].driver_number;
+
+            const driverName =
+                DRIVER_NAMES[driverNumber] ||
+                `#${driverNumber}`;
+
+            const field =
+                document.getElementById(
+                    `adminSr${i + 1}`
+                );
+
+            if (field) {
+                field.value = driverName;
+            }
+
+        }
+
+        alert(
+            `✅ Sprint ${lastSession.country_name} caricata`
+        );
+
+    } catch(error) {
+
+        console.error(error);
+
+        alert("Errore OpenF1");
+
+    }
+
+});
 document
 .getElementById("generateJson")
 ?.addEventListener("click", () => {
