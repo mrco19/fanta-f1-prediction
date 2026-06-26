@@ -161,6 +161,86 @@ if (field) {
 }
 
 });
+
+document
+.getElementById("loadSprintQuali")
+?.addEventListener("click", async () => {
+
+    try {
+
+        const sessionResponse = await fetch(
+            "https://api.openf1.org/v1/sessions?session_name=Sprint Qualifying"
+        );
+
+        const sessions =
+            await sessionResponse.json();
+
+        const pastSessions =
+            sessions
+                .filter(
+                    s => new Date(s.date_start) < new Date()
+                )
+                .sort(
+                    (a, b) =>
+                        new Date(b.date_start) -
+                        new Date(a.date_start)
+                );
+
+        const lastSession =
+            pastSessions[0];
+
+        const resultResponse = await fetch(
+            `https://api.openf1.org/v1/session_result?session_key=${lastSession.session_key}`
+        );
+
+        const results =
+            await resultResponse.json();
+
+        results.sort(
+            (a, b) => a.position - b.position
+        );
+
+        const top5 =
+            results.filter(
+                r =>
+                    r.position !== null &&
+                    r.position <= 5
+            );
+
+        for (let i = 0; i < top5.length; i++) {
+
+            const driverNumber =
+                top5[i].driver_number;
+
+            const driverName =
+                DRIVER_NAMES[driverNumber] ||
+                `#${driverNumber}`;
+
+            const field =
+                document.getElementById(
+                    `adminSqr${i + 1}`
+                );
+
+            if (field) {
+                field.value = driverName;
+            }
+
+        }
+
+        alert(
+            `✅ Sprint Qualifying ${lastSession.country_name} caricata`
+        );
+
+    } catch(error) {
+
+        console.error(error);
+
+        alert("Errore OpenF1");
+
+    }
+
+});
+
 document
 .getElementById("loadQuali")
 ?.addEventListener("click", async () => {
