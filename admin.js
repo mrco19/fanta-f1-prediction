@@ -238,5 +238,50 @@ alert(
     }
 
 });
+document
+.getElementById("generateJson")
+?.addEventListener("click", () => {
+
+    const data = {
+
+        qualifying: [],
+        sprintQualifying: [],
+        sprint: [],
+        race: []
+
+    };
+
+    for (let i = 1; i <= 5; i++) {
+
+        data.qualifying.push(
+            document.getElementById(`adminQr${i}`).value
+        );
+
+        data.sprintQualifying.push(
+            document.getElementById(`adminSqr${i}`).value
+        );
+
+    }
+
+    for (let i = 1; i <= 8; i++) {
+
+        data.sprint.push(
+            document.getElementById(`adminSr${i}`).value
+        );
+
+    }
+
+    for (let i = 1; i <= 10; i++) {
+
+        data.race.push(
+            document.getElementById(`adminRr${i}`).value
+        );
+
+    }
+
+    document.getElementById("jsonOutput").value =
+        JSON.stringify(data, null, 4);
+
+});
 
 
