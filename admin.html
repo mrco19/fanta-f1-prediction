@@ -74,61 +74,65 @@ Gestione risultati • OpenF1 • JSON
 <div id="sprint-results"></div>
 <div id="race-results"></div>
 
- <h2 class="section-title">
+<h2 class="section-title">
 ⚙️ Azioni OpenF1
 </h2>
- 
-  <div class="action-grid">
 
-<button id="loadQuali" class="action-card blue">
+<div class="cards-grid">
 
-<span>⏱️</span>
+<button id="loadQuali" class="admin-card blue-card">
 
-<strong>QUALIFICHE</strong>
+<img
+src="images/quali-blue.png"
+class="card-image"
+alt="Qualifiche">
 
-<small>OpenF1</small>
+<h3>QUALIFICHE</h3>
 
-</button>
-
-<button id="loadSprintQuali" class="action-card purple">
-
-<span>⚡</span>
-
-<strong>SPRINT QUALI</strong>
-
-<small>OpenF1</small>
+<p>Carica da OpenF1</p>
 
 </button>
 
-<button id="loadSprint" class="action-card green">
+<button id="loadSprintQuali" class="admin-card purple-card">
 
-<span>🏎️</span>
+<img
+src="images/sprintquali-purple.png"
+class="card-image"
+alt="Sprint Qualifying">
 
-<strong>SPRINT</strong>
+<h3>SPRINT QUALIFYING</h3>
 
-<small>OpenF1</small>
+<p>Carica da OpenF1</p>
 
 </button>
 
-<button id="loadRace" class="admin-card race-card">
+<button id="loadSprint" class="admin-card green-card">
 
-<div class="card-icon">
-🏁
+<img
+src="images/sprint-green.png"
+class="card-image"
+alt="Sprint">
+
+<h3>SPRINT RACE</h3>
+
+<p>Carica da OpenF1</p>
+
+</button>
+
+<button id="loadRace" class="admin-card red-card">
+
+<img
+src="images/race-red.png"
+class="card-image"
+alt="Race">
+
+<h3>GARA</h3>
+
+<p>Carica da OpenF1</p>
+
+</button>
+
 </div>
-
-<div class="card-text">
-
-<h3>CARICA GARA</h3>
-
-<p>da OpenF1</p>
-
-</div>
-
-<div class="card-car">
-🏎️
-</div>
-
-</button>
 
 <div class="json-actions">
 
@@ -143,8 +147,6 @@ Gestione risultati • OpenF1 • JSON
 <button id="downloadJson">
 💾 Scarica
 </button>
-
-</div>
 
 </div>
 
