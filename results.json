@@ -1,44 +1,38 @@
 {
-   "qualifying": [
+    "qualifying": [
         "George RUSSELL",
         "Charles LECLERC",
         "Lewis HAMILTON",
         "Kimi ANTONELLI",
         "Max VERSTAPPEN"
     ],
-
-  "sprintQualifying": [
-    "Norris",
-    "Verstappen",
-    "Piastri",
-    "Leclerc",
-    "Russell",
-    "Hamilton",
-    "Antonelli",
-    "Alonso"
-  ],
-
-  "sprintRace": [
-    "Verstappen",
-    "Norris",
-    "Piastri",
-    "Leclerc",
-    "Russell",
-    "Hamilton",
-    "Antonelli",
-    "Alonso"
-  ],
-
-  "race": [
-    "Verstappen",
-    "Norris",
-    "Leclerc",
-    "Piastri",
-    "Russell",
-    "Hamilton",
-    "Antonelli",
-    "Alonso",
-    "Sainz",
-    "Gasly"
-  ]
+    "sprintQualifying": [
+        "",
+        "",
+        "",
+        "",
+        ""
+    ],
+    "sprint": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+    ],
+    "race": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+    ]
 }
