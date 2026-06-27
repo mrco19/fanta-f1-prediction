@@ -1,16 +1,11 @@
 {
-  "qualifying": [
-    "Verstappen",
-    "Leclerc",
-    "Norris",
-    "Piastri",
-    "Russell",
-    "Hamilton",
-    "Antonelli",
-    "Alonso",
-    "Sainz",
-    "Gasly"
-  ],
+   "qualifying": [
+        "George RUSSELL",
+        "Charles LECLERC",
+        "Lewis HAMILTON",
+        "Kimi ANTONELLI",
+        "Max VERSTAPPEN"
+    ],
 
   "sprintQualifying": [
     "Norris",
