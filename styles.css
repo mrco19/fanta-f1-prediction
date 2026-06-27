@@ -134,49 +134,12 @@ h2{
     pointer-events:none;
 }
 
-/* NASCONDE LA FRECCIA NELLE CASELLE RISULTATI */
-.result-row{
-    position:relative;
-
-    display:flex;
-    align-items:center;
-    gap:15px;
-
-    margin-bottom:12px;
-
-    padding:12px;
-
-    border-radius:14px;
-
-    background:
-    linear-gradient(
-        90deg,
-        rgba(225,6,0,.10),
-        rgba(255,255,255,.03)
-    );
-
-    border-left:4px solid #E10600;
-}
 
 /* ELIMINA LA FRECCIA */
 .result-row::after{
     display:none;
 }
-.result-field{
-    flex:1;
 
-    background:transparent;
-
-    border:none;
-
-    color:white;
-
-    font-weight:800;
-
-    font-size:1rem;
-
-    outline:none;
-}
 /* SELECT */
 select{
     flex:1;
@@ -251,7 +214,7 @@ option{
    
     border:1px solid rgba(225,6,0,.25);
     background:rgba(225,6,0,.08);
-
+    text-align:right;
     color:white;
     font-size:15px;
     font-weight:700;
@@ -584,7 +547,7 @@ hr{
 }
 .f1-title{
     position:relative;
-    z-index:3px;
+    z-index:3;
 
     font-size:clamp(2rem, 8vw, 4.5rem);
     max-width:100%;
@@ -661,8 +624,13 @@ hr{
 /* RISULTATI AUTOMATICI */
 
 .result-row{
+
+    position:relative;
+
     display:flex;
+
     align-items:center;
+
     justify-content:space-between;
 
     gap:15px;
@@ -676,25 +644,11 @@ hr{
     background:rgba(255,255,255,.06);
 
     border:1px solid rgba(255,255,255,.10);
+
+    transition:.25s ease;
+
 }
 
-.result-field{
-    flex:1;
-
-    background:transparent;
-
-    border:none;
-
-    color:white;
-
-    font-size:1rem;
-
-    font-weight:800;
-
-    text-align:right;
-
-    outline:none;
-}
 .result-row:first-child{
     border-left:4px solid gold;
 }
@@ -705,9 +659,6 @@ hr{
 
 .result-row:nth-child(3){
     border-left:4px solid #cd7f32;
-}
-.result-row{
-    transition:.25s ease;
 }
 
 .result-row:hover{
