@@ -1153,7 +1153,7 @@ display:flex;
 
 align-items:center;
 
-gap:25px;
+gap:8px;
 
 margin-bottom:40px;
 
@@ -1179,7 +1179,7 @@ box-shadow:
 
 .admin-logo-wide{
 
-width:360px;
+width:400px;
 
 display:flex;
 align-items:center;
@@ -1225,11 +1225,13 @@ transform:scale(1.03);
 
 margin:0;
 
-font-size:4rem;
+font-size:3.3rem;
 
 font-weight:900;
 
-letter-spacing:2px;
+letter-spacing:1px;
+
+line-height:1;
 
 color:white;
 
@@ -1239,13 +1241,17 @@ text-transform:uppercase;
 
 .admin-header p{
 
-margin-top:12px;
+margin-top:14px;
 
-font-size:1.35rem;
+font-size:1.25rem;
 
-color:#e5e7eb;
+font-weight:500;
 
-letter-spacing:1px;
+letter-spacing:.8px;
+
+color:#f3f4f6;
+
+opacity:.9;
 
 }
 /* ===== JSON ACTIONS ===== */
