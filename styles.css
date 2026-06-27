@@ -1179,10 +1179,12 @@ box-shadow:
 
 .admin-logo-wide{
 
-width:260px;
+width:360px;
 
 display:flex;
 align-items:center;
+
+justify-content:center;
 
 flex-shrink:0;
 
@@ -1197,9 +1199,16 @@ height:auto;
 display:block;
 
 filter:
-drop-shadow(0 8px 18px rgba(0,0,0,.45));
+drop-shadow(0 10px 25px rgba(0,0,0,.55));
 
-transition:.3s;
+transition:.35s;
+
+}
+
+.admin-logo-wide:hover img{
+
+transform:scale(1.05);
+
 
 }
 
