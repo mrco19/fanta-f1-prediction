@@ -46,7 +46,7 @@ h2{
         0 0 10px rgba(225,6,0,.35);
 }
 
-/* HERO */
+
 .hero{
     position:relative;
     overflow:hidden;
@@ -79,6 +79,7 @@ h2{
     text-shadow:
         0 2px 6px rgba(0,0,0,.8);
 }
+
 
 /* INPUT ROW */
 .input-row{
@@ -1212,6 +1213,29 @@ box-shadow:
 
 }
 
+.admin-card::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:220px;
+    height:220px;
+
+    right:-40px;
+    bottom:-40px;
+
+    border-radius:50%;
+
+    filter:blur(60px);
+
+    opacity:.45;
+
+    transition:.4s;
+
+    z-index:1;
+
+}
 .admin-card:hover .card-image{
 
     transform:
@@ -1240,7 +1264,8 @@ line-height:1.1;
 
 color:#ffffff;
 
-z-index:2;
+position:relative;
+z-index:10;
 
 transition:.35s ease;
 
@@ -1273,7 +1298,8 @@ letter-spacing:.3px;
 
 color:rgba(255,255,255,.88);
 
-z-index:2;
+position:relative;
+z-index:10;
 
 transition:.35s ease;
 
@@ -1395,6 +1421,13 @@ linear-gradient(
 
 .green-card::after{
     background:#10b981;
+}
+.admin-card:hover::after{
+
+    transform:scale(1.4);
+
+    opacity:.75;
+
 }
 
 @media(max-width:900px){
