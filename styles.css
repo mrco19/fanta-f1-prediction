@@ -718,205 +718,7 @@ hr{
         0 6px 18px rgba(0,0,0,.25);
 
 }
-/* ===========================
-   ADMIN BUTTONS
-=========================== */
 
-.admin-buttons{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-    gap:18px;
-    margin:30px 0;
-}
-
-.admin-buttons button{
-
-    padding:18px;
-
-    font-size:17px;
-    font-weight:800;
-
-    border-radius:18px;
-
-    transition:.25s;
-
-    border:none;
-
-    color:white;
-}
-
-#loadQuali{
-    background:linear-gradient(145deg,#0066ff,#2b8cff);
-}
-
-#loadSprintQuali{
-    background:linear-gradient(145deg,#7c3aed,#a855f7);
-}
-
-#loadSprint{
-    background:linear-gradient(145deg,#16a34a,#22c55e);
-}
-
-#loadRace{
-    background:linear-gradient(145deg,#E10600,#ff3b30);
-}
-
-#generateJson{
-    background:linear-gradient(145deg,#ea580c,#fb923c);
-}
-
-#copyJson{
-    background:linear-gradient(145deg,#0284c7,#38bdf8);
-}
-
-#downloadJson{
-    background:linear-gradient(145deg,#ca8a04,#facc15);
-    color:#111;
-}
-
-.admin-buttons button:hover{
-
-    transform:translateY(-4px);
-
-    box-shadow:
-        0 12px 28px rgba(0,0,0,.35);
-
-}
-/* ===========================
-   CARD MENU ADMIN
-=========================== */
-
-.admin-card{
-
-    position:relative;
-
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-
-    width:100%;
-
-    padding:18px 22px;
-
-    border-radius:18px;
-
-    border:1px solid rgba(255,255,255,.15);
-
-    cursor:pointer;
-
-    overflow:hidden;
-
-    transition:.30s;
-
-    text-align:left;
-
-    color:white;
-}
-
-.admin-card:hover{
-
-    transform:translateY(-5px) scale(1.02);
-
-}
-
-.card-icon{
-
-    width:78px;
-    height:78px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    font-size:42px;
-
-    border-radius:16px;
-
-    background:rgba(0,0,0,.25);
-
-    border:1px solid rgba(255,255,255,.15);
-
-    flex-shrink:0;
-
-}
-
-.card-text{
-
-    flex:1;
-
-    padding-left:20px;
-
-}
-
-.card-text h3{
-
-    margin:0;
-
-    font-size:2rem;
-
-    font-weight:900;
-
-    text-transform:uppercase;
-
-    line-height:1.05;
-
-}
-
-.card-text p{
-
-    margin-top:8px;
-
-    color:#f1f1f1;
-
-    font-size:1.25rem;
-
-}
-
-.card-car{
-
-    font-size:70px;
-
-    opacity:.28;
-
-    transform:translateX(15px);
-
-    transition:.3s;
-
-}
-
-.admin-card:hover .card-car{
-
-    transform:translateX(0);
-
-    opacity:.45;
-
-}
-/* CARD ROSSA */
-
-.race-card{
-
-    background:
-    linear-gradient(
-        90deg,
-        #6d0d0d,
-        #230808
-    );
-
-    border:1px solid #ff3434;
-
-    box-shadow:
-        0 0 20px rgba(255,40,40,.45);
-
-}
-
-.race-card .card-icon{
-
-    color:white;
-
-    box-shadow:
-        inset 0 0 18px rgba(255,255,255,.08);
-
-}
 /* ===== ADMIN GRID ===== */
 
 .admin-grid{
@@ -970,7 +772,7 @@ hr{
 
 grid-template-columns:1fr;
 
-}
+ }
 
 }
 /* DASHBOARD */
@@ -1067,9 +869,9 @@ background:linear-gradient(135deg,#059669,#10b981);
 
 grid-template-columns:1fr;
 
+    }
 }
 
-}
 .section-title{
 
     margin-top:45px;
@@ -1360,8 +1162,8 @@ gap:12px;
 text-align:center;
 
 }
+    }
 
-}
 /* ==========================================
    OPENF1 CARDS
 ========================================== */
@@ -1370,14 +1172,15 @@ text-align:center;
 
 display:grid;
 
-grid-template-columns:repeat(2,1fr);
+grid-template-columns:repeat(2,minmax(340px,1fr));
 
-gap:24px;
+gap:30px;
 
-margin:35px 0;
+margin:45px 0;
+
+align-items:stretch;
 
 }
-
 .admin-card{
 
 position:relative;
@@ -1388,88 +1191,127 @@ display:flex;
 
 flex-direction:column;
 
-justify-content:center;
+justify-content:flex-end;
 
-align-items:center;
+align-items:flex-start;
 
 padding:28px;
 
-border:none;
-
-border-radius:24px;
+border-radius:28px;
 
 cursor:pointer;
 
-background:#1b1b1b;
+border:1px solid rgba(255,255,255,.08);
 
-transition:.35s;
+background:
+linear-gradient(
+160deg,
+rgba(255,255,255,.08),
+rgba(255,255,255,.02)
+);
 
-min-height:320px;
+backdrop-filter:blur(12px);
+-webkit-backdrop-filter:blur(12px);
+
+transition:
+transform .35s ease,
+box-shadow .35s ease;
+
+min-height:340px;
 
 box-shadow:
-0 18px 40px rgba(0,0,0,.35);
+0 18px 45px rgba(0,0,0,.40);
 
 }
 
 .admin-card:hover{
 
 transform:
-translateY(-8px)
-scale(1.02);
+translateY(-10px)
+scale(1.03);
+
+box-shadow:
+0 25px 50px rgba(0,0,0,.45);
 
 }
-
 .card-image{
 
-width:230px;
+position:absolute;
+
+right:-20px;
+
+bottom:-10px;
+
+width:255px;
 
 height:auto;
 
-margin-bottom:20px;
+margin:0;
 
-transition:.35s;
+transition:
+transform .45s ease,
+filter .45s ease;
 
 filter:
-drop-shadow(
-0 10px 18px rgba(0,0,0,.35)
-);
+drop-shadow(0 15px 25px rgba(0,0,0,.45));
+
+pointer-events:none;
 
 }
 
 .admin-card:hover .card-image{
 
 transform:
-scale(1.08)
-rotate(-2deg);
+scale(1.12)
+rotate(-4deg)
+translateX(-10px)
+translateY(-5px);
+
+filter:
+drop-shadow(
+0 22px 35px rgba(0,0,0,.55)
+);
 
 }
 
 .admin-card h3{
 
-margin:0;
+margin-top:auto;
 
-font-size:1.45rem;
+margin-bottom:6px;
+
+font-size:1.55rem;
 
 font-weight:900;
 
-letter-spacing:1px;
+letter-spacing:1.2px;
 
-color:white;
+line-height:1.1;
+
+color:#ffffff;
+
+z-index:2;
+
+text-shadow:
+0 2px 8px rgba(0,0,0,.35);
 
 }
 
 .admin-card p{
 
-margin-top:8px;
+margin-top:4px;
 
-font-size:.95rem;
+font-size:1rem;
 
-opacity:.8;
+font-weight:500;
 
-color:white;
+letter-spacing:.3px;
+
+color:rgba(255,255,255,.88);
+
+z-index:2;
 
 }
-
 /* ROSSA */
 
 .red-card{
@@ -1535,5 +1377,41 @@ grid-template-columns:1fr;
 width:180px;
 
 }
+
+}
+/* RIFLESSO */
+
+.admin-card::before{
+
+content:"";
+
+position:absolute;
+
+top:-120%;
+
+left:-40%;
+
+width:45%;
+
+height:320%;
+
+background:
+
+linear-gradient(
+90deg,
+transparent,
+rgba(255,255,255,.25),
+transparent
+);
+
+transform:rotate(25deg);
+
+transition:.7s;
+
+}
+
+.admin-card:hover::before{
+
+left:130%;
 
 }
