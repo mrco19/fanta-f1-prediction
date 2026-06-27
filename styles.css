@@ -1175,44 +1175,38 @@ box-shadow:
 
 }
 
-.admin-logo{
+/* LOGO HEADER */
 
-width:130px;
-height:130px;
+.admin-logo-wide{
+
+width:260px;
 
 display:flex;
-justify-content:center;
 align-items:center;
-
-border-radius:26px;
-
-background:transparent;
-
-box-shadow:none;
-
-overflow:hidden;
 
 flex-shrink:0;
 
 }
 
-.admin-logo img{
+.admin-logo-wide img{
 
-width:120%;
-height:120%;
+width:100%;
 
-object-fit:cover;
+height:auto;
 
-transition:.35s;
+display:block;
 
 filter:
-drop-shadow(0 10px 18px rgba(0,0,0,.35));
+drop-shadow(0 8px 18px rgba(0,0,0,.45));
+
+transition:.3s;
 
 }
 
-.admin-header:hover .admin-logo img{
+.admin-header:hover
+.admin-logo-wide img{
 
-transform:scale(1.08);
+transform:scale(1.03);
 
 }
 
