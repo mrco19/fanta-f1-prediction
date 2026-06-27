@@ -1219,11 +1219,13 @@ transform:scale(1.03);
 
 }
 
+/* HEADER */
+
 .admin-header h1{
 
 margin:0;
 
-font-size:2.8rem;
+font-size:4rem;
 
 font-weight:900;
 
@@ -1231,15 +1233,17 @@ letter-spacing:2px;
 
 color:white;
 
+text-transform:uppercase;
+
 }
 
 .admin-header p{
 
-margin-top:8px;
+margin-top:12px;
 
-color:#d1d5db;
+font-size:1.35rem;
 
-font-size:1rem;
+color:#e5e7eb;
 
 letter-spacing:1px;
 
