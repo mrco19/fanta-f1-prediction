@@ -1191,39 +1191,35 @@ box-shadow:
 }
 .card-image{
 
-position:absolute;
+    position:absolute;
 
-right:-20px;
+    right:-80px;
+    bottom:-25px;
 
-bottom:-10px;
+    width:340px;
 
-width:255px;
+    height:auto;
 
-height:auto;
+    pointer-events:none;
 
-margin:0;
+    transition:all .45s ease;
 
-transition:
-transform .45s ease,
-filter .45s ease;
+    z-index:2;
 
-filter:
-drop-shadow(0 15px 25px rgba(0,0,0,.45));
-
-pointer-events:none;
+    filter:drop-shadow(0 25px 30px rgba(0,0,0,.45));
 
 }
 
-transform:
-scale(1.18)
-rotate(-6deg)
-translateX(-18px)
-translateY(-12px);
+.admin-card:hover .card-image{
 
-filter:
-drop-shadow(
-0 22px 35px rgba(0,0,0,.55)
-);
+    transform:
+        scale(1.18)
+        rotate(-6deg)
+        translateX(-18px)
+        translateY(-12px);
+
+    filter:
+        drop-shadow(0 35px 40px rgba(0,0,0,.60));
 
 }
 
