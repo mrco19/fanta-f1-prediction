@@ -1344,6 +1344,38 @@ linear-gradient(
         0 30px 60px rgba(0,0,0,.45),
         0 0 35px rgba(16,185,129,.35);
 }
+/* ===== BARRA COLORATA INFERIORE ===== */
+
+.admin-card::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+    bottom:0;
+
+    width:100%;
+    height:5px;
+
+    border-radius:0 0 28px 28px;
+
+}
+.red-card::after{
+    background:#E10600;
+}
+
+.blue-card::after{
+    background:#2563eb;
+}
+
+.purple-card::after{
+    background:#8b5cf6;
+}
+
+.green-card::after{
+    background:#10b981;
+}
 
 @media(max-width:900px){
 
