@@ -1124,9 +1124,9 @@ text-align:center;
 
 display:grid;
 
-grid-template-columns:repeat(2,minmax(340px,1fr));
+grid-template-columns:repeat(2,1fr);
 
-gap:20px;
+gap:16px;
 
 margin:45px 0;
 
@@ -1142,9 +1142,9 @@ align-items:stretch;
     flex-direction:column;
     justify-content:flex-end;
 
-    min-height:230px;
+    min-height:180px;
 
-    padding:18px;
+    padding:14px 18px;
 
     border-radius:28px;
 
@@ -1174,11 +1174,6 @@ transition:
 transform .35s ease,
 box-shadow .35s ease;
 
-min-height:340px;
-
-box-shadow:
-0 18px 45px rgba(0,0,0,.40);
-
 }
 
 .admin-card:hover{
@@ -1195,10 +1190,9 @@ box-shadow:
 
     position:absolute;
 
-    right:-55px;
-    bottom:-15px;
-
-    width:260px;
+   width:210px;
+   right:-30px;
+   bottom:-8px;
 
     pointer-events:none;
 
@@ -1252,7 +1246,7 @@ margin-top:auto;
 
 margin-bottom:6px;
 
-font-size:1.55rem;
+font-size:1.25rem;
 
 font-weight:900;
 
@@ -1288,7 +1282,7 @@ text-shadow:
 
 margin-top:4px;
 
-font-size:1rem;
+font-size:.92rem;
 
 font-weight:500;
 
