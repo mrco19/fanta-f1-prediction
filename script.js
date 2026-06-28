@@ -1,26 +1,26 @@
 const drivers = [
-  "Verstappen",
-  "Norris",
-  "Leclerc",
-  "Piastri",
-  "Russell",
-  "Hamilton",
-  "Sainz",
-  "Alonso",
-  "Stroll",
-  "Gasly",
-  "Ocon",
-  "Hadjar",
-  "Albon",
-  "Hülkenberg",
-  "Bottas",
-  "Bortoleto",
-  "Lawson",
-  "Lindblad",
-  "Bearman",
-  "Colapinto",
-  "Perez",
-  "Antonelli"
+  "Max VERSTAPPEN",
+  "Lando NORRIS",
+  "Charles LECLERC",
+  "Oscar PIASTRI",
+  "George RUSSELL",
+  "Lewis HAMILTON",
+  "Carlos SAINZ",
+  "Fernando ALONSO",
+  "Lance STROLL",
+  "Pierre GASLY",
+  "Esteban OCON",
+  "Isack HADJAR",
+  "Alexander ALBON",
+  "Nico HULKENBERG",
+  "Valtteri BOTTAS",
+  "Gabriel BORTOLETO",
+  "Liam LAWSON",
+  "Arvin LINDBLAD",
+  "Oliver BEARMAN",
+  "Franco COLAPINTO",
+  "Sergio PEREZ",
+  "Kimi ANTONELLI"
 ];
 
 const driversSorted = [...drivers].sort((a, b) =>
@@ -540,9 +540,9 @@ async function loadResults() {
 
     // Sprint Race
     setResultPositions(
-        "sr",
-        data.sprintRace
-    );
+    "sr",
+    data.sprint
+);
 
     // Gara
     setResultPositions(
