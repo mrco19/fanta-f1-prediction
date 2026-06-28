@@ -306,6 +306,8 @@ for (let i = 0; i < top5.length; i++) {
     }
 }
 
+generateJson();
+        
 alert(
     `✅ Qualifiche ${lastQuali.country_name} caricate`
 );
@@ -397,9 +399,8 @@ document
     }
 
 });
-document
-.getElementById("generateJson")
-?.addEventListener("click", () => {
+
+function generateJson() {
 
     const data = {
 
@@ -441,7 +442,10 @@ document
     document.getElementById("jsonOutput").value =
         JSON.stringify(data, null, 4);
 
-});
+}
+document
+.getElementById("generateJson")
+?.addEventListener("click", generateJson);
 document
 .getElementById("copyJson")
 ?.addEventListener("click", async () => {
