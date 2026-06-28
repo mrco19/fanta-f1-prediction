@@ -1144,7 +1144,7 @@ align-items:stretch;
 
     min-height:180px;
 
-    padding:14px 18px;
+    padding:22px;
 
     border-radius:28px;
 
@@ -1190,19 +1190,22 @@ box-shadow:
 
     position:absolute;
 
-   width:210px;
-   right:-30px;
-   bottom:-8px;
+    width:260px;
+    right:-10px;
+    bottom:-8px;
 
+    transform:scale(1.08);
+    
     pointer-events:none;
 
     transition:all .45s ease;
 
-    z-index:5;
-
     filter:
-        drop-shadow(0 20px 35px rgba(0,0,0,.45));
+     drop-shadow(0 10px 12px rgba(0,0,0,.25))
+     drop-shadow(0 28px 32px rgba(0,0,0,.40));
 
+
+    z-index:5;
 }
 
 .admin-card::after{
@@ -1230,11 +1233,15 @@ box-shadow:
 }
 .admin-card:hover .card-image{
 
+    .admin-card:hover .card-image{
+
     transform:
-        scale(1.18)
-        rotate(-6deg)
-        translateX(-18px)
-        translateY(-12px);
+translateY(-8px)
+translateX(-10px)
+scale(1.18)
+rotate(-4deg);
+
+}
 
     filter:
         drop-shadow(0 35px 45px rgba(0,0,0,.60));
@@ -1244,7 +1251,7 @@ box-shadow:
 
 margin-top:auto;
 
-margin-bottom:6px;
+margin-bottom:2px;
 
 font-size:1.25rem;
 
