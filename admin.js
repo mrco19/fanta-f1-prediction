@@ -148,6 +148,8 @@ if (field) {
 }
     }
 
+    generateJson();
+    
     alert(
         `✅ Caricata gara: ${lastRace.country_name}`
     );
@@ -227,6 +229,8 @@ document
 
         }
 
+        generateJson();
+        
         alert(
             `✅ Sprint Qualifying ${lastSession.country_name} caricata`
         );
@@ -386,6 +390,8 @@ document
 
         }
 
+        generateJson();
+        
         alert(
             `✅ Sprint ${lastSession.country_name} caricata`
         );
