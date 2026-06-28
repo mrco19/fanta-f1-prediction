@@ -149,6 +149,7 @@ if (field) {
     }
 
     generateJson();
+    downloadJson();
     
     alert(
         `✅ Caricata gara: ${lastRace.country_name}`
@@ -230,6 +231,7 @@ document
         }
 
         generateJson();
+        downloadJson();
         
         alert(
             `✅ Sprint Qualifying ${lastSession.country_name} caricata`
@@ -310,7 +312,8 @@ for (let i = 0; i < top5.length; i++) {
     }
 }
 
-generateJson();
+        generateJson();
+        downloadJson();
         
 alert(
     `✅ Qualifiche ${lastQuali.country_name} caricate`
@@ -391,6 +394,7 @@ document
         }
 
         generateJson();
+        downloadJson();
         
         alert(
             `✅ Sprint ${lastSession.country_name} caricata`
@@ -449,24 +453,7 @@ function generateJson() {
         JSON.stringify(data, null, 4);
 
 }
-document
-.getElementById("generateJson")
-?.addEventListener("click", generateJson);
-document
-.getElementById("copyJson")
-?.addEventListener("click", async () => {
-
-    const text =
-        document.getElementById("jsonOutput").value;
-
-    await navigator.clipboard.writeText(text);
-
-    alert("✅ JSON copiato!");
-
-});
-document
-.getElementById("downloadJson")
-?.addEventListener("click", () => {
+function downloadJson() {
 
     const text =
         document.getElementById("jsonOutput").value;
@@ -492,6 +479,24 @@ document
 
     URL.revokeObjectURL(link.href);
 
+}
+document
+.getElementById("generateJson")
+?.addEventListener("click", generateJson);
+document
+.getElementById("copyJson")
+?.addEventListener("click", async () => {
+
+    const text =
+        document.getElementById("jsonOutput").value;
+
+    await navigator.clipboard.writeText(text);
+
+    alert("✅ JSON copiato!");
+
 });
+document
+.getElementById("downloadJson")
+?.addEventListener("click", downloadJson);
 
 
