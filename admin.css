@@ -561,15 +561,11 @@ box-shadow:
 }
 .admin-card:hover .card-image{
 
-    .admin-card:hover .card-image{
-
     transform:
-translateY(-8px)
-translateX(-10px)
-scale(1.18)
-rotate(-4deg);
-
-}
+        translateY(-8px)
+        translateX(-10px)
+        scale(1.18)
+        rotate(-4deg);
 
     filter:
         drop-shadow(0 35px 45px rgba(0,0,0,.60));
@@ -800,5 +796,10 @@ transparent
 transform:rotate(25deg);
 
 transition:.7s;
+
+}
+.admin-card:hover::before{
+
+    left:130%;
 
 }
