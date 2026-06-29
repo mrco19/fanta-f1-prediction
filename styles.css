@@ -841,15 +841,52 @@ margin:30px 0;
 
 border-radius:14px;
 
+/* Barra rossa Formula 1 */
+border-left:6px solid #e10600;
+
 box-shadow:0 10px 30px rgba(0,0,0,.4);
+
+/* Animazione */
+opacity:0;
+transform:translateY(40px);
+transition:.7s;
+
+}
+
+.admin-panel.show{
+
+opacity:1;
+transform:translateY(0);
 
 }
 
 .admin-panel h2{
 
-color:#e10600;
+    position:relative;
 
-margin-bottom:20px;
+    margin-bottom:25px;
+
+    color:white;
+
+}
+
+/* Linea rossa sotto il titolo */
+
+.admin-panel h2::after{
+
+content:"";
+
+display:block;
+
+width:90px;
+
+height:4px;
+
+background:#e10600;
+
+margin-top:10px;
+
+border-radius:10px;
 
 }
 
