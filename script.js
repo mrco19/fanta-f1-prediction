@@ -586,4 +586,27 @@ function setResultPositions(prefix, results) {
 
 }
 loadResults();
+const sections=document.querySelectorAll(".admin-panel");
+
+const observer=new IntersectionObserver(entries=>{
+
+entries.forEach(entry=>{
+
+if(entry.isIntersecting){
+
+entry.target.classList.add("show");
+
+}
+
+});
+
+},{
+threshold:.15
+});
+
+sections.forEach(section=>{
+
+observer.observe(section);
+
+});
 
