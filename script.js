@@ -476,26 +476,23 @@ document
 
 function showSection(id) {
 
-  document
-    .querySelectorAll(".panel")
-    .forEach(panel => {
-      panel.style.display = "none";
+    document.querySelectorAll(".panel").forEach(panel => {
+        panel.style.display = "none";
     });
-  
-    const target =
-    document.getElementById(id);
 
-  if (target) {
-    target.style.display = "block";
-  }
+    const target = document.getElementById(id);
 
-  if (sideMenu) {
-    sideMenu.classList.remove("open");
-  }
+    if (target) {
+        target.style.display = "block";
+    }
 
-  if (menuToggle) {
-    menuToggle.classList.remove("active");
-  }
+    if (sideMenu) {
+        sideMenu.classList.remove("open");
+    }
+
+    if (menuToggle) {
+        menuToggle.classList.remove("active");
+    }
 
 }
 
@@ -503,63 +500,44 @@ function showSection(id) {
    MENU HAMBURGER
 ========================= */
 
-const menuToggle =
-  document.getElementById("menuToggle");
-
-const sideMenu =
-  document.getElementById("sideMenu");
+const menuToggle = document.getElementById("menuToggle");
+const sideMenu = document.getElementById("sideMenu");
 
 if (menuToggle && sideMenu) {
 
-  menuToggle.addEventListener("click", () => {
+    menuToggle.addEventListener("click", () => {
 
-    menuToggle.classList.toggle("active");
-    sideMenu.classList.toggle("open");
+        menuToggle.classList.toggle("active");
+        sideMenu.classList.toggle("open");
 
-  });
+    });
 
 }
+
 showSection("app");
+
+/* =========================
+   CARICAMENTO RISULTATI
+========================= */
+
 async function loadResults() {
 
     const response = await fetch("results.json");
-
     const data = await response.json();
-  
-    // Qualifiche
-    setResultPositions(
-        "qr",
-        data.qualifying
-    );
 
-    // Sprint Qualifying
-    setResultPositions(
-        "sqr",
-        data.sprintQualifying
-    );
-
-    // Sprint Race
-    setResultPositions(
-    "sr",
-    data.sprint
-);
-
-    // Gara
-    setResultPositions(
-        "rr",
-        data.race
-    );
+    setResultPositions("qr", data.qualifying);
+    setResultPositions("sqr", data.sprintQualifying);
+    setResultPositions("sr", data.sprint);
+    setResultPositions("rr", data.race);
 
 }
+
 function setResultPositions(prefix, results) {
 
     results.forEach((driver, index) => {
 
-        const field =
-            document.getElementById(`${prefix}${index + 1}`);
-
-        const pos =
-            document.getElementById(`${prefix}Pos${index + 1}`);
+        const field = document.getElementById(`${prefix}${index + 1}`);
+        const pos = document.getElementById(`${prefix}Pos${index + 1}`);
 
         if (!field) return;
 
@@ -568,16 +546,21 @@ function setResultPositions(prefix, results) {
         if (pos) {
 
             if (index === 0) {
+
                 pos.textContent = "🏆 1°";
-            }
-            else if (index === 1) {
+
+            } else if (index === 1) {
+
                 pos.textContent = "🥈 2°";
-            }
-            else if (index === 2) {
+
+            } else if (index === 2) {
+
                 pos.textContent = "🥉 3°";
-            }
-            else {
+
+            } else {
+
                 pos.textContent = `${index + 1}°`;
+
             }
 
         }
@@ -585,60 +568,72 @@ function setResultPositions(prefix, results) {
     });
 
 }
+
 loadResults();
-const sections=document.querySelectorAll(".admin-panel");
 
-const observer=new IntersectionObserver(entries=>{
+/* =========================
+   REGOLAMENTO
+========================= */
 
-entries.forEach(entry=>{
+document.addEventListener("DOMContentLoaded", () => {
 
-if(entry.isIntersecting){
+    const sections = document.querySelectorAll(".admin-panel");
+    const links = document.querySelectorAll(".rules-index a");
 
-entry.target.classList.add("show");
+    if (sections.length === 0) return;
 
-}
+    /* Animazione comparsa */
 
-});
+    const observer = new IntersectionObserver((entries) => {
 
-},{
-threshold:.15
-});
+        entries.forEach(entry => {
 
-sections.forEach(section=>{
+            if (entry.isIntersecting) {
 
-observer.observe(section);
+                entry.target.classList.add("show");
 
-});
-const links=document.querySelectorAll(".rules-index a");
+            }
 
-const panels=document.querySelectorAll(".admin-panel");
+        });
 
-window.addEventListener("scroll",()=>{
+    }, {
 
-let current="";
+        threshold: 0.15
 
-panels.forEach(section=>{
+    });
 
-const top=section.offsetTop-120;
+    sections.forEach(section => observer.observe(section));
 
-if(scrollY>=top){
+    /* Evidenzia indice */
 
-current=section.getAttribute("id");
+    window.addEventListener("scroll", () => {
 
-}
+        let current = "";
 
-});
+        sections.forEach(section => {
 
-links.forEach(link=>{
+            const top = section.offsetTop - 150;
 
-link.classList.remove("active");
+            if (window.scrollY >= top) {
 
-if(link.getAttribute("href")==="#"+current){
+                current = section.id;
 
-link.classList.add("active");
+            }
 
-}
+        });
 
-});
+        links.forEach(link => {
+
+            link.classList.remove("active");
+
+            if (link.getAttribute("href") === "#" + current) {
+
+                link.classList.add("active");
+
+            }
+
+        });
+
+    });
 
 });
