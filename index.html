@@ -252,7 +252,29 @@
 
 <h1>📜 Regolamento Ufficiale</h1>
 
-<section class="admin-panel">
+      <div class="rules-index">
+
+<h2>Indice</h2>
+
+<a href="#obiettivo">🎯 Obiettivo</a>
+
+<a href="#weekend">🏁 Weekend Normale</a>
+
+<a href="#sprint">⚡ Weekend Sprint</a>
+
+<a href="#bonus">🏆 Bonus Weekend</a>
+
+<a href="#classifica">🌍 Classifica Generale</a>
+
+<a href="#duello">🥊 Duello Stagionale</a>
+
+<a href="#leghe">👥 Leghe Private</a>
+
+<a href="#premi">🏆 Premi Finali</a>
+
+</div>
+
+<section id="obiettivo" class="admin-panel">
 
 <h2>🎯 Obiettivo</h2>
 
@@ -263,10 +285,10 @@ Ogni previsione assegna punti in base alla precisione.
 
 </section>
 
-<section class="admin-panel">
+<section id="weekend" class="admin-panel">
 
 <h2>🏁 Weekend Normale</h2>
-
+      
 <h3>🏁 Qualifiche</h3>
 
 <table class="rules-table">
@@ -362,7 +384,7 @@ Indovina tutti e 10 i piloti della Top 10 (ordine non importante).<br>
 
 </section>
 
-<section class="admin-panel">
+<section id="sprint" class="admin-panel">
 
 <h2>⚡ Weekend Sprint</h2>
 
@@ -451,13 +473,21 @@ Indovina tutti e 10 i piloti della Top 10 (ordine non importante).<br>
 
 </section>
 
-<section class="admin-panel">
+<section id="bonus" class="admin-panel">
 
 <h2>🏆 Bonus Weekend Perfetto</h2>
-
 <p>
 
-Se durante un weekend vengono indovinati tutti i piloti di tutte le sessioni:
+Se vengono indovinati tutti i piloti previsti nel weekend:
+
+• Top 5 Qualifiche + Top 10 Gara (weekend normale)
+
+oppure
+
+• Top 5 Sprint Qualifying
+• Top 8 Sprint Race
+• Top 5 Qualifiche
+• Top 10 Gara (weekend Sprint)
 
 </p>
 
@@ -473,49 +503,149 @@ Se durante un weekend vengono indovinati tutti i piloti di tutte le sessioni:
 
 </ul>
 
-<h3>⭐ Bonus +50 punti</h3>
+<div class="bonus-box">
+
+🏆 <strong>Perfect Weekend Bonus</strong><br>
+
+Se vengono indovinati tutti i piloti di tutte le sessioni del weekend:
+
+<ul>
+
+<li>Top 5 Sprint Qualifying*</li>
+<li>Top 8 Sprint Race*</li>
+<li>Top 5 Qualifiche</li>
+<li>Top 10 Gara</li>
+
+</ul>
+
+<strong>+50 punti Bonus</strong>
+
+<p style="margin-top:10px;font-size:.9rem;">
+* Nei weekend senza Sprint vengono considerate solamente Qualifiche e Gara.
+</p>
+
+</div>
 
 </section>
 
-<section class="admin-panel">
+<section id="classifica" class="admin-panel">
 
 <h2>🌍 Classifica Generale</h2>
 
 <p>
 
-I punti ottenuti in ogni GP vengono sommati durante tutta la stagione.
-
-Vince il campionato chi totalizza più punti.
-
-</p>
-
-</section>
-
-<section class="admin-panel">
-
-<h2>🥊 Duello Stagionale</h2>
-
-<p>
-
-Due giocatori possono sfidarsi durante tutta la stagione.
+Per ogni Gran Premio vengono sommati:
 
 </p>
 
 <ul>
 
-<li>🏁 1 punto al vincitore del GP Fantasy.</li>
+<li>Sprint Qualifying (se prevista)</li>
 
-<li>🤝 0,5 punti a ciascun giocatore in caso di pareggio.</li>
+<li>Sprint Race (se prevista)</li>
 
-<li>⚡ Chi ottiene più punti nella Sprint Qualifying riceve <strong>+2 punti bonus Sprint Race</strong>.</li>
+<li>Qualifiche</li>
 
-<li>🏆 Chi ottiene più punti nelle Qualifiche riceve <strong>+5 punti bonus Gara</strong>.</li>
+<li>Gara</li>
+
+<li>Perfect Race Bonus (+20)</li>
+
+<li>Perfect Weekend Bonus (+50)</li>
 
 </ul>
 
+<h3>📊 Formula del Weekend</h3>
+
+<div class="bonus-box">
+
+Punteggio Weekend =<br><br>
+
+Sprint Qualifying (se presente)<br>
++ Sprint Race<br>
++ Qualifiche<br>
++ Gara<br>
++ Perfect Race Bonus (+20)<br>
++ Perfect Weekend Bonus (+50)
+
+</div>
+
 <p>
 
-Il vincitore del GP Fantasy viene determinato sommando:
+Tutti i punti ottenuti vengono accumulati durante l'intera stagione.
+
+Il giocatore con il punteggio totale più alto diventa il Campione Fanta F1 Prediction.
+
+</p>
+
+</section>
+
+<section id="duello" class="admin-panel">
+
+<h2>🥊 Duello Stagionale</h2>
+
+<p>
+Due giocatori possono sfidarsi durante tutta la stagione.
+</p>
+
+<h3>🏆 Assegnazione Punti Duello</h3>
+
+<ul>
+
+<li>Il vincitore del GP Fantasy ottiene <strong>1 Punto Duello</strong>.</li>
+
+<li>In caso di pareggio entrambi i giocatori ottengono <strong>0,5 Punti Duello</strong>.</li>
+
+</ul>
+
+<h3>⚡ Bonus Sprint Qualifying</h3>
+
+<p>
+
+Il giocatore che ottiene il punteggio più alto nella Sprint Qualifying riceve:
+
+</p>
+
+<div class="bonus-box">
+
++2 punti Bonus Sprint Race
+
+</div>
+
+<p>
+
+Questi punti vengono aggiunti esclusivamente al punteggio della Sprint Race per determinare il vincitore del GP Fantasy.
+
+In caso di parità il bonus non viene assegnato.
+
+</p>
+
+<h3>🏁 Bonus Qualifiche</h3>
+
+<p>
+
+Il giocatore che ottiene il punteggio più alto nelle Qualifiche riceve:
+
+</p>
+
+<div class="bonus-box">
+
++5 punti Bonus Gara
+
+</div>
+
+<p>
+
+Questi punti vengono aggiunti esclusivamente al punteggio della Gara per determinare il vincitore del GP Fantasy.
+
+In caso di parità il bonus non viene assegnato.
+
+</p>
+
+<h3>🏆 Vincitore del GP Fantasy</h3>
+
+<p>
+
+Per ogni Gran Premio viene calcolato il punteggio complessivo:
 
 </p>
 
@@ -523,58 +653,181 @@ Il vincitore del GP Fantasy viene determinato sommando:
 
 <li>Sprint Qualifying</li>
 
-<li>Sprint Race</li>
-
-<li>Bonus Sprint</li>
+<li>Sprint Race + Bonus Sprint Qualifying (+2)</li>
 
 <li>Qualifiche</li>
 
-<li>Gara</li>
+<li>Gara + Bonus Qualifiche (+5)</li>
 
-<li>Bonus Qualifiche</li>
+<li>Perfect Race Bonus (+20)</li>
+
+<li>Perfect Weekend Bonus (+50)</li>
 
 </ul>
 
 <p>
 
-A fine stagione vince il giocatore con più punti Duello.
+Il giocatore con il punteggio più alto conquista <strong>1 Punto Duello</strong>.
 
 </p>
 
-</section>
-
-<section class="admin-panel">
-
-<h2>👥 Leghe Private</h2>
+<h3>🥇 Campione del Duello</h3>
 
 <p>
 
-Ogni lega utilizza gli stessi pronostici della classifica generale.
-
-I punti vengono accumulati per tutta la stagione.
+Al termine della stagione vince il giocatore che ha totalizzato il maggior numero di <strong>Punti Duello</strong>.
 
 </p>
 
-</section>
+<h3>📊 Spareggi</h3>
 
-<section class="admin-panel">
+<ol>
 
-<h2>🏆 Premi Finali</h2>
+<li>Maggior numero di GP Fantasy vinti.</li>
+
+<li>Maggior numero di Qualifiche vinte.</li>
+
+<li>Maggior numero di Sprint Qualifying vinte.</li>
+
+<li>Maggior punteggio totale nella Classifica Generale.</li>
+
+</ol>
+      </section>
+
+<section id="leghe" class="admin-panel">
+
+<h2>👥 Leghe Private</h2>
+<p>
+
+Una Lega Privata può essere composta da qualsiasi numero di giocatori
+(2, 4, 8, 10 o più partecipanti).
+
+Ogni giocatore utilizza gli stessi pronostici inseriti per la Classifica Generale.
+
+</p>
+
+<hr>
+
+<h3>🏆 Bonus Sprint Qualifying</h3>
+
+<p>
+
+Il giocatore che ottiene il punteggio più alto nella Sprint Qualifying riceve:
+
+</p>
+
+<div class="bonus-box">
+
++2 punti Bonus Sprint Race
+
+</div>
+
+<p>
+
+In caso di parità il bonus viene assegnato a tutti i giocatori con il miglior punteggio.
+
+</p>
+
+<hr>
+
+<h3>🏁 Bonus Qualifiche</h3>
+
+<p>
+
+Il giocatore che ottiene il punteggio più alto nelle Qualifiche riceve:
+
+</p>
+
+<div class="bonus-box">
+
++5 punti Bonus Gara
+
+</div>
+
+<p>
+
+In caso di parità il bonus viene assegnato a tutti i giocatori con il miglior punteggio.
+
+</p>
+
+<hr>
+
+<h3>📊 Classifica della Lega</h3>
+
+<p>
+
+Per ogni Gran Premio viene calcolato il punteggio totale sommando:
+
+</p>
 
 <ul>
 
-<li>Campione Fanta F1 Prediction</li>
+<li>Sprint Qualifying</li>
 
-<li>Vincitore Lega</li>
+<li>Sprint Race + Bonus Sprint Qualifying (+2)</li>
 
-<li>Vincitore Duello</li>
+<li>Qualifiche</li>
 
-<li>Maggior numero di Pole Position indovinate</li>
+<li>Gara + Bonus Qualifiche (+5)</li>
 
-<li>Maggior numero di GP Fantasy vinti</li>
+<li>Perfect Race Bonus (+20)</li>
 
-<li>Miglior punteggio stagionale</li>
+<li>Perfect Weekend Bonus (+50)</li>
 
+</ul>
+
+<p>
+
+I punti vengono accumulati durante tutta la stagione.
+
+Vince la Lega il giocatore che totalizza il maggior numero di punti.
+
+</p>
+
+<hr>
+
+<h3>🥇 Spareggi</h3>
+
+<ol>
+
+<li>Maggior numero di GP Fantasy vinti.</li>
+
+<li>Maggior numero di Qualifiche vinte.</li>
+
+<li>Maggior numero di Sprint Qualifying vinte.</li>
+
+<li>Maggior numero di Pole Position indovinate.</li>
+
+<li>Maggior punteggio nella Classifica Generale.</li>
+
+</ol>
+
+</section>
+
+<section id="premi" class="admin-panel">
+
+<h2>🏆 Premi Finali</h2>
+<ul>
+
+<li>🏆 Campione Fanta F1 Prediction</li>
+
+<li>👥 Vincitore di ogni Lega Privata</li>
+
+<li>🥊 Campione del Duello Stagionale</li>
+
+<li>🎯 Maggior numero di Pole Position indovinate</li>
+
+<li>🏁 Maggior numero di GP Fantasy vinti</li>
+
+<li>⚡ Maggior numero di Sprint Qualifying vinte</li>
+
+<li>🏎 Maggior numero di Perfect Race Bonus ottenuti</li>
+
+<li>⭐ Maggior numero di Perfect Weekend Bonus ottenuti</li>
+
+<li>🚀 Miglior punteggio di un singolo weekend</li>
+
+<li>🌍 Miglior punteggio stagionale assoluto</li>
 </ul>
 
 </section>
