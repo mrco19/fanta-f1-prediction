@@ -750,17 +750,27 @@ box-shadow:
 
 .rules-index a{
     display:block;
-    padding:10px;
-    margin:6px 0;
+    padding:12px;
+    margin:8px 0;
     color:#fff;
     text-decoration:none;
     border-radius:8px;
-    transition:.25s;
+    transition:.3s;
 }
 
 .rules-index a:hover{
     background:#e10600;
     padding-left:18px;
+}
+
+.rules-index a.active{
+
+    background:#e10600;
+
+    font-weight:bold;
+
+    transform:translateX(8px);
+
 }
 .bonus-box{
 
