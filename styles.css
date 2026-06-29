@@ -672,16 +672,6 @@ hr{
 }
 /* ===== REGOLAMENTO ===== */
 
-.rules-table{
-
-width:100%;
-
-border-collapse:collapse;
-
-margin:20px 0;
-
-}
-
 .rules-table th{
 
 background:#E10600;
@@ -772,25 +762,7 @@ box-shadow:
     transform:translateX(8px);
 
 }
-.bonus-box{
 
-background:linear-gradient(135deg,#e10600,#8b0000);
-
-color:white;
-
-padding:18px;
-
-margin:20px 0;
-
-border-radius:12px;
-
-font-weight:bold;
-
-box-shadow:0 8px 20px rgba(225,6,0,.35);
-
-border-left:6px solid gold;
-
-}
 .rules-table{
 
 width:100%;
