@@ -735,3 +735,128 @@ box-shadow:
 
 }
 
+.rules-index{
+    background:#181818;
+    border:2px solid #e10600;
+    border-radius:12px;
+    padding:20px;
+    margin-bottom:30px;
+}
+
+.rules-index h2{
+    margin-top:0;
+    color:#fff;
+}
+
+.rules-index a{
+    display:block;
+    padding:10px;
+    margin:6px 0;
+    color:#fff;
+    text-decoration:none;
+    border-radius:8px;
+    transition:.25s;
+}
+
+.rules-index a:hover{
+    background:#e10600;
+    padding-left:18px;
+}
+.bonus-box{
+
+background:linear-gradient(135deg,#e10600,#8b0000);
+
+color:white;
+
+padding:18px;
+
+margin:20px 0;
+
+border-radius:12px;
+
+font-weight:bold;
+
+box-shadow:0 8px 20px rgba(225,6,0,.35);
+
+border-left:6px solid gold;
+
+}
+.rules-table{
+
+width:100%;
+
+border-collapse:collapse;
+
+margin:20px 0;
+
+overflow:hidden;
+
+border-radius:12px;
+
+}
+
+.rules-table thead{
+
+background:#e10600;
+
+color:white;
+
+}
+
+.rules-table th,
+.rules-table td{
+
+padding:12px;
+
+text-align:center;
+
+}
+
+.rules-table tbody tr:nth-child(odd){
+
+background:#202020;
+
+}
+
+.rules-table tbody tr:nth-child(even){
+
+background:#2b2b2b;
+
+}
+
+.rules-table tbody tr:hover{
+
+background:#444;
+
+transition:.2s;
+
+}
+.admin-panel{
+
+background:#111;
+
+padding:30px;
+
+margin:30px 0;
+
+border-radius:14px;
+
+box-shadow:0 10px 30px rgba(0,0,0,.4);
+
+}
+
+.admin-panel h2{
+
+color:#e10600;
+
+margin-bottom:20px;
+
+}
+
+.admin-panel h3{
+
+color:#ffd700;
+
+margin-top:25px;
+
+}
