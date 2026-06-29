@@ -609,4 +609,36 @@ sections.forEach(section=>{
 observer.observe(section);
 
 });
+const links=document.querySelectorAll(".rules-index a");
 
+const panels=document.querySelectorAll(".admin-panel");
+
+window.addEventListener("scroll",()=>{
+
+let current="";
+
+panels.forEach(section=>{
+
+const top=section.offsetTop-120;
+
+if(scrollY>=top){
+
+current=section.getAttribute("id");
+
+}
+
+});
+
+links.forEach(link=>{
+
+link.classList.remove("active");
+
+if(link.getAttribute("href")==="#"+current){
+
+link.classList.add("active");
+
+}
+
+});
+
+});
