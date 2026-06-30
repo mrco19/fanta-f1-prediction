@@ -514,7 +514,7 @@ if (menuToggle && sideMenu) {
 
 }
 
-showSection("app");
+showSection("home");
 
 /* =========================
    CARICAMENTO RISULTATI
