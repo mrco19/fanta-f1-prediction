@@ -1077,5 +1077,97 @@ font-size:1.4rem;
 padding:18px;
 
 }
+    .home-banner{
+
+flex-direction:column;
+
+text-align:center;
+
+}
+
+.banner-right{
+
+margin-top:20px;
+
+text-align:center;
+
+}
+
+}
+.home-banner{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+background:#111;
+
+border:2px solid #E10600;
+
+border-radius:18px;
+
+padding:25px;
+
+margin-bottom:30px;
+
+box-shadow:0 10px 25px rgba(225,6,0,.25);
+
+}
+
+.banner-left h3{
+
+margin:0;
+
+font-size:1.6rem;
+
+color:#E10600;
+
+}
+
+.banner-left p{
+
+margin:8px 0;
+
+color:#ddd;
+
+}
+
+.banner-open{
+
+display:inline-block;
+
+background:#008f39;
+
+padding:8px 16px;
+
+border-radius:25px;
+
+font-weight:bold;
+
+}
+
+.banner-right{
+
+text-align:right;
+
+}
+
+.banner-right p{
+
+margin:6px 0;
+
+color:#bbb;
+
+}
+
+.banner-right hr{
+
+margin:12px 0;
+
+border:0;
+
+border-top:1px solid rgba(255,255,255,.15);
 
 }
