@@ -103,6 +103,13 @@ async function loadQualifyingResults() {
         const sessions = await response.json();
 
         console.log("Sessioni:", sessions);
+       
+       const qualifying = sessions.find(session =>
+    session.meeting_key === 1289 &&
+    session.session_name === "Qualifying"
+     );
+
+console.log("Qualifiche:", qualifying);
 
     } catch(error) {
 
