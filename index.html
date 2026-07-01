@@ -80,9 +80,9 @@
 
 <div class="banner-left">
 
-<h3 id="gpName"></h3>
+<h3 id="gpName">Caricamento...</h3>
 
-<p id="weekendType"></p>
+<p id="weekendType">Caricamento...</p>
 
 <span id="gpStatus" class="gp-status"></span>
 
@@ -114,13 +114,11 @@ La Formula 1 come non l'hai mai giocata.
 
 <h2>🏁 Prossimo Gran Premio</h2>
 
-<h3>🇮🇹 GP d'Italia</h3>
+<h3 id="gpCardName">Caricamento...</h3>
 
-<p>Weekend Sprint</p>
+<p id="gpCardWeekend">Caricamento...</p>
 
-<span class="gp-status">
-🟢 Pronostici aperti
-</span>
+<span id="gpCardStatus" class="gp-status"></span>
 
 </div>
 
@@ -146,8 +144,6 @@ La Formula 1 come non l'hai mai giocata.
 
 </div>
 
-</div>
-
 <div class="home-action" onclick="showSection('rules')">
 
 <div class="action-icon">📜</div>
@@ -168,17 +164,17 @@ La Formula 1 come non l'hai mai giocata.
 
 </div>
 
+</div>
+
       <h2 class="stats-title">📈 Statistiche</h2>
 
 <div class="stats-grid">
 
 <div class="stat-card">
 
-<div class="stat-number">12</div>
+<div class="stat-number" id="totalGP">-</div>
 
 <div class="stat-label">Gran Premi</div>
-
-</div>
 
 </div>
 
@@ -200,7 +196,7 @@ La Formula 1 come non l'hai mai giocata.
 
 <div class="stat-card">
 
-<div class="stat-number">840</div>
+<div class="stat-number" id="leaderPoints"></div>
 
 <div class="stat-label">Leader Campionato</div>
 
