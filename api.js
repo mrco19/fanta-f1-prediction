@@ -111,6 +111,14 @@ async function loadQualifyingResults() {
 
 console.log("Qualifiche:", qualifying);
 
+       const responseResults = await fetch(
+    `https://api.openf1.org/v1/position?session_key=${qualifying.session_key}`
+);
+
+const positions = await responseResults.json();
+
+console.log("Posizioni:", positions);
+
     } catch(error) {
 
         console.error(error);
