@@ -4,7 +4,7 @@
 
 async function loadWeekendData() {
 
-    try{
+    try {
 
         const response = await fetch("https://api.openf1.org/v1/meetings?year=2026");
 
@@ -18,7 +18,7 @@ async function loadWeekendData() {
 
         console.log(nextGP);
 
-    }catch(error){
+    } catch(error) {
 
         console.error(error);
 
@@ -27,4 +27,3 @@ async function loadWeekendData() {
 }
 
 loadWeekendData();
-
