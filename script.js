@@ -470,9 +470,10 @@ document
 
   });
 
-/* =========================
-   MENU
-========================= */
+/* ==========================================
+   NAVIGAZIONE PAGINE
+========================================== */
+
 
 function showSection(id) {
 
@@ -532,6 +533,10 @@ async function loadResults() {
 
 }
 
+/* ==========================================
+   POSIZIONI RISULTATI
+========================================== */
+
 function setResultPositions(prefix, results) {
 
     results.forEach((driver, index) => {
@@ -569,8 +574,45 @@ function setResultPositions(prefix, results) {
 
 }
 
-loadResults();
 
+/* ==========================================
+   CARICAMENTO WEEKEND
+========================================== */
+async function loadWeekend() {
+
+    const response = await fetch("weekend.json");
+
+    const data = await response.json();
+
+    document.getElementById("gpName").textContent =
+        `${data.country} ${data.gpName}`;
+
+    document.getElementById("weekendType").textContent =
+        `Weekend ${data.weekendType}`;
+
+    document.getElementById("gpStatus").textContent =
+        `🟢 ${data.status}`;
+
+    document.getElementById("leader").textContent =
+        `${data.leader} - ${data.leaderPoints} pt`;
+
+    document.getElementById("lastWinner").textContent =
+        data.lastWinner;
+
+    document.getElementById("lastPole").textContent =
+        data.lastPole;
+  
+  gpDate = new Date(data.closeDate);
+  
+  updateCountdown();
+
+}
+/* ==========================================
+   AVVIO DEL SITO
+========================================== */
+
+loadResults();
+loadWeekend();
 /* =========================
    REGOLAMENTO
 ========================= */
@@ -582,8 +624,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (sections.length === 0) return;
 
-    /* Animazione comparsa */
-
+/* ==========================================
+   ANIMAZIONI
+========================================== */
     const observer = new IntersectionObserver((entries) => {
 
         entries.forEach(entry => {
@@ -641,7 +684,7 @@ document.addEventListener("DOMContentLoaded", () => {
    COUNTDOWN PROSSIMO GP
 ========================= */
 
-const gpDate = new Date("2026-09-05T14:00:00");
+let gpDate;
 
 function updateCountdown(){
 
@@ -668,6 +711,5 @@ function updateCountdown(){
 
 }
 
-updateCountdown();
 
 setInterval(updateCountdown,60000);
