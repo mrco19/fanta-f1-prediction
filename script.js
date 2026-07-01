@@ -637,3 +637,37 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 });
+/* =========================
+   COUNTDOWN PROSSIMO GP
+========================= */
+
+const gpDate = new Date("2026-09-05T14:00:00");
+
+function updateCountdown(){
+
+    const now = new Date();
+
+    const diff = gpDate - now;
+
+    if(diff <= 0){
+
+        document.getElementById("countdown").textContent = "Weekend iniziato!";
+
+        return;
+
+    }
+
+    const days = Math.floor(diff / (1000*60*60*24));
+
+    const hours = Math.floor((diff % (1000*60*60*24))/(1000*60*60));
+
+    const minutes = Math.floor((diff % (1000*60*60))/(1000*60));
+
+    document.getElementById("countdown").textContent =
+        `${days}g ${hours}h ${minutes}m`;
+
+}
+
+updateCountdown();
+
+setInterval(updateCountdown,60000);
