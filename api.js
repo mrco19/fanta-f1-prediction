@@ -130,10 +130,33 @@ async function loadQualifyingResults() {
 
     if (!currentMeeting) return;
 
-    console.log("Risultati qualifiche...");
+    try {
+
+        const response = await fetch(
+
+            `${API_BASE}/sessions?meeting_key=${currentMeeting.meeting_key}`
+
+        );
+
+        const sessions = await response.json();
+
+        console.log("Sessioni del weekend:", sessions);
+
+        const qualifying = sessions.find(session =>
+            session.session_name === "Qualifying"
+        );
+
+        console.log("Qualifica trovata:", qualifying);
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+    }
 
 }
-
 /* ==========================================
    RISULTATI SPRINT
 ========================================== */
