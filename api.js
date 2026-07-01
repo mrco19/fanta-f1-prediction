@@ -12,6 +12,14 @@ async function loadWeekendData() {
 
         const meetings = await response.json();
 
+     if (!Array.isArray(meetings)) {
+
+    console.error("OpenF1 ha restituito:", meetings);
+
+    return;
+
+}
+
         const now = new Date();
 
         // Cerca il primo GP futuro
