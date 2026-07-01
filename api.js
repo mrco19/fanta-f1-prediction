@@ -6,17 +6,20 @@ async function loadWeekendData() {
 
     try {
 
-        const response = await fetch("https://api.openf1.org/v1/meetings?year=2026");
+        const response = await fetch(
+            "https://api.openf1.org/v1/meetings?year=2026"
+        );
 
         const meetings = await response.json();
 
         const now = new Date();
 
+        // Cerca il primo GP futuro
         const nextGP = meetings.find(gp =>
             new Date(gp.date_start) > now
         );
 
-        console.log(nextGP);
+        console.log("Prossimo GP:", nextGP);
 
     } catch(error) {
 
