@@ -83,6 +83,27 @@ async function loadDriverStandings() {
     }
 
 }
+
+async function loadQualifyingResults() {
+
+    try {
+
+        const response = await fetch(
+            "https://api.openf1.org/v1/sessions?year=2026"
+        );
+
+        const sessions = await response.json();
+
+        console.log("Sessioni:", sessions);
+
+    } catch(error) {
+
+        console.error(error);
+
+    }
+
+}
+
 loadWeekendData();
 loadDriverStandings();
-
+loadQualifyingResults();
