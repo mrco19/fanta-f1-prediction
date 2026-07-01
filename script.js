@@ -576,43 +576,11 @@ function setResultPositions(prefix, results) {
 
 
 /* ==========================================
-   CARICAMENTO WEEKEND
-========================================== */
-async function loadWeekend() {
-
-   const response = await fetch("weekend.php");
-
-    const data = await response.json();
-
-    document.getElementById("gpName").textContent =
-        `${data.country} ${data.gpName}`;
-
-    document.getElementById("weekendType").textContent =
-        `Weekend ${data.weekendType}`;
-
-    document.getElementById("gpStatus").textContent =
-        `🟢 ${data.status}`;
-
-    document.getElementById("leader").textContent =
-        `${data.leader} - ${data.leaderPoints} pt`;
-
-    document.getElementById("lastWinner").textContent =
-        data.lastWinner;
-
-    document.getElementById("lastPole").textContent =
-        data.lastPole;
-  
-  gpDate = new Date(data.closeDate);
-  
-  updateCountdown();
-
-}
-/* ==========================================
    AVVIO DEL SITO
 ========================================== */
 
 loadResults();
-loadWeekend();
+
 /* =========================
    REGOLAMENTO
 ========================= */
