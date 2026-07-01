@@ -20,6 +20,17 @@ async function loadWeekendData() {
         );
 
         console.log("Prossimo GP:", nextGP);
+       
+       document.getElementById("gpName").textContent =
+    `${nextGP.country_name} ${nextGP.meeting_name}`;
+
+document.getElementById("weekendType").textContent =
+    nextGP.meeting_name.includes("Sprint")
+        ? "Weekend Sprint"
+        : "Weekend Normale";
+
+document.getElementById("countdown").textContent =
+    new Date(nextGP.date_start).toLocaleDateString("it-IT");
 
     } catch(error) {
 
