@@ -4,7 +4,20 @@
 
 async function loadWeekendData() {
 
-    console.log("Caricamento dati Formula 1...");
+    try{
+
+        const response = await fetch("https://api.openf1.org/v1/meetings?year=2026");
+
+        const meetings = await response.json();
+
+        console.log(meetings);
+
+    }catch(error){
+
+        console.error(error);
+
+    }
 
 }
+
 loadWeekendData();
