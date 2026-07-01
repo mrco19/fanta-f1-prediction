@@ -580,7 +580,7 @@ function setResultPositions(prefix, results) {
 ========================================== */
 async function loadWeekend() {
 
-    const response = await fetch("weekend.json");
+   const response = await fetch("weekend.php");
 
     const data = await response.json();
 
