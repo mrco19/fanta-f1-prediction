@@ -29,9 +29,21 @@ document.getElementById("weekendType").textContent =
         ? "Weekend Sprint"
         : "Weekend Normale";
 
-document.getElementById("countdown").textContent =
-    new Date(nextGP.date_start).toLocaleDateString("it-IT");
+       document.getElementById("gpCardName").textContent =
+    `${nextGP.country_name} ${nextGP.meeting_name}`;
 
+document.getElementById("gpCardWeekend").textContent =
+    nextGP.meeting_name.includes("Sprint")
+        ? "Weekend Sprint"
+        : "Weekend Normale";
+
+document.getElementById("gpCardStatus").textContent =
+    "🟢 Pronostici aperti";
+       
+       gpDate = new Date(nextGP.date_start);
+
+updateCountdown();
+       
     } catch(error) {
 
         console.error(error);
