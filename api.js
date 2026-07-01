@@ -28,4 +28,3 @@ async function loadWeekendData() {
 
 loadWeekendData();
 
-loadWeekendData();
