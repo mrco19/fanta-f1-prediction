@@ -43,6 +43,18 @@ document.getElementById("gpCardStatus").textContent =
        gpDate = new Date(nextGP.date_start);
 
 updateCountdown();
+
+// Data del weekend
+document.getElementById("gpDate").textContent =
+    new Date(nextGP.date_start).toLocaleDateString("it-IT", {
+        day: "numeric",
+        month: "long",
+        year: "numeric"
+    });
+
+// Circuito
+document.getElementById("gpCircuit").textContent =
+    nextGP.circuit_short_name;
        
     } catch(error) {
 
