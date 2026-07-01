@@ -10,7 +10,13 @@ async function loadWeekendData() {
 
         const meetings = await response.json();
 
-        console.log(meetings);
+        const now = new Date();
+
+        const nextGP = meetings.find(gp =>
+            new Date(gp.date_start) > now
+        );
+
+        console.log(nextGP);
 
     }catch(error){
 
@@ -19,5 +25,7 @@ async function loadWeekendData() {
     }
 
 }
+
+loadWeekendData();
 
 loadWeekendData();
