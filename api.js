@@ -61,6 +61,28 @@ document.getElementById("gpCircuit").textContent =
         console.error(error);
 
     }
+   
 
 }
+async function loadDriverStandings() {
+
+    try {
+
+        const response = await fetch(
+            "https://api.openf1.org/v1/drivers?session_key=latest"
+        );
+
+        const drivers = await response.json();
+
+        console.log(drivers);
+
+    } catch (error) {
+
+        console.error(error);
+
+    }
+
+}
+loadWeekendData();
+loadDriverStandings();
 
