@@ -146,15 +146,15 @@ async function loadQualifyingResults() {
             session.session_name === "Qualifying"
         );
 
-        const responseResults = await fetch(
+       const responseResults = await fetch(
 
-    `${API_BASE}/position?session_key=${qualifying.session_key}`
+    `${API_BASE}/session_result?session_key=${qualifying.session_key}`
 
 );
 
-const positions = await responseResults.json();
+const results = await responseResults.json();
 
-console.log("Posizioni ricevute:", positions);
+console.log("Risultati Qualifica:", results);
 
     }
 
