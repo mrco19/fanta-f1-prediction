@@ -44,7 +44,7 @@ function createAdminInputs(container, prefix, total) {
         <table class="admin-table">
             <thead>
                 <tr>
-                    <th>Pos</th>
+                    <th style="width:70px;">Pos</th>
                     <th>Pilota</th>
                 </tr>
             </thead>
@@ -53,28 +53,33 @@ function createAdminInputs(container, prefix, total) {
 
     for (let i = 1; i <= total; i++) {
 
-        let label = i;
+        let medal = i;
 
-        if (i === 1) label = "🥇";
-        if (i === 2) label = "🥈";
-        if (i === 3) label = "🥉";
+        if (i === 1) medal = "🥇";
+        if (i === 2) medal = "🥈";
+        if (i === 3) medal = "🥉";
 
         html += `
-            <tr>
-                <td class="pos">${label}</td>
+        <tr>
 
-                <td>
+            <td class="pos">
+                ${medal}
+            </td>
 
-                    <input
-                        id="${prefix}${i}"
-                        class="result-field"
+            <td>
 
-                    >
+                <input
+                    type="text"
+                    id="${prefix}${i}"
+                    class="result-field"
+                    placeholder="Seleziona pilota"
+                >
 
-                </td>
+            </td>
 
-            </tr>
+        </tr>
         `;
+
     }
 
     html += `
