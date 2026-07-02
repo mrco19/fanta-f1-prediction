@@ -40,21 +40,50 @@ function createAdminInputs(container, prefix, total) {
 
     if (!container) return;
 
+    let html = `
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>Pos</th>
+                    <th>Pilota</th>
+                </tr>
+            </thead>
+            <tbody>
+    `;
+
     for (let i = 1; i <= total; i++) {
 
-        let label = `${i}°`;
+        let label = i;
 
-        if (i === 1) label = "🏆 1°";
-        if (i === 2) label = "🥈 2°";
-        if (i === 3) label = "🥉 3°";
+        if (i === 1) label = "🥇";
+        if (i === 2) label = "🥈";
+        if (i === 3) label = "🥉";
 
-        container.innerHTML += `
-            <div class="result-row">
-                <span>${label}</span>
-                <input id="${prefix}${i}" class="result-field">
-            </div>
+        html += `
+            <tr>
+                <td class="pos">${label}</td>
+
+                <td>
+
+                    <input
+                        id="${prefix}${i}"
+                        class="result-field"
+
+                    >
+
+                </td>
+
+            </tr>
         `;
     }
+
+    html += `
+            </tbody>
+        </table>
+    `;
+
+    container.innerHTML = html;
+
 }
 
 createAdminInputs(adminQuali, "adminQr", 5);
