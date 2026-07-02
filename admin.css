@@ -1257,3 +1257,8 @@ body{
     box-shadow:0 0 12px rgba(225,6,0,.35);
 
 }
+.admin-panel {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+}
