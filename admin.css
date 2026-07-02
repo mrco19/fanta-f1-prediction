@@ -803,3 +803,30 @@ transition:.7s;
     left:130%;
 
 }
+#admin-quali,
+#admin-sprintquali,
+#admin-sprint,
+#admin-race{
+
+    display:block !important;
+    visibility:visible !important;
+    opacity:1 !important;
+
+}
+
+.result-row{
+
+    display:flex !important;
+    visibility:visible !important;
+    opacity:1 !important;
+    margin-bottom:12px;
+
+}
+
+.result-field{
+
+    display:block !important;
+    visibility:visible !important;
+    opacity:1 !important;
+
+}
