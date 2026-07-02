@@ -6,6 +6,37 @@
 "use strict";
 
 /* ==========================================
+   PILOTI F1 2026
+========================================== */
+
+const DRIVERS = [
+
+    "Alexander ALBON",
+    "Arvin LINDBLAD",
+    "Carlos SAINZ",
+    "Charles LECLERC",
+    "Esteban OCON",
+    "Fernando ALONSO",
+    "Franco COLAPINTO",
+    "Gabriel BORTOLETO",
+    "George RUSSELL",
+    "Isack HADJAR",
+    "Kimi ANTONELLI",
+    "Lando NORRIS",
+    "Lance STROLL",
+    "Lewis HAMILTON",
+    "Liam LAWSON",
+    "Max VERSTAPPEN",
+    "Nico HULKENBERG",
+    "Oliver BEARMAN",
+    "Oscar PIASTRI",
+    "Pierre GASLY",
+    "Sergio PEREZ",
+    "Valtteri BOTTAS"
+
+].sort((a,b)=>a.localeCompare(b));
+
+/* ==========================================
    CONFIGURAZIONE
 ========================================== */
 
