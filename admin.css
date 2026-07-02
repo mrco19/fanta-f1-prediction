@@ -1,5 +1,5 @@
 /* ==========================================
-   FANTA F1 ADMIN
+   RESET
 ========================================== */
 
 *{
@@ -7,6 +7,10 @@
     padding:0;
     box-sizing:border-box;
 }
+
+/* ==========================================
+   BODY
+========================================== */
 
 body{
 
@@ -19,22 +23,28 @@ body{
     min-height:100vh;
 
     background:
-    radial-gradient(circle at top right,
-        rgba(225,6,0,.15),
-        transparent 35%),
-
-    radial-gradient(circle at bottom left,
-        rgba(0,120,255,.12),
-        transparent 35%),
-
-    linear-gradient(
-        135deg,
-        #0f0f0f,
-        #1a1a1a,
-        #111827
-    );
+        radial-gradient(
+            circle at top right,
+            rgba(225,6,0,.15),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at bottom left,
+            rgba(0,120,255,.12),
+            transparent 35%
+        ),
+        linear-gradient(
+            135deg,
+            #0f0f0f,
+            #181818,
+            #111827
+        );
 
 }
+
+/* ==========================================
+   CONTAINER
+========================================== */
 
 .container{
 
@@ -43,6 +53,7 @@ body{
     margin:auto;
 
 }
+
 /* ==========================================
    HEADER
 ========================================== */
@@ -55,33 +66,39 @@ body{
 
     gap:35px;
 
+    padding:30px;
+
     margin-bottom:45px;
 
-    padding:28px;
-
-    border-radius:26px;
+    border-radius:28px;
 
     background:
-    linear-gradient(
-        145deg,
-        rgba(225,6,0,.18),
-        rgba(255,255,255,.04)
-    );
+        linear-gradient(
+            145deg,
+            rgba(225,6,0,.18),
+            rgba(255,255,255,.04)
+        );
 
-    border:1px solid rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.10);
 
-    backdrop-filter:blur(18px);
+    backdrop-filter:blur(16px);
 
     box-shadow:
-        0 18px 40px rgba(0,0,0,.45);
+        0 18px 45px rgba(0,0,0,.45);
 
 }
 
 .admin-logo-wide{
 
-    width:360px;
+    width:380px;
 
     flex-shrink:0;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
 
 }
 
@@ -91,10 +108,10 @@ body{
 
     display:block;
 
+    transition:.35s;
+
     filter:
         drop-shadow(0 15px 30px rgba(0,0,0,.55));
-
-    transition:.35s;
 
 }
 
@@ -106,26 +123,41 @@ body{
 
 .admin-header h1{
 
+    margin:0;
+
     font-size:3rem;
 
     font-weight:900;
 
     letter-spacing:2px;
 
+    line-height:1;
+
+    text-transform:uppercase;
+
+    color:white;
+
 }
 
 .admin-header p{
 
-    margin-top:12px;
+    margin-top:14px;
 
     color:#d1d5db;
 
     font-size:1.15rem;
 
+    letter-spacing:.5px;
+
 }
+
+/* ==========================================
+   TITOLI
+========================================== */
+
 .section-title{
 
-    margin:45px 0 20px;
+    margin:45px 0 22px;
 
     padding-left:15px;
 
@@ -137,9 +169,12 @@ body{
 
     text-transform:uppercase;
 
+    letter-spacing:1px;
+
 }
+
 /* ==========================================
-   GRID PANNELLI
+   GRID
 ========================================== */
 
 .admin-grid{
@@ -154,25 +189,46 @@ body{
 
 }
 
+/* ==========================================
+   PANNELLI
+========================================== */
+
 .admin-panel{
 
+    position:relative;
+
+    overflow:hidden;
+
     background:
-    linear-gradient(
-        145deg,
-        rgba(255,255,255,.08),
-        rgba(255,255,255,.03)
-    );
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.08),
+            rgba(255,255,255,.03)
+        );
 
     border-radius:24px;
 
     padding:28px;
 
-    border:1px solid rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.10);
 
-    backdrop-filter:blur(14px);
+    backdrop-filter:blur(16px);
 
     box-shadow:
-        0 15px 35px rgba(0,0,0,.40);
+        0 18px 40px rgba(0,0,0,.40);
+
+    transition:
+        transform .30s ease,
+        box-shadow .30s ease;
+
+}
+
+.admin-panel:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:
+        0 28px 60px rgba(0,0,0,.55);
 
 }
 
@@ -186,102 +242,925 @@ body{
 
     margin-bottom:22px;
 
-    padding-bottom:12px;
+    padding-bottom:14px;
+
+    border-bottom:2px solid rgba(225,6,0,.25);
 
     font-size:1.45rem;
 
     font-weight:900;
 
-    border-bottom:2px solid rgba(225,6,0,.30);
+    color:white;
+
+}
+
+/* ==========================================
+   RESPONSIVE HEADER + GRID
+========================================== */
+
+@media(max-width:900px){
+
+.admin-header{
+
+    flex-direction:column;
+
+    text-align:center;
+
+    gap:25px;
+
+}
+
+.admin-logo-wide{
+
+    width:280px;
+
+}
+
+.admin-grid{
+
+    grid-template-columns:1fr;
+
+}
 
 }
 /* ==========================================
-   RIGHE RISULTATI
+   TABELLE RISULTATI ADMIN
 ========================================== */
 
-.result-row{
+.admin-table{
 
-    display:flex;
+    width:100%;
 
-    align-items:center;
+    border-collapse:collapse;
 
-    gap:16px;
+    overflow:hidden;
 
-    margin-bottom:12px;
-
-    padding:14px 16px;
-
-    border-radius:14px;
-
-    background:rgba(255,255,255,.05);
-
-    border:1px solid rgba(255,255,255,.08);
-
-    transition:.25s;
+    border-radius:18px;
 
 }
 
-.result-row:hover{
+.admin-table thead{
 
-    transform:translateX(4px);
-
-    background:rgba(255,255,255,.08);
-
-}
-.result-row:nth-child(1){
-
-    border-left:5px solid gold;
+    background:linear-gradient(
+        135deg,
+        #E10600,
+        #9b0000
+    );
 
 }
 
-.result-row:nth-child(2){
+.admin-table th{
 
-    border-left:5px solid silver;
-
-}
-
-.result-row:nth-child(3){
-
-    border-left:5px solid #cd7f32;
-
-}
-.result-row span{
-
-    width:70px;
-
-    font-weight:900;
+    padding:16px;
 
     text-align:center;
 
     color:white;
 
+    font-size:15px;
+
+    font-weight:800;
+
+    letter-spacing:.5px;
+
 }
-.result-field{
 
-    flex:1;
+.admin-table tbody tr{
 
-    padding:14px 16px;
+    transition:.25s;
 
-    border-radius:12px;
+}
 
-    border:2px solid rgba(225,6,0,.20);
+.admin-table tbody tr:nth-child(odd){
+
+    background:rgba(255,255,255,.04);
+
+}
+
+.admin-table tbody tr:nth-child(even){
+
+    background:rgba(255,255,255,.02);
+
+}
+
+.admin-table tbody tr:hover{
+
+    background:rgba(255,255,255,.08);
+
+}
+
+.admin-table td{
+
+    padding:12px;
+
+    border-bottom:1px solid rgba(255,255,255,.08);
+
+}
+
+
+/* ==========================================
+   COLONNA POSIZIONE
+========================================== */
+
+.admin-table .pos{
+
+    width:70px;
+
+    text-align:center;
+
+    font-size:18px;
+
+    font-weight:900;
+
+    color:white;
+
+}
+
+
+/* ==========================================
+   PODIO
+========================================== */
+
+.admin-table tbody tr:nth-child(1) .pos{
+
+    color:gold;
+
+}
+
+.admin-table tbody tr:nth-child(2) .pos{
+
+    color:silver;
+
+}
+
+.admin-table tbody tr:nth-child(3) .pos{
+
+    color:#cd7f32;
+
+}
+
+
+/* ==========================================
+   INPUT PILOTI
+========================================== */
+
+.admin-table input{
+
+    width:100%;
+
+    padding:13px 16px;
 
     background:#0d1117;
 
     color:white;
 
+    border:2px solid rgba(225,6,0,.18);
+
+    border-radius:12px;
+
     font-size:15px;
 
     font-weight:700;
 
-    text-align:left;
+    transition:.25s;
 
 }
-@media(max-width:900px){
+
+.admin-table input:hover{
+
+    border-color:rgba(225,6,0,.45);
+
+}
+
+.admin-table input:focus{
+
+    outline:none;
+
+    border-color:#E10600;
+
+    box-shadow:0 0 12px rgba(225,6,0,.35);
+
+}
+
+
+/* ==========================================
+   ANIMAZIONE CARICAMENTO
+========================================== */
+
+.admin-table input.loaded{
+
+    animation:driverLoaded .35s ease;
+
+}
+
+@keyframes driverLoaded{
+
+    0%{
+
+        transform:scale(.96);
+
+        background:#1d2b45;
+
+    }
+
+    60%{
+
+        transform:scale(1.03);
+
+    }
+
+    100%{
+
+        transform:scale(1);
+
+        background:#0d1117;
+
+    }
+
+}
+
+
+/* ==========================================
+   SCROLL
+========================================== */
+
+.admin-panel{
+
+    overflow:hidden;
+
+}
+/* ==========================================
+   OPENF1 CARDS
+========================================== */
+
+.cards-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:22px;
+
+    margin:45px 0;
+
+}
+
+.admin-card{
+
+    position:relative;
+
+    overflow:hidden;
+
+    min-height:220px;
+
+    padding:28px;
+
+    border:none;
+
+    border-radius:24px;
+
+    cursor:pointer;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:flex-end;
+
+    color:white;
+
+    transition:
+        transform .35s,
+        box-shadow .35s;
+
+    box-shadow:
+        0 18px 40px rgba(0,0,0,.40);
+
+}
+
+.admin-card:hover{
+
+    transform:
+        translateY(-8px)
+        scale(1.02);
+
+}
+
+.card-image{
+
+    position:absolute;
+
+    right:12px;
+
+    bottom:0;
+
+    width:170px;
+
+    pointer-events:none;
+
+    transition:.35s;
+
+    filter:
+        drop-shadow(0 12px 20px rgba(0,0,0,.45));
+
+}
+
+.admin-card:hover .card-image{
+
+    transform:
+        translateY(-10px)
+        scale(1.08);
+
+}
+
+.admin-card h3{
+
+    position:relative;
+
+    z-index:5;
+
+    margin:0;
+
+    font-size:1.35rem;
+
+    font-weight:900;
+
+    letter-spacing:1px;
+
+}
+
+.admin-card p{
+
+    position:relative;
+
+    z-index:5;
+
+    margin-top:8px;
+
+    color:rgba(255,255,255,.88);
+
+    font-size:.95rem;
+
+}
+
+/* COLORI */
+
+.blue-card{
+
+    background:
+    linear-gradient(
+        135deg,
+        #174ea6,
+        #2563eb
+    );
+
+}
+
+.purple-card{
+
+    background:
+    linear-gradient(
+        135deg,
+        #6d28d9,
+        #9333ea
+    );
+
+}
+
+.green-card{
+
+    background:
+    linear-gradient(
+        135deg,
+        #047857,
+        #10b981
+    );
+
+}
+
+.red-card{
+
+    background:
+    linear-gradient(
+        135deg,
+        #960000,
+        #E10600
+    );
+
+}
+
+.blue-card:hover{
+
+    box-shadow:
+        0 20px 45px rgba(37,99,235,.45);
+
+}
+
+.purple-card:hover{
+
+    box-shadow:
+        0 20px 45px rgba(147,51,234,.45);
+
+}
+
+.green-card:hover{
+
+    box-shadow:
+        0 20px 45px rgba(16,185,129,.45);
+
+}
+
+.red-card:hover{
+
+    box-shadow:
+        0 20px 45px rgba(225,6,0,.45);
+
+}
+
+/* ==========================================
+   JSON ACTIONS
+========================================== */
+
+.json-actions{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:18px;
+
+    flex-wrap:wrap;
+
+    margin:30px 0;
+
+}
+
+.json-actions button{
+
+    min-width:200px;
+
+    padding:16px 20px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:
+    linear-gradient(
+        135deg,
+        #E10600,
+        #b00000
+    );
+
+    color:white;
+
+    font-size:1rem;
+
+    font-weight:800;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+    box-shadow:
+        0 10px 22px rgba(225,6,0,.35);
+
+}
+
+.json-actions button:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:
+        0 15px 30px rgba(225,6,0,.45);
+
+}
+
+/* ==========================================
+   JSON EDITOR
+========================================== */
+
+.json-box{
+
+    background:#10151d;
+
+    border-radius:22px;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    padding:22px;
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,.35);
+
+}
+
+#jsonOutput{
+
+    width:100%;
+
+    height:340px;
+
+    resize:vertical;
+
+    border:none;
+
+    outline:none;
+
+    padding:22px;
+
+    border-radius:16px;
+
+    background:#05070d;
+
+    color:#00ff99;
+
+    font-family:
+        Consolas,
+        monospace;
+
+    font-size:15px;
+
+    line-height:1.6;
+
+}
+
+#jsonOutput::placeholder{
+
+    color:#777;
+
+}
+/* ==========================================
+   FOOTER
+========================================== */
+
+.admin-footer{
+
+    margin-top:60px;
+
+    padding:20px 28px;
+
+    border-radius:20px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:20px;
+
+    background:
+    linear-gradient(
+        145deg,
+        rgba(255,255,255,.05),
+        rgba(255,255,255,.02)
+    );
+
+    border:1px solid rgba(255,255,255,.08);
+
+    color:#d1d5db;
+
+    font-size:.95rem;
+
+    box-shadow:
+        0 12px 30px rgba(0,0,0,.30);
+
+}
+
+.admin-footer div{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+}
+
+/* ==========================================
+   ANIMAZIONI
+========================================== */
+
+.admin-panel{
+
+    animation:fadeUp .45s ease;
+
+}
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(18px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+.admin-card{
+
+    animation:fadeCard .5s ease;
+
+}
+
+@keyframes fadeCard{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(25px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* ==========================================
+   RIFLESSO CARDS
+========================================== */
+
+.admin-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:-130%;
+
+    left:-40%;
+
+    width:45%;
+
+    height:320%;
+
+    background:
+
+    linear-gradient(
+
+        90deg,
+
+        transparent,
+
+        rgba(255,255,255,.28),
+
+        transparent
+
+    );
+
+    transform:rotate(25deg);
+
+    transition:.8s;
+
+}
+
+.admin-card:hover::before{
+
+    left:130%;
+
+}
+
+/* ==========================================
+   SCROLLBAR
+========================================== */
+
+::-webkit-scrollbar{
+
+    width:11px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#111827;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#E10600;
+
+    border-radius:999px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:#ff2f2f;
+
+}
+
+/* ==========================================
+   RESPONSIVE TABLET
+========================================== */
+
+@media(max-width:1000px){
+
+.admin-header{
+
+    flex-direction:column;
+
+    text-align:center;
+
+}
+
+.admin-logo-wide{
+
+    width:300px;
+
+}
+
+.cards-grid{
+
+    grid-template-columns:1fr;
+
+}
 
 .admin-grid{
 
-grid-template-columns:1fr;
+    grid-template-columns:1fr;
+
+}
+
+}
+
+/* ==========================================
+   RESPONSIVE MOBILE
+========================================== */
+
+@media(max-width:768px){
+
+body{
+
+    padding:18px;
+
+}
+
+.admin-header{
+
+    padding:20px;
+
+}
+
+.admin-header h1{
+
+    font-size:2.2rem;
+
+}
+
+.admin-header p{
+
+    font-size:1rem;
+
+}
+
+.admin-logo-wide{
+
+    width:230px;
+
+}
+
+.admin-panel{
+
+    padding:20px;
+
+}
+
+.admin-panel h2{
+
+    font-size:1.2rem;
+
+}
+
+.result-row{
+
+    padding:12px;
+
+    gap:10px;
+
+}
+
+.result-row span{
+
+    width:50px;
+
+}
+
+.result-field{
+
+    padding:12px;
+
+    font-size:14px;
+
+}
+
+.card-image{
+
+    width:120px;
+
+}
+
+.admin-card{
+
+    min-height:180px;
+
+    padding:20px;
+
+}
+
+.admin-card h3{
+
+    font-size:1.15rem;
+
+}
+
+.admin-card p{
+
+    font-size:.85rem;
+
+}
+
+.json-actions{
+
+    flex-direction:column;
+
+}
+
+.json-actions button{
+
+    width:100%;
+
+}
+
+.admin-footer{
+
+    flex-direction:column;
+
+    text-align:center;
+
+}
+
+}
+
+/* ==========================================
+   RESPONSIVE PICCOLI SMARTPHONE
+========================================== */
+
+@media(max-width:480px){
+
+.admin-header h1{
+
+    font-size:1.8rem;
+
+}
+
+.admin-logo-wide{
+
+    width:180px;
+
+}
+
+.section-title{
+
+    font-size:1.4rem;
+
+}
+
+.card-image{
+
+    width:95px;
+
+}
+
+.admin-card{
+
+    min-height:160px;
+
+}
+
+#jsonOutput{
+
+    height:260px;
+
+    font-size:13px;
 
 }
 
