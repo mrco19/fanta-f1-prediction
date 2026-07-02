@@ -72,8 +72,7 @@ function createAdminInputs(container, prefix, total) {
 
     html += `</tbody></table>`;
 
-    container.innerHTML = "";
-    container.insertAdjacentHTML("beforeend", html);
+    container.innerHTML = html;
 }
 
 /* =========================
