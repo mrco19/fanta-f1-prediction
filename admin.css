@@ -1,5 +1,156 @@
+/* ==========================================
+   FANTA F1 ADMIN PANEL
+========================================== */
 
-/* ===== ADMIN GRID ===== */
+body{
+
+    margin:0;
+    padding:30px;
+
+    font-family:'Inter',sans-serif;
+
+    background:
+    radial-gradient(circle at top right,
+    rgba(225,6,0,.15),
+    transparent 35%),
+
+    radial-gradient(circle at bottom left,
+    rgba(0,120,255,.10),
+    transparent 35%),
+
+    linear-gradient(
+        135deg,
+        #0f0f0f,
+        #181818,
+        #111827
+    );
+
+    color:white;
+
+    min-height:100vh;
+
+}
+
+.container{
+
+    max-width:1300px;
+
+    margin:auto;
+
+}
+
+/* ==========================================
+   HEADER
+========================================== */
+
+.admin-header{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:30px;
+
+    padding:30px;
+
+    margin-bottom:40px;
+
+    border-radius:26px;
+
+    background:
+
+    linear-gradient(
+        145deg,
+        rgba(225,6,0,.18),
+        rgba(255,255,255,.04)
+    );
+
+    border:1px solid rgba(255,255,255,.10);
+
+    backdrop-filter:blur(14px);
+
+    box-shadow:
+
+        0 15px 40px rgba(0,0,0,.40);
+
+}
+
+.admin-logo-wide{
+
+    width:370px;
+
+    flex-shrink:0;
+
+}
+
+.admin-logo-wide img{
+
+    width:100%;
+
+    display:block;
+
+    transition:.35s;
+
+    filter:
+    drop-shadow(0 12px 25px rgba(0,0,0,.5));
+
+}
+
+.admin-logo-wide:hover img{
+
+    transform:scale(1.05);
+
+}
+
+.admin-header h1{
+
+    margin:0;
+
+    font-size:3rem;
+
+    font-weight:900;
+
+    letter-spacing:2px;
+
+    text-transform:uppercase;
+
+}
+
+.admin-header p{
+
+    margin-top:12px;
+
+    color:#ddd;
+
+    font-size:1.15rem;
+
+}
+
+/* ==========================================
+   TITOLI
+========================================== */
+
+.section-title{
+
+    margin-top:50px;
+
+    margin-bottom:25px;
+
+    padding-left:15px;
+
+    border-left:6px solid #E10600;
+
+    font-size:1.8rem;
+
+    font-weight:900;
+
+    text-transform:uppercase;
+
+}
+
+/* ==========================================
+   GRID
+========================================== */
 
 .admin-grid{
 
@@ -9,27 +160,30 @@
 
     gap:25px;
 
-    margin-bottom:35px;
+    margin-bottom:40px;
 
 }
 
 .admin-panel{
 
-    background:linear-gradient(
+    background:
+
+    linear-gradient(
         145deg,
         rgba(255,255,255,.08),
         rgba(255,255,255,.03)
     );
 
+    padding:25px;
+
     border-radius:22px;
-
-    padding:22px;
-
-    backdrop-filter:blur(14px);
 
     border:1px solid rgba(255,255,255,.10);
 
+    backdrop-filter:blur(12px);
+
     box-shadow:
+
         0 12px 30px rgba(0,0,0,.35);
 
 }
@@ -38,768 +192,322 @@
 
     margin-top:0;
 
-    margin-bottom:18px;
+    margin-bottom:20px;
 
-    font-size:1.4rem;
+    font-size:1.35rem;
+
+}
+
+/* ==========================================
+   RIGHE RISULTATI
+========================================== */
+
+.result-row{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    margin-bottom:12px;
+
+    padding:12px 16px;
+
+    border-radius:14px;
+
+    background:rgba(255,255,255,.06);
+
+    border:1px solid rgba(255,255,255,.10);
+
+    transition:.25s;
+
+}
+
+.result-row:hover{
+
+    transform:translateX(4px);
+
+}
+
+.result-row span{
+
+    width:60px;
+
+    font-weight:bold;
+
+}
+
+.result-field{
+
+    flex:1;
+
+    padding:12px;
+
+    border-radius:12px;
+
+    border:none;
+
+    background:rgba(225,6,0,.10);
 
     color:white;
 
-}
+    font-weight:700;
 
-@media(max-width:900px){
-
-.admin-grid{
-
-grid-template-columns:1fr;
-
- }
-
-}
-/* DASHBOARD */
-
-.action-grid{
-
-display:grid;
-
-grid-template-columns:repeat(2,1fr);
-
-gap:20px;
-
-margin:30px 0;
+    font-size:15px;
 
 }
 
-.action-card{
+/* Podio */
 
-display:flex;
+.result-row:nth-child(1){
 
-flex-direction:column;
-
-justify-content:center;
-
-align-items:center;
-
-padding:20px;
-
-border-radius:22px;
-
-border:none;
-
-cursor:pointer;
-
-font-size:1rem;
-
-color:white;
-
-transition:.25s;
+    border-left:5px solid gold;
 
 }
 
-.action-card span{
+.result-row:nth-child(2){
 
-font-size:2.6rem;
-
-margin-bottom:12px;
+    border-left:5px solid silver;
 
 }
 
-.action-card strong{
+.result-row:nth-child(3){
 
-font-size:1.15rem;
+    border-left:5px solid #cd7f32;
 
-letter-spacing:1px;
+}
+/* ===========================
+   PANNELLI RISULTATI
+=========================== */
+
+.admin-panel{
+
+    background:linear-gradient(
+        160deg,
+        rgba(255,255,255,.07),
+        rgba(255,255,255,.03)
+    );
+
+    border-radius:26px;
+
+    padding:28px;
+
+    border:1px solid rgba(255,255,255,.10);
+
+    backdrop-filter:blur(18px);
+
+    box-shadow:
+        0 20px 45px rgba(0,0,0,.45);
+
+    transition:.35s;
+}
+
+.admin-panel:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:
+        0 28px 60px rgba(0,0,0,.55);
 
 }
 
-.action-card small{
+.admin-panel h2{
 
-margin-top:8px;
+    margin:0 0 25px;
 
-opacity:.75;
-
-}
-
-.action-card:hover{
-
-transform:translateY(-6px);
-
-}
-
-.blue{
-
-background:linear-gradient(135deg,#1d4ed8,#2563eb);
-
-}
-
-.purple{
-
-background:linear-gradient(135deg,#7c3aed,#9333ea);
-
-}
-
-.green{
-
-background:linear-gradient(135deg,#059669,#10b981);
-
-}
-
-@media(max-width:900px){
-
-.action-grid{
-
-grid-template-columns:1fr;
-
-    }
-}
-
-.section-title{
-
-    margin-top:45px;
-    margin-bottom:20px;
-
-    font-size:1.8rem;
+    font-size:1.5rem;
 
     font-weight:900;
 
     color:white;
 
-    border-left:6px solid #E10600;
+    display:flex;
 
-    padding-left:15px;
+    align-items:center;
 
-    text-transform:uppercase;
+    gap:12px;
 
-    letter-spacing:1px;
+    padding-bottom:12px;
 
-}
-/* ===== JSON EDITOR ===== */
-
-.json-box{
-
-    background:#0f172a;
-
-    border:2px solid rgba(225,6,0,.25);
-
-    border-radius:20px;
-
-    padding:20px;
-
-    box-shadow:
-        0 15px 35px rgba(0,0,0,.35);
+    border-bottom:2px solid rgba(225,6,0,.35);
 
 }
-
-#jsonOutput{
-
-    width:100%;
-
-    height:320px;
-
-    background:#05070d;
-
-    color:#00ff9d;
-
-    border:none;
-
-    resize:vertical;
-
-    outline:none;
-
-    font-size:15px;
-
-    font-family:
-        Consolas,
-        Monaco,
-        monospace;
-
-    line-height:1.6;
-
-    padding:20px;
-
-    border-radius:14px;
-
-    box-sizing:border-box;
-
-}
-
-#jsonOutput::placeholder{
-
-    color:#6b7280;
-
-}
-/* ===== HEADER ===== */
-
-.admin-header{
-
-display:flex;
-
-align-items:center;
-
-gap:8px;
-
-margin-bottom:40px;
-
-padding:25px;
-
-border-radius:24px;
-
-background:
-linear-gradient(
-135deg,
-rgba(225,6,0,.18),
-rgba(255,255,255,.04)
-);
-
-border:1px solid rgba(255,255,255,.10);
-
-box-shadow:
-0 15px 35px rgba(0,0,0,.35);
-
-}
-
-/* LOGO HEADER */
-
-.admin-logo-wide{
-
-width:400px;
-
-display:flex;
-align-items:center;
-
-justify-content:center;
-
-flex-shrink:0;
-
-}
-
-.admin-logo-wide img{
-
-width:100%;
-
-height:auto;
-
-display:block;
-
-filter:
-drop-shadow(0 10px 25px rgba(0,0,0,.55));
-
-transition:.35s;
-
-}
-
-.admin-logo-wide:hover img{
-
-transform:scale(1.05);
-
-
-}
-
-.admin-header:hover
-.admin-logo-wide img{
-
-transform:scale(1.03);
-
-}
-
-/* HEADER */
-
-.admin-header h1{
-
-margin:0;
-
-font-size:3.3rem;
-
-font-weight:900;
-
-letter-spacing:1px;
-
-line-height:1;
-
-color:white;
-
-text-transform:uppercase;
-
-}
-
-.admin-header p{
-
-margin-top:14px;
-
-font-size:1.25rem;
-
-font-weight:500;
-
-letter-spacing:.8px;
-
-color:#f3f4f6;
-
-opacity:.9;
-
-}
-/* ===== JSON ACTIONS ===== */
-
-.json-actions{
-
-display:flex;
-
-justify-content:center;
-
-gap:18px;
-
-margin-top:20px;
-
-flex-wrap:wrap;
-
-}
-
-.json-actions button{
-
-min-width:190px;
-
-padding:16px;
-
-border-radius:16px;
-
-font-size:1rem;
-
-font-weight:800;
-
-background:linear-gradient(
-135deg,
-#E10600,
-#b30000
-);
-
-box-shadow:
-0 8px 20px rgba(225,6,0,.35);
-
-transition:.25s;
-
-}
-
-.json-actions button:hover{
-
-transform:translateY(-4px);
-
-box-shadow:
-0 14px 30px rgba(225,6,0,.55);
-
-}
-/* ===========================
-   FOOTER
-=========================== */
-
-.admin-footer{
-
-    margin-top:50px;
-
-    padding:18px 30px;
-
-    border-radius:18px;
+.result-row{
 
     display:flex;
+
+    align-items:center;
 
     justify-content:space-between;
 
-    align-items:center;
+    gap:18px;
 
-    background:
-    linear-gradient(
-        145deg,
-        rgba(255,255,255,.05),
-        rgba(255,255,255,.02)
-    );
+    margin-bottom:12px;
+
+    padding:14px 18px;
+
+    border-radius:14px;
+
+    background:rgba(255,255,255,.05);
 
     border:1px solid rgba(255,255,255,.08);
 
-    color:#d1d5db;
+    transition:.25s;
+
+}
+
+.result-row:hover{
+
+    background:rgba(255,255,255,.08);
+
+    transform:translateX(4px);
+
+}
+.result-field{
+
+    flex:1;
+
+    background:#0d1117;
+
+    border:2px solid rgba(225,6,0,.25);
+
+    border-radius:14px;
+
+    color:white;
+
+    font-weight:700;
+
+    padding:14px;
+
+    font-size:15px;
+
+    text-align:right;
+
+    transition:.25s;
+
+}
+
+.result-field:focus{
+
+    border-color:#E10600;
+
+    outline:none;
+
+}
+.result-row span{
+
+    width:70px;
+
+    font-weight:900;
+
+    color:white;
+
+}
+
+.result-row:nth-child(1){
+
+    border-left:5px solid gold;
+
+}
+
+.result-row:nth-child(2){
+
+    border-left:5px solid silver;
+
+}
+
+.result-row:nth-child(3){
+
+    border-left:5px solid #cd7f32;
+
+}
+/* ==========================
+   TABELLE RISULTATI
+========================== */
+
+.admin-table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    overflow:hidden;
+
+    border-radius:14px;
+
+}
+
+.admin-table thead{
+
+    background:#E10600;
+
+}
+
+.admin-table th{
+
+    padding:14px;
+
+    color:white;
+
+    text-align:center;
 
     font-size:.95rem;
 
-    box-shadow:
-        0 10px 25px rgba(0,0,0,.25);
+}
+
+.admin-table td{
+
+    padding:12px;
+
+    border-bottom:1px solid rgba(255,255,255,.08);
 
 }
 
-.admin-footer div{
+.admin-table tbody tr:nth-child(even){
 
-    display:flex;
-
-    align-items:center;
-
-    gap:8px;
+    background:rgba(255,255,255,.03);
 
 }
 
-@media(max-width:768px){
+.admin-table tbody tr:hover{
 
-.admin-footer{
-
-flex-direction:column;
-
-gap:12px;
-
-text-align:center;
-
-}
-    }
-
-/* ==========================================
-   OPENF1 CARDS
-========================================== */
-
-.cards-grid{
-
-display:grid;
-
-grid-template-columns:repeat(2,1fr);
-
-gap:16px;
-
-margin:45px 0;
-
-align-items:stretch;
-
-}
-.admin-card{
-
-    position:relative;
-    overflow:hidden;
-
-    display:flex;
-    flex-direction:column;
-    justify-content:flex-end;
-
-    min-height:180px;
-
-    padding:22px;
-
-    border-radius:28px;
-
-    cursor:pointer;
-
-    border:1px solid rgba(255,255,255,.12);
-
-    transition:
-        transform .45s ease,
-        box-shadow .45s ease;
-
-    box-shadow:
-        0 18px 45px rgba(0,0,0,.40),
-        inset 0 1px 0 rgba(255,255,255,.08);
-
-background:
-linear-gradient(
-160deg,
-rgba(255,255,255,.08),
-rgba(255,255,255,.02)
-);
-
-backdrop-filter:blur(12px);
--webkit-backdrop-filter:blur(12px);
-
-transition:
-transform .35s ease,
-box-shadow .35s ease;
+    background:rgba(255,255,255,.06);
 
 }
 
-.admin-card:hover{
+.admin-table .pos{
 
-transform:
-translateY(-10px)
-scale(1.03);
+    width:60px;
 
-box-shadow:
-0 25px 50px rgba(0,0,0,.45);
+    text-align:center;
 
-}
-.card-image{
+    font-weight:bold;
 
-    position:absolute;
-
-    width:260px;
-    right:-10px;
-    bottom:-8px;
-
-    transform:scale(1.08);
-    
-    pointer-events:none;
-
-    transition:all .45s ease;
-
-    filter:
-     drop-shadow(0 10px 12px rgba(0,0,0,.25))
-     drop-shadow(0 28px 32px rgba(0,0,0,.40));
-
-
-    z-index:5;
-}
-
-.admin-card::after{
-
-    content:"";
-
-    position:absolute;
-
-    width:220px;
-    height:220px;
-
-    right:-40px;
-    bottom:-40px;
-
-    border-radius:50%;
-
-    filter:blur(60px);
-
-    opacity:.45;
-
-    transition:.4s;
-
-    z-index:1;
-
-}
-.admin-card:hover .card-image{
-
-    transform:
-        translateY(-8px)
-        translateX(-10px)
-        scale(1.18)
-        rotate(-4deg);
-
-    filter:
-        drop-shadow(0 35px 45px rgba(0,0,0,.60));
-
-}
-.admin-card h3{
-
-margin-top:auto;
-
-margin-bottom:2px;
-
-font-size:1.25rem;
-
-font-weight:900;
-
-letter-spacing:1.2px;
-
-line-height:1.1;
-
-color:#ffffff;
-
-position:relative;
-z-index:10;
-
-transition:.35s ease;
-
-text-shadow:
-0 2px 8px rgba(0,0,0,.35);
-
-}
-.admin-card:hover h3{
-
-    transform:translateY(-6px);
-
-    letter-spacing:2px;
-
-    color:white;
-
-    text-shadow:
-        0 0 12px rgba(255,255,255,.45),
-        0 0 28px rgba(255,255,255,.25);
-
-}
-.admin-card p{
-
-margin-top:4px;
-
-font-size:.92rem;
-
-font-weight:500;
-
-letter-spacing:.3px;
-
-color:rgba(255,255,255,.88);
-
-position:relative;
-z-index:10;
-
-transition:.35s ease;
-
-}
-.admin-card:hover p{
-
-    transform:translateY(-5px);
-
-    color:white;
-
-    opacity:1;
-
-}
-/* ROSSA */
-
-.red-card{
-
-background:
-linear-gradient(
-135deg,
-#6d0000,
-#E10600
-);
-
+    color:#ffd700;
 
 }
 
-/* BLU */
-
-.blue-card{
-
-background:
-linear-gradient(
-135deg,
-#0c3d88,
-#1d4ed8
-);
-
-}
-
-/* VIOLA */
-
-.purple-card{
-
-background:
-linear-gradient(
-135deg,
-#5b21b6,
-#8b5cf6
-);
-
-}
-
-/* VERDE */
-
-.green-card{
-
-background:
-linear-gradient(
-135deg,
-#047857,
-#10b981
-);
-
-}
-/* GLOW HOVER */
-
-.red-card:hover{
-    box-shadow:
-        0 30px 60px rgba(0,0,0,.45),
-        0 0 35px rgba(225,6,0,.35);
-}
-
-.blue-card:hover{
-    box-shadow:
-        0 30px 60px rgba(0,0,0,.45),
-        0 0 35px rgba(37,99,235,.35);
-}
-
-.purple-card:hover{
-    box-shadow:
-        0 30px 60px rgba(0,0,0,.45),
-        0 0 35px rgba(139,92,246,.35);
-}
-
-.green-card:hover{
-    box-shadow:
-        0 30px 60px rgba(0,0,0,.45),
-        0 0 35px rgba(16,185,129,.35);
-}
-/* ===== BARRA COLORATA INFERIORE ===== */
-
-.admin-card::after{
-
-    content:"";
-
-    position:absolute;
-
-    left:0;
-    bottom:0;
+.admin-table input{
 
     width:100%;
-    height:5px;
 
-    border-radius:0 0 28px 28px;
+    background:transparent;
 
-}
-.red-card::after{
-    background:#E10600;
-}
+    border:none;
 
-.blue-card::after{
-    background:#2563eb;
-}
+    color:white;
 
-.purple-card::after{
-    background:#8b5cf6;
-}
+    font-weight:700;
 
-.green-card::after{
-    background:#10b981;
-}
-.admin-card:hover::after{
+    font-size:15px;
 
-    transform:scale(1.4);
-
-    opacity:.75;
+    text-align:left;
 
 }
 
-@media(max-width:900px){
+.admin-table input:focus{
 
-.cards-grid{
-
-grid-template-columns:1fr;
-
-}
-
-.card-image{
-
-width:180px;
-
-}
-
-}
-/* RIFLESSO */
-
-.admin-card::before{
-
-content:"";
-
-position:absolute;
-
-top:-120%;
-
-left:-40%;
-
-width:45%;
-
-height:320%;
-
-background:
-
-linear-gradient(
-90deg,
-transparent,
-rgba(255,255,255,.25),
-transparent
-);
-
-transform:rotate(25deg);
-
-transition:.7s;
-
-}
-.admin-card:hover::before{
-
-    left:130%;
+    outline:none;
 
 }
