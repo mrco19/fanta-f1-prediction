@@ -1258,7 +1258,7 @@ body{
 
 }
 .admin-panel {
+    display: block !important;
+    visibility: visible !important;
     opacity: 1 !important;
-    transform: none !important;
-    animation: none !important;
 }
