@@ -1,34 +1,7 @@
 /* ==========================================
-   FANTA F1 PREDICTION
-   ADMIN PANEL
+   FANTA F1 ADMIN
    Versione 2.0
 ========================================== */
-
-:root{
-
-    --bg:#0f1724;
-    --panel:#182436;
-    --panel-light:#22314a;
-
-    --primary:#ff2d2d;
-    --primary-dark:#c51d1d;
-
-    --text:#ffffff;
-    --text-light:#d9d9d9;
-
-    --border:#31445f;
-
-    --success:#28c76f;
-    --warning:#ffb400;
-
-    --shadow:
-        0 12px 30px rgba(0,0,0,.35);
-
-    --radius:14px;
-
-    --transition:.25s ease;
-
-}
 
 /* ==========================================
    RESET
@@ -37,7 +10,9 @@
 *{
 
     margin:0;
+
     padding:0;
+
     box-sizing:border-box;
 
 }
@@ -51,16 +26,1148 @@ html{
 body{
 
     font-family:
-
         "Segoe UI",
         Arial,
-        Helvetica,
         sans-serif;
 
-    background:var(--bg);
+    background:#111827;
+
+    color:#f8fafc;
+
+}
+
+/* ==========================================
+   VARIABILI
+========================================== */
+
+:root{
+
+    --background:#111827;
+
+    --panel:#1f2937;
+
+    --panel-light:#273549;
+
+    --accent:#e10600;
+
+    --accent-hover:#ff2a22;
+
+    --green:#22c55e;
+
+    --text:#f8fafc;
+
+    --text-light:#cbd5e1;
+
+    --border:#374151;
+
+    --shadow:
+
+        0 10px 25px rgba(0,0,0,.35);
+
+    --radius:14px;
+
+}
+/* ==========================================
+   LAYOUT GENERALE
+========================================== */
+
+.admin-layout{
+
+    display:grid;
+
+    grid-template-columns:260px 1fr;
+
+    grid-template-rows:80px 1fr;
+
+    min-height:100vh;
+
+}
+
+/* ==========================================
+   HEADER
+========================================== */
+
+.admin-header{
+
+    grid-column:1 / 3;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:20px 30px;
+
+    background:var(--panel);
+
+    border-bottom:1px solid var(--border);
+
+    box-shadow:var(--shadow);
+
+}
+
+.header-left h1{
+
+    font-size:28px;
+
+    font-weight:700;
+
+    color:var(--accent);
+
+}
+
+.subtitle{
+
+    display:block;
+
+    margin-top:5px;
+
+    color:var(--text-light);
+
+    font-size:14px;
+
+}
+
+.header-right{
+
+    display:flex;
+
+    align-items:center;
+
+}
+
+.status-card{
+
+    background:var(--panel-light);
+
+    padding:12px 20px;
+
+    border-radius:var(--radius);
+
+    text-align:center;
+
+}
+
+.status-title{
+
+    display:block;
+
+    font-size:13px;
+
+    color:var(--text-light);
+
+    margin-bottom:5px;
+
+}
+
+.status-online{
+
+    color:var(--green);
+
+    font-weight:600;
+
+}
+
+/* ==========================================
+   SIDEBAR
+========================================== */
+
+.sidebar{
+
+    background:var(--panel);
+
+    border-right:1px solid var(--border);
+
+    display:flex;
+
+    flex-direction:column;
+
+    padding:25px 15px;
+
+    gap:12px;
+
+}
+
+.sidebar button{
+
+    border:none;
+
+    background:transparent;
 
     color:var(--text);
 
-    min-height:100vh;
+    padding:14px 18px;
+
+    text-align:left;
+
+    font-size:15px;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.sidebar button:hover{
+
+    background:var(--accent);
+
+}
+
+.sidebar button.active{
+
+    background:var(--accent);
+
+}
+
+/* ==========================================
+   CONTENUTO
+========================================== */
+
+.content{
+
+    padding:35px;
+
+    overflow:auto;
+
+}
+
+.panel{
+
+    display:none;
+
+    animation:fade .35s ease;
+
+}
+
+.panel:first-child{
+
+    display:block;
+
+}
+
+.panel h2{
+
+    margin-bottom:25px;
+
+    font-size:28px;
+
+    color:var(--accent);
+
+}
+
+/* ==========================================
+   ANIMAZIONE
+========================================== */
+
+@keyframes fade{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(15px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+/* ==========================================
+   DASHBOARD
+========================================== */
+
+.dashboard-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+    gap:22px;
+
+    margin-top:25px;
+
+}
+
+/* ==========================================
+   CARD
+========================================== */
+
+.dashboard-card{
+
+    background:var(--panel);
+
+    border:1px solid var(--border);
+
+    border-radius:var(--radius);
+
+    padding:22px;
+
+    box-shadow:var(--shadow);
+
+    transition:.25s;
+
+}
+
+.dashboard-card:hover{
+
+    transform:translateY(-4px);
+
+    border-color:var(--accent);
+
+}
+
+.dashboard-card h3{
+
+    font-size:15px;
+
+    color:var(--text-light);
+
+    margin-bottom:14px;
+
+    font-weight:500;
+
+}
+
+.dashboard-card p{
+
+    font-size:22px;
+
+    font-weight:700;
+
+    color:white;
+
+    line-height:1.4;
+
+}
+
+/* ==========================================
+   CARD GP
+========================================== */
+
+#gpName{
+
+    color:var(--accent);
+
+}
+
+#gpCircuit{
+
+    color:#38bdf8;
+
+}
+
+#gpDate{
+
+    color:#facc15;
+
+}
+
+#countdown{
+
+    color:#22c55e;
+
+}
+
+#gpCardStatus{
+
+    color:#22c55e;
+
+}
+
+/* ==========================================
+   ANIMAZIONE CARD
+========================================== */
+
+.dashboard-card{
+
+    animation:cardAppear .45s ease;
+
+}
+
+@keyframes cardAppear{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(20px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* ==========================================
+   EFFETTO LUCE
+========================================== */
+
+.dashboard-card::before{
+
+    content:"";
+
+    display:block;
+
+    height:4px;
+
+    width:100%;
+
+    background:var(--accent);
+
+    border-radius:10px;
+
+    margin-bottom:18px;
+
+}
+/* ==========================================
+   SEZIONI PRONOSTICI
+========================================== */
+
+.prediction-layout{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:30px;
+
+    margin-top:30px;
+
+}
+
+/* ==========================================
+   BOX
+========================================== */
+
+.prediction-box{
+
+    background:var(--panel);
+
+    border:1px solid var(--border);
+
+    border-radius:var(--radius);
+
+    padding:25px;
+
+    box-shadow:var(--shadow);
+
+}
+
+.prediction-box h3{
+
+    margin-bottom:20px;
+
+    color:var(--accent);
+
+    font-size:20px;
+
+    text-align:center;
+
+}
+
+/* ==========================================
+   RIGHE
+========================================== */
+
+.input-row,
+.result-row{
+
+    display:grid;
+
+    grid-template-columns:60px 1fr;
+
+    align-items:center;
+
+    gap:15px;
+
+    margin-bottom:12px;
+
+}
+
+.input-row span,
+.result-row span{
+
+    font-weight:700;
+
+    text-align:center;
+
+    color:var(--text);
+
+}
+
+/* ==========================================
+   SELECT PILOTI
+========================================== */
+
+.driver-select{
+
+    width:100%;
+
+    height:45px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#374151;
+
+    color:white;
+
+    padding:0 12px;
+
+    font-size:15px;
+
+    transition:.2s;
+
+}
+
+.driver-select:focus{
+
+    outline:none;
+
+    box-shadow:0 0 0 2px var(--accent);
+
+}
+
+/* ==========================================
+   CAMPI RISULTATO
+========================================== */
+
+.result-field{
+
+    width:100%;
+
+    height:45px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#1f2937;
+
+    color:#22c55e;
+
+    padding:0 12px;
+
+    font-weight:600;
+
+    font-size:15px;
+
+}
+
+/* ==========================================
+   PODIO
+========================================== */
+
+#qrPos1,
+#sqrPos1,
+#srPos1,
+#rrPos1{
+
+    color:#FFD700;
+
+}
+
+#qrPos2,
+#sqrPos2,
+#srPos2,
+#rrPos2{
+
+    color:#C0C0C0;
+
+}
+
+#qrPos3,
+#sqrPos3,
+#srPos3,
+#rrPos3{
+
+    color:#CD7F32;
+
+}
+
+/* ==========================================
+   HOVER BOX
+========================================== */
+
+.prediction-box:hover{
+
+    border-color:var(--accent);
+
+    transform:translateY(-2px);
+
+    transition:.2s;
+
+}
+/* ==========================================
+   AREA PUNTEGGI
+========================================== */
+
+.score-area{
+
+    margin-top:35px;
+
+    background:var(--panel);
+
+    border:1px solid var(--border);
+
+    border-radius:var(--radius);
+
+    padding:25px;
+
+    text-align:center;
+
+    box-shadow:var(--shadow);
+
+}
+
+/* ==========================================
+   BOTTONI
+========================================== */
+
+.score-area button,
+.total-container button,
+.json-buttons button{
+
+    background:var(--accent);
+
+    color:white;
+
+    border:none;
+
+    padding:14px 28px;
+
+    border-radius:10px;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.score-area button:hover,
+.total-container button:hover,
+.json-buttons button:hover{
+
+    background:var(--accent-hover);
+
+    transform:translateY(-2px);
+
+}
+
+/* ==========================================
+   PUNTEGGI
+========================================== */
+
+.score-area h3{
+
+    margin-top:25px;
+
+    font-size:30px;
+
+    color:#22c55e;
+
+}
+
+/* ==========================================
+   DETTAGLIO PUNTEGGI
+========================================== */
+
+#qualiDetail,
+#sprintQualiDetail,
+#sprintRaceDetail,
+#raceDetail{
+
+    margin-top:20px;
+
+    padding:18px;
+
+    background:#111827;
+
+    border-radius:10px;
+
+    border:1px solid var(--border);
+
+    text-align:left;
+
+    line-height:1.8;
+
+    font-size:15px;
+
+    color:var(--text-light);
+
+}
+
+/* ==========================================
+   TOTALE WEEKEND
+========================================== */
+
+.total-container{
+
+    background:var(--panel);
+
+    border-radius:var(--radius);
+
+    border:1px solid var(--border);
+
+    padding:35px;
+
+    text-align:center;
+
+    box-shadow:var(--shadow);
+
+}
+
+.total-score{
+
+    margin-top:25px;
+
+    font-size:34px;
+
+    font-weight:bold;
+
+    color:#22c55e;
+
+}
+/* ==========================================
+   JSON GENERATOR
+========================================== */
+
+.json-description{
+
+    margin:20px 0;
+
+    color:var(--text-light);
+
+    line-height:1.6;
+
+    font-size:15px;
+
+}
+
+/* ==========================================
+   TEXTAREA JSON
+========================================== */
+
+#jsonOutput{
+
+    width:100%;
+
+    min-height:350px;
+
+    margin-top:20px;
+
+    padding:20px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#0f172a;
+
+    color:#22c55e;
+
+    font-family:
+
+        Consolas,
+        "Courier New",
+        monospace;
+
+    font-size:14px;
+
+    line-height:1.6;
+
+    resize:vertical;
+
+    box-shadow:inset 0 0 10px rgba(0,0,0,.4);
+
+}
+
+/* ==========================================
+   BOTTONI JSON
+========================================== */
+
+.json-buttons{
+
+    display:flex;
+
+    gap:15px;
+
+    justify-content:center;
+
+    flex-wrap:wrap;
+
+    margin-top:25px;
+
+}
+
+.json-buttons button{
+
+    min-width:180px;
+
+}
+
+/* ==========================================
+   EFFETTO CODICE
+========================================== */
+
+#jsonOutput:focus{
+
+    outline:none;
+
+    box-shadow:
+
+        0 0 0 2px var(--accent),
+
+        inset 0 0 10px rgba(0,0,0,.5);
+
+}
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width:1200px){
+
+    .prediction-layout{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+@media (max-width:900px){
+
+    .admin-layout{
+
+        grid-template-columns:1fr;
+
+        grid-template-rows:auto auto 1fr;
+
+    }
+
+    .admin-header{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        gap:15px;
+
+    }
+
+    .sidebar{
+
+        flex-direction:row;
+
+        flex-wrap:wrap;
+
+        justify-content:center;
+
+        border-right:none;
+
+        border-bottom:1px solid var(--border);
+
+        padding:15px;
+
+    }
+
+    .sidebar button{
+
+        flex:1 1 180px;
+
+        text-align:center;
+
+    }
+
+    .content{
+
+        padding:20px;
+
+    }
+
+}
+
+@media (max-width:600px){
+
+    .dashboard-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .dashboard-card{
+
+        padding:18px;
+
+    }
+
+    .dashboard-card p{
+
+        font-size:18px;
+
+    }
+
+    .prediction-box{
+
+        padding:18px;
+
+    }
+
+    .input-row,
+    .result-row{
+
+        grid-template-columns:45px 1fr;
+
+        gap:10px;
+
+    }
+
+    .driver-select,
+    .result-field{
+
+        font-size:14px;
+
+        height:42px;
+
+    }
+
+    .json-buttons{
+
+        flex-direction:column;
+
+    }
+
+    .json-buttons button{
+
+        width:100%;
+
+    }
+
+    .total-score{
+
+        font-size:26px;
+
+    }
+
+    .score-area h3{
+
+        font-size:24px;
+
+    }
+
+}
+/* ==========================================
+   RIFINITURE FINALI
+========================================== */
+
+/* Scrollbar */
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+    height:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#111827;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#4b5563;
+
+    border-radius:20px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:var(--accent);
+
+}
+
+/* ==========================================
+   TRANSIZIONI GLOBALI
+========================================== */
+
+button,
+.driver-select,
+.result-field,
+.dashboard-card,
+.prediction-box{
+
+    transition:all .25s ease;
+
+}
+
+/* ==========================================
+   INPUT DISABILITATI
+========================================== */
+
+.driver-select:disabled{
+
+    opacity:.65;
+
+    cursor:not-allowed;
+
+}
+
+/* ==========================================
+   RISULTATI CARICATI
+========================================== */
+
+.result-field.loaded{
+
+    background:#0f172a;
+
+    color:#22c55e;
+
+    font-weight:700;
+
+}
+
+/* ==========================================
+   FOCUS
+========================================== */
+
+button:focus,
+.driver-select:focus,
+.result-field:focus,
+textarea:focus{
+
+    outline:none;
+
+}
+
+/* ==========================================
+   SEPARATORE
+========================================== */
+
+.panel h2::after{
+
+    content:"";
+
+    display:block;
+
+    width:80px;
+
+    height:4px;
+
+    margin-top:12px;
+
+    border-radius:20px;
+
+    background:var(--accent);
+
+}
+
+/* ==========================================
+   EFFETTO BOTTONI
+========================================== */
+
+button:active{
+
+    transform:scale(.97);
+
+}
+
+/* ==========================================
+   BOX
+========================================== */
+
+.prediction-box,
+.dashboard-card,
+.score-area,
+.total-container{
+
+    overflow:hidden;
+
+}
+
+/* ==========================================
+   OMBRE
+========================================== */
+
+.dashboard-card:hover,
+.prediction-box:hover{
+
+    box-shadow:
+
+        0 18px 40px rgba(0,0,0,.35);
+
+}
+
+/* ==========================================
+   ANIMAZIONE PANNELLI
+========================================== */
+
+.panel{
+
+    animation:fadePanel .35s ease;
+
+}
+
+@keyframes fadePanel{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(20px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* ==========================================
+   FOOTER
+========================================== */
+
+.footer{
+
+    margin-top:40px;
+
+    padding:20px;
+
+    text-align:center;
+
+    color:var(--text-light);
+
+    border-top:1px solid var(--border);
+
+    font-size:14px;
 
 }
