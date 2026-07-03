@@ -2,1114 +2,349 @@
 <html lang="it">
 
 <head>
-
-    <meta charset="UTF-8">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Fanta F1 Admin</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="admin.css">
-
+    ...
 </head>
 
 <body>
 
-<div class="container">
+<div class="admin-layout">
 
-    <!-- ==========================================
-         HEADER
-    ========================================== -->
-
-    <header class="admin-header">
-
-        <div class="admin-logo-wide">
-
-            <img src="assets/logo.png" alt="Fanta F1">
-
-        </div>
-
-        <div class="admin-header-info">
-
-            <h1>Fanta F1 Admin</h1>
-
-            <p>Gestione Weekend • OpenF1 • Risultati • JSON</p>
-
-        </div>
-
+    <header>
+        ...
     </header>
 
-    <!-- ==========================================
-         DASHBOARD
-    ========================================== -->
+    <aside class="sidebar">
 
-    <h2 class="section-title">
-        Dashboard
-    </h2>
-
-    <div class="cards-grid">
-
-        <div class="admin-card blue-card" id="btnLoadOpenF1">
-
-            <img src="assets/icons/openf1.png" class="card-image">
-
-            <h3>OPEN F1</h3>
-
-            <p>Aggiorna automaticamente il weekend</p>
-
-        </div>
-
-        <div class="admin-card purple-card" id="btnJson">
-
-            <img src="assets/icons/json.png" class="card-image">
-
-            <h3>JSON</h3>
-
-            <p>Editor risultati weekend</p>
-
-        </div>
-
-        <div class="admin-card green-card" id="btnSave">
-
-            <img src="assets/icons/save.png" class="card-image">
-
-            <h3>SALVA</h3>
-
-            <p>Esporta results.json</p>
-
-        </div>
-
-        <div class="admin-card red-card" id="calculateTotal">
-
-            <img src="assets/icons/trophy.png" class="card-image">
-
-            <h3>CALCOLA</h3>
-
-            <p>Calcola il punteggio del weekend</p>
-
-        </div>
-
-    </div>
-
-    <!-- ==========================================
-         INFO WEEKEND
-    ========================================== -->
-
-    <div class="admin-grid">
-
-        <div class="admin-panel">
-
-            <h2>🏁 Weekend Corrente</h2>
-
-            <table class="admin-table">
-
-                <tbody>
-
-                    <tr>
-                        <td>Gran Premio</td>
-                        <td id="gpName">--</td>
-                    </tr>
-
-                    <tr>
-                        <td>Circuito</td>
-                        <td id="gpCircuit">--</td>
-                    </tr>
-
-                    <tr>
-                        <td>Data</td>
-                        <td id="gpDate">--</td>
-                    </tr>
-
-                    <tr>
-                        <td>Weekend</td>
-                        <td id="weekendType">--</td>
-                    </tr>
-
-                    <tr>
-                        <td>Countdown</td>
-                        <td id="countdown">--</td>
-                    </tr>
-
-                </tbody>
-
-            </table>
-
-        </div>
-
-        <div class="admin-panel">
-
-            <h2>📊 Stato</h2>
-
-            <table class="admin-table">
-
-                <tbody>
-
-                    <tr>
-                        <td>OpenF1</td>
-                        <td id="apiStatus">● Offline</td>
-                    </tr>
-
-                    <tr>
-                        <td>Qualifiche</td>
-                        <td id="qualiStatus">In attesa</td>
-                    </tr>
-
-                    <tr>
-                        <td>Sprint</td>
-                        <td id="sprintStatus">In attesa</td>
-                    </tr>
-
-                    <tr>
-                        <td>Gara</td>
-                        <td id="raceStatus">In attesa</td>
-                    </tr>
-
-                </tbody>
-
-            </table>
-
-        </div>
-
-    </div>
-
-       <!-- ==========================================
-         QUALIFICHE
-    ========================================== -->
-
-    <h2 class="section-title">
-        Qualifiche
-    </h2>
-
-    <div class="admin-grid">
-
-        <!-- =========================
-             PRONOSTICI
-        ========================== -->
-
-        <div class="admin-panel">
-
-            <h2>🏁 Pronostici Qualifiche</h2>
-
-            <div id="quali-predictions">
-
-                <!-- 1 -->
-                <div class="result-row">
-                    <span>1°</span>
-                    <select id="qp1" class="driver-select"></select>
-                </div>
-
-                <!-- 2 -->
-                <div class="result-row">
-                    <span>2°</span>
-                    <select id="qp2" class="driver-select"></select>
-                </div>
-
-                <!-- 3 -->
-                <div class="result-row">
-                    <span>3°</span>
-                    <select id="qp3" class="driver-select"></select>
-                </div>
-
-                <!-- 4 -->
-                <div class="result-row">
-                    <span>4°</span>
-                    <select id="qp4" class="driver-select"></select>
-                </div>
-
-                <!-- 5 -->
-                <div class="result-row">
-                    <span>5°</span>
-                    <select id="qp5" class="driver-select"></select>
-                </div>
-
-            </div>
-
-        </div>
-
-        <!-- =========================
-             RISULTATI
-        ========================== -->
-
-        <div class="admin-panel">
-
-            <h2>🏆 Risultati Qualifiche</h2>
-
-            <div id="quali-results">
-
-                <div class="result-row">
-                    <span id="qrPos1">🏆 1°</span>
-                    <input id="qr1" class="result-field" readonly>
-                </div>
-
-                <div class="result-row">
-                    <span id="qrPos2">🥈 2°</span>
-                    <input id="qr2" class="result-field" readonly>
-                </div>
-
-                <div class="result-row">
-                    <span id="qrPos3">🥉 3°</span>
-                    <input id="qr3" class="result-field" readonly>
-                </div>
-
-                <div class="result-row">
-                    <span id="qrPos4">4°</span>
-                    <input id="qr4" class="result-field" readonly>
-                </div>
-
-                <div class="result-row">
-                    <span id="qrPos5">5°</span>
-                    <input id="qr5" class="result-field" readonly>
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <!-- =========================
-         CALCOLO QUALIFICHE
-    ========================== -->
-
-    <div class="json-actions">
-
-        <button id="calculateQuali">
-            Calcola Qualifiche
+        <button onclick="showSection('dashboard')">
+            🏠 Dashboard
         </button>
 
-    </div>
-
-    <div class="admin-panel">
-
-        <h2>📈 Punteggio Qualifiche</h2>
-
-        <p id="qualiScore">
-            0 punti
-        </p>
-
-        <br>
-
-        <div id="qualiDetail">
-
-        </div>
-
-    </div>
-
-        <!-- ==========================================
-         SPRINT QUALIFYING
-    ========================================== -->
-
-    <h2 class="section-title">
-        Sprint Qualifying
-    </h2>
-
-    <div class="admin-grid">
-
-        <!-- =========================
-             PRONOSTICI
-        ========================== -->
-
-        <div class="admin-panel">
-
-            <h2>⚡ Pronostici Sprint Qualifying</h2>
-
-            <div id="sprintquali-predictions">
-
-                <div class="result-row">
-                    <span>1°</span>
-                    <select id="sqp1" class="driver-select"></select>
-                </div>
-
-                <div class="result-row">
-                    <span>2°</span>
-                    <select id="sqp2" class="driver-select"></select>
-                </div>
-
-                <div class="result-row">
-                    <span>3°</span>
-                    <select id="sqp3" class="driver-select"></select>
-                </div>
-
-                <div class="result-row">
-                    <span>4°</span>
-                    <select id="sqp4" class="driver-select"></select>
-                </div>
-
-                <div class="result-row">
-                    <span>5°</span>
-                    <select id="sqp5" class="driver-select"></select>
-                </div>
-
-            </div>
-
-        </div>
-
-        <!-- =========================
-             RISULTATI
-        ========================== -->
-
-        <div class="admin-panel">
-
-            <h2>🏆 Risultati Sprint Qualifying</h2>
-
-            <div id="sprintquali-results">
-
-                <div class="result-row">
-                    <span id="sqrPos1">🏆 1°</span>
-                    <input id="sqr1" class="result-field" readonly>
-                </div>
-
-                <div class="result-row">
-                    <span id="sqrPos2">🥈 2°</span>
-                    <input id="sqr2" class="result-field" readonly>
-                </div>
-
-                <div class="result-row">
-                    <span id="sqrPos3">🥉 3°</span>
-                    <input id="sqr3" class="result-field" readonly>
-                </div>
-
-                <div class="result-row">
-                    <span id="sqrPos4">4°</span>
-                    <input id="sqr4" class="result-field" readonly>
-                </div>
-
-                <div class="result-row">
-                    <span id="sqrPos5">5°</span>
-                    <input id="sqr5" class="result-field" readonly>
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <!-- =========================
-         CALCOLO SPRINT QUALI
-    ========================== -->
-
-    <div class="json-actions">
-
-        <button id="calculateSprintQuali">
-
-            Calcola Sprint Qualifying
-
+        <button onclick="showSection('qualifying')">
+            🏁 Qualifica
         </button>
 
-    </div>
-
-    <div class="admin-panel">
-
-        <h2>📈 Punteggio Sprint Qualifying</h2>
-
-        <p id="sprintQualiScore">
-
-            0 punti
-
-        </p>
-
-        <br>
-
-        <div id="sprintQualiDetail">
-
-        </div>
-
-    </div>
-
-       <!-- ==========================================
-         SPRINT RACE
-    ========================================== -->
-
-    <h2 class="section-title">
-        Sprint Race
-    </h2>
-
-    <div class="admin-grid">
-
-        <!-- =========================
-             PRONOSTICI
-        ========================== -->
-
-        <div class="admin-panel">
-
-            <h2>🏎️ Pronostici Sprint Race</h2>
-
-            <div id="sprint-predictions">
-
-                <div class="result-row">
-                    <span>1°</span>
-                    <select id="sp1" class="driver-select"></select>
-                </div>
-
-                <div class="result-row">
-                    <span>2°</span>
-                    <select id="sp2" class="driver-select"></select>
-                </div>
-
-                <div class="result-row">
-                    <span>3°</span>
-                    <select id="sp3" class="driver-select"></select>
-                </div>
-
-                <div class="result-row">
-                    <span>4°</span>
-                    <select id="sp4" class="driver-select"></select>
-                </div>
-
-                <div class="result-row">
-                    <span>5°</span>
-                    <select id="sp5" class="driver-select"></select>
-                </div>
-
-                <div class="result-row">
-                    <span>6°</span>
-                    <select id="sp6" class="driver-select"></select>
-                </div>
-
-                <div class="result-row">
-                    <span>7°</span>
-                    <select id="sp7" class="driver-select"></select>
-                </div>
-
-                <div class="result-row">
-                    <span>8°</span>
-                    <select id="sp8" class="driver-select"></select>
-                </div>
-
-            </div>
-
-        </div>
-
-        <!-- =========================
-             RISULTATI
-        ========================== -->
-
-        <div class="admin-panel">
-
-            <h2>🏆 Risultati Sprint Race</h2>
-
-            <div id="sprint-results">
-
-                <div class="result-row">
-                    <span id="srPos1">🏆 1°</span>
-                    <input id="sr1" class="result-field" readonly>
-                </div>
-
-                <div class="result-row">
-                    <span id="srPos2">🥈 2°</span>
-                    <input id="sr2" class="result-field" readonly>
-                </div>
-
-                <div class="result-row">
-                    <span id="srPos3">🥉 3°</span>
-                    <input id="sr3" class="result-field" readonly>
-                </div>
-
-                <div class="result-row">
-                    <span id="srPos4">4°</span>
-                    <input id="sr4" class="result-field" readonly>
-                </div>
-
-                <div class="result-row">
-                    <span id="srPos5">5°</span>
-                    <input id="sr5" class="result-field" readonly>
-                </div>
-
-                <div class="result-row">
-                    <span id="srPos6">6°</span>
-                    <input id="sr6" class="result-field" readonly>
-                </div>
-
-                <div class="result-row">
-                    <span id="srPos7">7°</span>
-                    <input id="sr7" class="result-field" readonly>
-                </div>
-
-                <div class="result-row">
-                    <span id="srPos8">8°</span>
-                    <input id="sr8" class="result-field" readonly>
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <!-- =========================
-         CALCOLO SPRINT RACE
-    ========================== -->
-
-    <div class="json-actions">
-
-        <button id="calculateSprintRace">
-
-            Calcola Sprint Race
-
+        <button onclick="showSection('sprintQualifying')">
+            ⚡ Sprint Qualifica
         </button>
 
-    </div>
-
-    <div class="admin-panel">
-
-        <h2>📈 Punteggio Sprint Race</h2>
-
-        <p id="sprintRaceScore">
-
-            0 punti
-
-        </p>
-
-        <br>
-
-        <div id="sprintRaceDetail">
-
-        </div>
-
-    </div>
-
-        <!-- ==========================================
-         GARA
-    ========================================== -->
-
-    <h2 class="section-title">
-        Gara
-    </h2>
-
-    <div class="admin-grid">
-
-        <!-- =========================
-             PRONOSTICI
-        ========================== -->
-
-        <div class="admin-panel">
-
-            <h2>🏁 Pronostici Gara</h2>
-
-            <div id="race-predictions">
-
-                <div class="result-row"><span>1°</span><select id="rp1" class="driver-select"></select></div>
-                <div class="result-row"><span>2°</span><select id="rp2" class="driver-select"></select></div>
-                <div class="result-row"><span>3°</span><select id="rp3" class="driver-select"></select></div>
-                <div class="result-row"><span>4°</span><select id="rp4" class="driver-select"></select></div>
-                <div class="result-row"><span>5°</span><select id="rp5" class="driver-select"></select></div>
-                <div class="result-row"><span>6°</span><select id="rp6" class="driver-select"></select></div>
-                <div class="result-row"><span>7°</span><select id="rp7" class="driver-select"></select></div>
-                <div class="result-row"><span>8°</span><select id="rp8" class="driver-select"></select></div>
-                <div class="result-row"><span>9°</span><select id="rp9" class="driver-select"></select></div>
-                <div class="result-row"><span>10°</span><select id="rp10" class="driver-select"></select></div>
-
-            </div>
-
-        </div>
-
-        <!-- =========================
-             RISULTATI
-        ========================== -->
-
-        <div class="admin-panel">
-
-            <h2>🏆 Risultati Gara</h2>
-
-            <div id="race-results">
-
-                <div class="result-row">
-                    <span id="rrPos1">🏆 1°</span>
-                    <input id="rr1" class="result-field" readonly>
-                </div>
-
-                <div class="result-row">
-                    <span id="rrPos2">🥈 2°</span>
-                    <input id="rr2" class="result-field" readonly>
-                </div>
-
-                <div class="result-row">
-                    <span id="rrPos3">🥉 3°</span>
-                    <input id="rr3" class="result-field" readonly>
-                </div>
-
-                <div class="result-row">
-                    <span id="rrPos4">4°</span>
-                    <input id="rr4" class="result-field" readonly>
-                </div>
-
-                <div class="result-row">
-                    <span id="rrPos5">5°</span>
-                    <input id="rr5" class="result-field" readonly>
-                </div>
-
-                <div class="result-row">
-                    <span id="rrPos6">6°</span>
-                    <input id="rr6" class="result-field" readonly>
-                </div>
-
-                <div class="result-row">
-                    <span id="rrPos7">7°</span>
-                    <input id="rr7" class="result-field" readonly>
-                </div>
-
-                <div class="result-row">
-                    <span id="rrPos8">8°</span>
-                    <input id="rr8" class="result-field" readonly>
-                </div>
-
-                <div class="result-row">
-                    <span id="rrPos9">9°</span>
-                    <input id="rr9" class="result-field" readonly>
-                </div>
-
-                <div class="result-row">
-                    <span id="rrPos10">10°</span>
-                    <input id="rr10" class="result-field" readonly>
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <!-- =========================
-         CALCOLO GARA
-    ========================== -->
-
-    <div class="json-actions">
-
-        <button id="calculateRace">
-
-            Calcola Gara
-
+        <button onclick="showSection('sprintRace')">
+            🏎 Sprint
         </button>
 
-    </div>
-
-    <div class="admin-panel">
-
-        <h2>📈 Punteggio Gara</h2>
-
-        <p id="raceScore">
-
-            0 punti
-
-        </p>
-
-        <br>
-
-        <div id="raceDetail">
-
-        </div>
-
-    </div>
-
-    <!-- ==========================================
-         TOTALE WEEKEND
-    ========================================== -->
-
-    <h2 class="section-title">
-
-        Totale Weekend
-
-    </h2>
-
-    <div class="admin-panel">
-
-        <h2>🏆 Punteggio Totale</h2>
-
-        <div
-            id="totalScore"
-            style="
-                font-size:2rem;
-                font-weight:900;
-                text-align:center;
-                margin:25px 0;
-                color:#ffffff;
-            ">
-
-            Totale Weekend: 0 punti
-
-        </div>
-
-        <div class="json-actions">
-
-            <button id="calculateTotal">
-
-                Calcola Totale Weekend
-
-            </button>
-
-        </div>
-
-    </div>
-
-       <!-- ==========================================
-         OPENF1
-    ========================================== -->
-
-    <h2 class="section-title">
-
-        OpenF1
-
-    </h2>
-
-    <div class="admin-grid">
-
-        <!-- =========================
-             WEEKEND
-        ========================== -->
-
-        <div class="admin-panel">
-
-            <h2>🏁 Weekend Corrente</h2>
-
-            <table class="admin-table">
-
-                <tbody>
-
-                    <tr>
-                        <th>Gran Premio</th>
-                        <td id="gpCardName">--</td>
-                    </tr>
-
-                    <tr>
-                        <th>Circuito</th>
-                        <td id="gpCircuitCard">--</td>
-                    </tr>
-
-                    <tr>
-                        <th>Weekend</th>
-                        <td id="gpCardWeekend">--</td>
-                    </tr>
-
-                    <tr>
-                        <th>Data</th>
-                        <td id="gpCardDate">--</td>
-                    </tr>
-
-                    <tr>
-                        <th>Stato</th>
-                        <td id="gpCardStatus">
-
-                            🟢 Pronostici aperti
-
-                        </td>
-                    </tr>
-
-                </tbody>
-
-            </table>
-
-        </div>
-
-        <!-- =========================
-             API STATUS
-        ========================== -->
-
-        <div class="admin-panel">
-
-            <h2>📡 Stato OpenF1</h2>
-
-            <table class="admin-table">
-
-                <tbody>
-
-                    <tr>
-
-                        <th>Connessione</th>
-
-                        <td id="apiConnection">
-
-                            In attesa...
-
-                        </td>
-
-                    </tr>
-
-                    <tr>
-
-                        <th>Meeting Key</th>
-
-                        <td id="meetingKey">
-
-                            --
-
-                        </td>
-
-                    </tr>
-
-                    <tr>
-
-                        <th>Sessione</th>
-
-                        <td id="currentSession">
-
-                            --
-
-                        </td>
-
-                    </tr>
-
-                    <tr>
-
-                        <th>Ultimo aggiornamento</th>
-
-                        <td id="lastUpdate">
-
-                            --
-
-                        </td>
-
-                    </tr>
-
-                </tbody>
-
-            </table>
-
-        </div>
-
-    </div>
-
-    <!-- ==========================================
-         AZIONI OPENF1
-    ========================================== -->
-
-    <div class="json-actions">
-
-        <button id="loadWeekend">
-
-            🏁 Carica Weekend
-
-        </button>
-
-        <button id="loadQualifying">
-
-            🏎️ Qualifiche
-
-        </button>
-
-        <button id="loadSprintQualifying">
-
-            ⚡ Sprint Qualifying
-
-        </button>
-
-        <button id="loadSprintRace">
-
-            🚀 Sprint Race
-
-        </button>
-
-        <button id="loadRace">
-
+        <button onclick="showSection('race')">
             🏆 Gara
-
         </button>
 
-    </div>
-
-    <!-- ==========================================
-         CLASSIFICA PILOTI
-    ========================================== -->
-
-    <div class="admin-panel">
-
-        <h2>🏆 Classifica Piloti</h2>
-
-        <table class="admin-table">
-
-            <thead>
-
-                <tr>
-
-                    <th>#</th>
-
-                    <th>Pilota</th>
-
-                    <th>Punti</th>
-
-                </tr>
-
-            </thead>
-
-            <tbody id="driverStandings">
-
-                <!-- OpenF1 riempirà automaticamente -->
-
-            </tbody>
-
-        </table>
-
-    </div>
-
-        <!-- ==========================================
-         JSON EDITOR
-    ========================================== -->
-
-    <h2 class="section-title">
-
-        JSON Editor
-
-    </h2>
-
-    <div class="json-box">
-
-        <textarea
-            id="jsonOutput"
-            spellcheck="false"
-            placeholder="Il file results.json verrà mostrato qui..."></textarea>
-
-    </div>
-
-    <!-- ==========================================
-         AZIONI JSON
-    ========================================== -->
-
-    <div class="json-actions">
-
-        <button id="generateJSON">
-
-            📄 Genera JSON
-
+        <button onclick="showSection('json')">
+            📄 JSON
         </button>
 
-        <button id="copyJSON">
+    </aside>
 
-            📋 Copia JSON
+    <main class="content">
 
-        </button>
+        <section id="dashboard" class="panel">
 
-        <button id="downloadJSON">
+            ...
 
-            💾 Scarica results.json
+        </section>
 
-        </button>
-
-        <button id="loadJSON">
-
-            📂 Carica results.json
-
-        </button>
-
-    </div>
-
-    <!-- ==========================================
-         ANTEPRIMA FILE
-    ========================================== -->
-
-    <div class="admin-panel">
-
-        <h2>📦 Anteprima risultati</h2>
-
-        <table class="admin-table">
-
-            <tbody>
-
-                <tr>
-
-                    <th>Qualifiche</th>
-
-                    <td id="jsonQualiCount">
-
-                        0 piloti
-
-                    </td>
-
-                </tr>
-
-                <tr>
-
-                    <th>Sprint Qualifying</th>
-
-                    <td id="jsonSprintQualiCount">
-
-                        0 piloti
-
-                    </td>
-
-                </tr>
-
-                <tr>
-
-                    <th>Sprint Race</th>
-
-                    <td id="jsonSprintCount">
-
-                        0 piloti
-
-                    </td>
-
-                </tr>
-
-                <tr>
-
-                    <th>Gara</th>
-
-                    <td id="jsonRaceCount">
-
-                        0 piloti
-
-                    </td>
-
-                </tr>
-
-                <tr>
-
-                    <th>Dimensione JSON</th>
-
-                    <td id="jsonSize">
-
-                        0 KB
-
-                    </td>
-
-                </tr>
-
-            </tbody>
-
-        </table>
-
-    </div>
-
-        <!-- ==========================================
-         FOOTER
-    ========================================== -->
-
-    <footer class="admin-footer">
-
-        <div class="footer-left">
-
-            🏎️ Fanta F1 Prediction Admin Panel
-
-        </div>
-
-        <div class="footer-center">
-
-            Powered by OpenF1 API
-
-        </div>
-
-        <div class="footer-right">
-
-            Versione 2.0
-
-        </div>
-
-    </footer>
+    </main>
 
 </div>
-<!-- Fine container -->
 
-<!-- ==========================================
-     SCRIPT
-========================================== -->
+</body>
+</html>
+        <!-- ======================================
+             QUALIFICA
+        ======================================= -->
 
-<script src="api.js"></script>
+        <section
+            id="qualifying"
+            class="panel"
+            style="display:none;">
+
+            <h2>🏁 Qualifica</h2>
+
+            <div class="prediction-layout">
+
+                <div class="prediction-box">
+
+                    <h3>Pronostici</h3>
+
+                    <div id="quali-predictions"></div>
+
+                </div>
+
+                <div class="prediction-box">
+
+                    <h3>Risultati</h3>
+
+                    <div id="quali-results"></div>
+
+                </div>
+
+            </div>
+
+            <div class="score-area">
+
+                <button id="calculateQuali">
+
+                    Calcola Punteggio
+
+                </button>
+
+                <h3 id="qualiScore">
+
+                    0 punti
+
+                </h3>
+
+                <div id="qualiDetail"></div>
+
+            </div>
+
+        </section>
+
+        <!-- ======================================
+             SPRINT QUALIFYING
+        ======================================= -->
+
+        <section
+            id="sprintQualifying"
+            class="panel"
+            style="display:none;">
+
+            <h2>⚡ Sprint Qualifica</h2>
+
+            <div class="prediction-layout">
+
+                <div class="prediction-box">
+
+                    <h3>Pronostici</h3>
+
+                    <div id="sprintquali-predictions"></div>
+
+                </div>
+
+                <div class="prediction-box">
+
+                    <h3>Risultati</h3>
+
+                    <div id="sprintquali-results"></div>
+
+                </div>
+
+            </div>
+
+            <div class="score-area">
+
+                <button id="calculateSprintQuali">
+
+                    Calcola Punteggio
+
+                </button>
+
+                <h3 id="sprintQualiScore">
+
+                    0 punti
+
+                </h3>
+
+                <div id="sprintQualiDetail"></div>
+
+            </div>
+
+        </section>
+                <!-- ======================================
+             SPRINT RACE
+        ======================================= -->
+
+        <section
+            id="sprintRace"
+            class="panel"
+            style="display:none;">
+
+            <h2>🏎 Sprint Race</h2>
+
+            <div class="prediction-layout">
+
+                <div class="prediction-box">
+
+                    <h3>Pronostici</h3>
+
+                    <div id="sprint-predictions"></div>
+
+                </div>
+
+                <div class="prediction-box">
+
+                    <h3>Risultati</h3>
+
+                    <div id="sprint-results"></div>
+
+                </div>
+
+            </div>
+
+            <div class="score-area">
+
+                <button id="calculateSprintRace">
+
+                    Calcola Punteggio
+
+                </button>
+
+                <h3 id="sprintRaceScore">
+
+                    0 punti
+
+                </h3>
+
+                <div id="sprintRaceDetail"></div>
+
+            </div>
+
+        </section>
+
+        <!-- ======================================
+             GARA
+        ======================================= -->
+
+        <section
+            id="race"
+            class="panel"
+            style="display:none;">
+
+            <h2>🏆 Gara</h2>
+
+            <div class="prediction-layout">
+
+                <div class="prediction-box">
+
+                    <h3>Pronostici</h3>
+
+                    <div id="race-predictions"></div>
+
+                </div>
+
+                <div class="prediction-box">
+
+                    <h3>Risultati</h3>
+
+                    <div id="race-results"></div>
+
+                </div>
+
+            </div>
+
+            <div class="score-area">
+
+                <button id="calculateRace">
+
+                    Calcola Punteggio
+
+                </button>
+
+                <h3 id="raceScore">
+
+                    0 punti
+
+                </h3>
+
+                <div id="raceDetail"></div>
+
+            </div>
+
+        </section>
+                <!-- ======================================
+             TOTALE WEEKEND
+        ======================================= -->
+
+        <section
+            id="total"
+            class="panel"
+            style="display:block;">
+
+            <h2>📊 Totale Weekend</h2>
+
+            <div class="total-container">
+
+                <button id="calculateTotal">
+
+                    Calcola Totale Weekend
+
+                </button>
+
+                <div
+                    id="totalScore"
+                    class="total-score">
+
+                    Totale Weekend: 0 punti
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- ======================================
+             JSON GENERATOR
+        ======================================= -->
+
+        <section
+            id="jsonGenerator"
+            class="panel"
+            style="display:none;">
+
+            <h2>📄 JSON Generator</h2>
+
+            <p class="json-description">
+
+                Genera automaticamente il file
+                <strong>results.json</strong>
+                da utilizzare nel sito principale.
+
+            </p>
+
+            <textarea
+
+                id="jsonOutput"
+
+                readonly
+
+                placeholder="Premi 'Genera JSON'..."
+
+            ></textarea>
+
+            <div class="json-buttons">
+
+                <button id="generateJSON">
+
+                    Genera JSON
+
+                </button>
+
+                <button id="copyJSON">
+
+                    Copia JSON
+
+                </button>
+
+                <button id="downloadJSON">
+
+                    Scarica results.json
+
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
 <script src="admin.js"></script>
 
 </body>
