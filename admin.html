@@ -2,60 +2,209 @@
 <html lang="it">
 
 <head>
-    ...
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Fanta F1 Prediction | Admin</title>
+
+    <link
+        rel="stylesheet"
+        href="admin.css">
+
 </head>
 
 <body>
 
 <div class="admin-layout">
 
-    <header>
-        ...
+    <!-- ==========================================
+         HEADER
+    =========================================== -->
+
+    <header class="admin-header">
+
+        <div class="header-left">
+
+            <h1>🏎 Fanta F1 Prediction</h1>
+
+            <span class="subtitle">
+
+                Pannello Amministratore
+
+            </span>
+
+        </div>
+
+        <div class="header-right">
+
+            <div class="status-card">
+
+                <span class="status-title">
+
+                    Stato Sistema
+
+                </span>
+
+                <span class="status-online">
+
+                    🟢 Online
+
+                </span>
+
+            </div>
+
+        </div>
+
     </header>
+
+    <!-- ==========================================
+         SIDEBAR
+    =========================================== -->
 
     <aside class="sidebar">
 
         <button onclick="showSection('dashboard')">
+
             🏠 Dashboard
+
         </button>
 
         <button onclick="showSection('qualifying')">
+
             🏁 Qualifica
+
         </button>
 
         <button onclick="showSection('sprintQualifying')">
+
             ⚡ Sprint Qualifica
+
         </button>
 
         <button onclick="showSection('sprintRace')">
-            🏎 Sprint
+
+            🏎 Sprint Race
+
         </button>
 
         <button onclick="showSection('race')">
+
             🏆 Gara
+
         </button>
 
-        <button onclick="showSection('json')">
-            📄 JSON
+        <button onclick="showSection('total')">
+
+            📊 Totale Weekend
+
+        </button>
+
+        <button onclick="showSection('jsonGenerator')">
+
+            📄 JSON Generator
+
         </button>
 
     </aside>
 
+    <!-- ==========================================
+         CONTENUTO
+    =========================================== -->
+
     <main class="content">
 
-        <section id="dashboard" class="panel">
+        <!-- ======================================
+             DASHBOARD
+        ======================================= -->
 
-            ...
+        <section
+            id="dashboard"
+            class="panel">
+
+            <h2>Dashboard</h2>
+
+            <div class="dashboard-grid">
+
+                <div class="dashboard-card">
+
+                    <h3>Gran Premio</h3>
+
+                    <p id="gpName">
+
+                        Caricamento...
+
+                    </p>
+
+                </div>
+
+                <div class="dashboard-card">
+
+                    <h3>Circuito</h3>
+
+                    <p id="gpCircuit">
+
+                        -
+
+                    </p>
+
+                </div>
+
+                <div class="dashboard-card">
+
+                    <h3>Data GP</h3>
+
+                    <p id="gpDate">
+
+                        -
+
+                    </p>
+
+                </div>
+
+                <div class="dashboard-card">
+
+                    <h3>Countdown</h3>
+
+                    <p id="countdown">
+
+                        --
+
+                    </p>
+
+                </div>
+
+                <div class="dashboard-card">
+
+                    <h3>Weekend</h3>
+
+                    <p id="weekendType">
+
+                        -
+
+                    </p>
+
+                </div>
+
+                <div class="dashboard-card">
+
+                    <h3>Stato Pronostici</h3>
+
+                    <p id="gpCardStatus">
+
+                        -
+
+                    </p>
+
+                </div>
+
+            </div>
 
         </section>
-
-    </main>
-
-</div>
-
-</body>
-</html>
-        <!-- ======================================
+                <!-- ======================================
              QUALIFICA
         ======================================= -->
 
@@ -156,7 +305,8 @@
             </div>
 
         </section>
-                <!-- ======================================
+
+        <!-- ======================================
              SPRINT RACE
         ======================================= -->
 
@@ -257,14 +407,15 @@
             </div>
 
         </section>
-                <!-- ======================================
+
+        <!-- ======================================
              TOTALE WEEKEND
         ======================================= -->
 
         <section
             id="total"
             class="panel"
-            style="display:block;">
+            style="display:none;">
 
             <h2>📊 Totale Weekend</h2>
 
@@ -340,8 +491,7 @@
             </div>
 
         </section>
-
-    </main>
+            </main>
 
 </div>
 
