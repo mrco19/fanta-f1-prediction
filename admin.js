@@ -1,12 +1,22 @@
 /* ==========================================
-   FANTA F1 ADMIN
-   Versione 2.0
+   FANTA F1 PREDICTION
+   ADMIN PANEL
+   Versione 3.0
 ========================================== */
 
 "use strict";
 
 /* ==========================================
-   PILOTI F1 2026
+   OPENF1
+========================================== */
+
+const API_BASE = "https://api.openf1.org/v1";
+
+let currentMeeting = null;
+let gpDate = null;
+
+/* ==========================================
+   PILOTI
 ========================================== */
 
 const DRIVERS = [
@@ -37,240 +47,151 @@ const DRIVERS = [
 ].sort((a,b)=>a.localeCompare(b));
 
 /* ==========================================
-   CONFIGURAZIONE
+   CONFIGURAZIONE TABELLE
 ========================================== */
 
-const API_BASE = "https://api.openf1.org/v1";
+const TABLES=[
 
-let currentMeeting = null;
-let gpDate = null;
+    {
 
-/* ==========================================
-   LISTA PILOTI
-========================================== */
+        predictionContainer:"quali-predictions",
 
-const DRIVERS = [
+        resultContainer:"quali-results",
 
-    "Alexander ALBON",
-    "Arvin LINDBLAD",
-    "Carlos SAINZ",
-    "Charles LECLERC",
-    "Esteban OCON",
-    "Fernando ALONSO",
-    "Franco COLAPINTO",
-    "Gabriel BORTOLETO",
-    "George RUSSELL",
-    "Isack HADJAR",
-    "Kimi ANTONELLI",
-    "Lando NORRIS",
-    "Lance STROLL",
-    "Lewis HAMILTON",
-    "Liam LAWSON",
-    "Max VERSTAPPEN",
-    "Nico HULKENBERG",
-    "Oliver BEARMAN",
-    "Oscar PIASTRI",
-    "Pierre GASLY",
-    "Sergio PEREZ",
-    "Valtteri BOTTAS"
+        predictionPrefix:"qp",
 
-].sort((a, b) => a.localeCompare(b));
+        resultPrefix:"qr",
+
+        positions:5,
+
+        scoreId:"qualiScore",
+
+        detailId:"qualiDetail",
+
+        exactPoints:[10,8,6,4,2],
+
+        bonus:1
+
+    },
+
+    {
+
+        predictionContainer:"sprintquali-predictions",
+
+        resultContainer:"sprintquali-results",
+
+        predictionPrefix:"sqp",
+
+        resultPrefix:"sqr",
+
+        positions:5,
+
+        scoreId:"sprintQualiScore",
+
+        detailId:"sprintQualiDetail",
+
+        exactPoints:[10,8,6,4,2],
+
+        bonus:1
+
+    },
+
+    {
+
+        predictionContainer:"sprint-predictions",
+
+        resultContainer:"sprint-results",
+
+        predictionPrefix:"sp",
+
+        resultPrefix:"sr",
+
+        positions:8,
+
+        scoreId:"sprintRaceScore",
+
+        detailId:"sprintRaceDetail",
+
+        exactPoints:[8,7,6,5,4,3,2,1],
+
+        bonus:1
+
+    },
+
+    {
+
+        predictionContainer:"race-predictions",
+
+        resultContainer:"race-results",
+
+        predictionPrefix:"rp",
+
+        resultPrefix:"rr",
+
+        positions:10,
+
+        scoreId:"raceScore",
+
+        detailId:"raceDetail",
+
+        exactPoints:[25,18,15,12,10,8,6,4,2,1],
+
+        bonus:2
+
+    }
+
+];
 
 /* ==========================================
    CACHE DOM
 ========================================== */
 
-const DOM = {
-
-    qualiPredictions:
-        document.getElementById("quali-predictions"),
-
-    qualiResults:
-        document.getElementById("quali-results"),
-
-    sprintQualiPredictions:
-        document.getElementById("sprintquali-predictions"),
-
-    sprintQualiResults:
-        document.getElementById("sprintquali-results"),
-
-    sprintPredictions:
-        document.getElementById("sprint-predictions"),
-
-    sprintResults:
-        document.getElementById("sprint-results"),
-
-    racePredictions:
-        document.getElementById("race-predictions"),
-
-    raceResults:
-        document.getElementById("race-results"),
+const DOM={
 
     totalScore:
-        document.getElementById("totalScore")
+
+        document.getElementById("totalScore"),
+
+    gpName:
+
+        document.getElementById("gpName"),
+
+    gpCircuit:
+
+        document.getElementById("gpCircuit"),
+
+    gpDate:
+
+        document.getElementById("gpDate"),
+
+    countdown:
+
+        document.getElementById("countdown"),
+
+    weekendType:
+
+        document.getElementById("weekendType"),
+
+    gpCardStatus:
+
+        document.getElementById("gpCardStatus"),
+
+    jsonOutput:
+
+        document.getElementById("jsonOutput")
 
 };
-
-/* ==========================================
-   PUNTEGGI
-========================================== */
-
-const POINTS = {
-
-    qualifying: {
-
-        exact: {
-            1: 10,
-            2: 8,
-            3: 6,
-            4: 4,
-            5: 2
-        },
-
-        bonus: 1
-
-    },
-
-    sprintQualifying: {
-
-        exact: {
-            1: 10,
-            2: 8,
-            3: 6,
-            4: 4,
-            5: 2
-        },
-
-        bonus: 1
-
-    },
-
-    sprintRace: {
-
-        exact: {
-            1: 8,
-            2: 7,
-            3: 6,
-            4: 5,
-            5: 4,
-            6: 3,
-            7: 2,
-            8: 1
-        },
-
-        bonus: 1
-
-    },
-
-    race: {
-
-        exact: {
-            1: 25,
-            2: 18,
-            3: 15,
-            4: 12,
-            5: 10,
-            6: 8,
-            7: 6,
-            8: 4,
-            9: 2,
-            10: 1
-        },
-
-        bonus: 2
-
-    }
-
-};
-
-/* ==========================================
-   CONFIGURAZIONE TABELLE
-========================================== */
-
-const TABLES = [
-
-    {
-
-        predictionContainer: "quali-predictions",
-        resultContainer: "quali-results",
-
-        predictionPrefix: "qp",
-        resultPrefix: "qr",
-
-        positions: 5,
-
-        score: "qualiScore",
-        detail: "qualiDetail",
-
-        points: POINTS.qualifying
-
-    },
-
-    {
-
-        predictionContainer: "sprintquali-predictions",
-        resultContainer: "sprintquali-results",
-
-        predictionPrefix: "sqp",
-        resultPrefix: "sqr",
-
-        positions: 5,
-
-        score: "sprintQualiScore",
-        detail: "sprintQualiDetail",
-
-        points: POINTS.sprintQualifying
-
-    },
-
-    {
-
-        predictionContainer: "sprint-predictions",
-        resultContainer: "sprint-results",
-
-        predictionPrefix: "sp",
-        resultPrefix: "sr",
-
-        positions: 8,
-
-        score: "sprintRaceScore",
-        detail: "sprintRaceDetail",
-
-        points: POINTS.sprintRace
-
-    },
-
-    {
-
-        predictionContainer: "race-predictions",
-        resultContainer: "race-results",
-
-        predictionPrefix: "rp",
-        resultPrefix: "rr",
-
-        positions: 10,
-
-        score: "raceScore",
-        detail: "raceDetail",
-
-        points: POINTS.race
-
-    }
-
-];
 /* ==========================================
    CREAZIONE TABELLE
 ========================================== */
 
-function createPredictionTable(config) {
+function createPredictionTable(config){
 
     const container = document.getElementById(
         config.predictionContainer
     );
 
-    if (!container) return;
-
-    let html = "";
+    if(!container) return;
 
     const options =
 
@@ -282,7 +203,9 @@ function createPredictionTable(config) {
 
         ).join("");
 
-    for (let i = 1; i <= config.positions; i++) {
+    let html = "";
+
+    for(let i = 1; i <= config.positions; i++){
 
         html += `
 
@@ -291,8 +214,12 @@ function createPredictionTable(config) {
                 <span>${i}°</span>
 
                 <select
+
                     id="${config.predictionPrefix}${i}"
-                    class="driver-select">
+
+                    class="driver-select"
+
+                >
 
                     ${options}
 
@@ -309,27 +236,30 @@ function createPredictionTable(config) {
 }
 
 /* ==========================================
-   CREAZIONE RISULTATI
+   TABELLA RISULTATI
 ========================================== */
 
-function createResultsTable(config) {
+function createResultsTable(config){
 
     const container = document.getElementById(
         config.resultContainer
     );
 
-    if (!container) return;
+    if(!container) return;
 
     let html = "";
 
-    for (let i = 1; i <= config.positions; i++) {
+    for(let i = 1; i <= config.positions; i++){
 
         html += `
 
             <div class="result-row">
 
                 <span
-                    id="${config.resultPrefix}Pos${i}">
+
+                    id="${config.resultPrefix}Pos${i}"
+
+                >
 
                     ${i}°
 
@@ -356,12 +286,12 @@ function createResultsTable(config) {
 }
 
 /* ==========================================
-   GENERAZIONE COMPLETA
+   COSTRUZIONE COMPLETA
 ========================================== */
 
-function buildTables() {
+function buildTables(){
 
-    TABLES.forEach(config => {
+    TABLES.forEach(config=>{
 
         createPredictionTable(config);
 
@@ -371,14 +301,14 @@ function buildTables() {
 
 }
 /* ==========================================
-   GESTIONE SELECT PILOTI
+   RECUPERA LE SELECT
 ========================================== */
 
-function getSelects(containerId) {
+function getSelects(containerId){
 
     const container = document.getElementById(containerId);
 
-    if (!container) return [];
+    if(!container) return [];
 
     return Array.from(
 
@@ -389,18 +319,18 @@ function getSelects(containerId) {
 }
 
 /* ==========================================
-   BLOCCO DUPLICATI
+   AGGIORNA BLOCCO DUPLICATI
 ========================================== */
 
-function updateDuplicateProtection(containerId) {
+function updateDuplicateProtection(containerId){
 
     const selects = getSelects(containerId);
 
     /* Riabilita tutte le opzioni */
 
-    selects.forEach(select => {
+    selects.forEach(select=>{
 
-        Array.from(select.options).forEach(option => {
+        Array.from(select.options).forEach(option=>{
 
             option.disabled = false;
 
@@ -408,29 +338,29 @@ function updateDuplicateProtection(containerId) {
 
     });
 
-    /* Piloti selezionati */
+    /* Trova i piloti già scelti */
 
     const selectedDrivers = selects
 
-        .map(select => select.value)
+        .map(select=>select.value)
 
-        .filter(driver => driver !== "");
+        .filter(driver=>driver !== "");
 
-    /* Blocca i duplicati */
+    /* Disabilita i duplicati */
 
-    selects.forEach(select => {
+    selects.forEach(select=>{
 
-        Array.from(select.options).forEach(option => {
+        Array.from(select.options).forEach(option=>{
 
-            if (option.value === "") return;
+            if(option.value==="") return;
 
-            if (
+            if(
 
                 selectedDrivers.includes(option.value) &&
 
                 option.value !== select.value
 
-            ) {
+            ){
 
                 option.disabled = true;
 
@@ -446,9 +376,9 @@ function updateDuplicateProtection(containerId) {
    INIZIALIZZA PROTEZIONE
 ========================================== */
 
-function initializeDuplicateProtection() {
+function initializeDuplicateProtection(){
 
-    TABLES.forEach(config => {
+    TABLES.forEach(config=>{
 
         const selects = getSelects(
 
@@ -456,13 +386,13 @@ function initializeDuplicateProtection() {
 
         );
 
-        selects.forEach(select => {
+        selects.forEach(select=>{
 
             select.addEventListener(
 
                 "change",
 
-                () => {
+                ()=>{
 
                     updateDuplicateProtection(
 
@@ -489,13 +419,13 @@ function initializeDuplicateProtection() {
    CARICAMENTO RESULTS.JSON
 ========================================== */
 
-async function loadResults() {
+async function loadResults(){
 
-    try {
+    try{
 
         const response = await fetch("results.json");
 
-        if (!response.ok) {
+        if(!response.ok){
 
             throw new Error("results.json non trovato");
 
@@ -521,45 +451,57 @@ async function loadResults() {
    APPLICA RISULTATI
 ========================================== */
 
-function applyResults(data) {
+function applyResults(data){
 
-    const mapping = [
+    const sections=[
 
         {
-            json: data.qualifying,
-            prefix: "qr"
+
+            json:data.qualifying,
+
+            prefix:"qr"
+
         },
 
         {
-            json: data.sprintQualifying,
-            prefix: "sqr"
+
+            json:data.sprintQualifying,
+
+            prefix:"sqr"
+
         },
 
         {
-            json: data.sprint,
-            prefix: "sr"
+
+            json:data.sprint,
+
+            prefix:"sr"
+
         },
 
         {
-            json: data.race,
-            prefix: "rr"
+
+            json:data.race,
+
+            prefix:"rr"
+
         }
 
     ];
 
-    mapping.forEach(section => {
+    sections.forEach(section=>{
 
-        if (!section.json) return;
+        if(!section.json) return;
 
         section.json.forEach((driver,index)=>{
 
-            const input = document.getElementById(
+            const input=document.getElementById(
 
                 `${section.prefix}${index+1}`
 
             );
 
-            const pos = document.getElementById(
+            const position=document.getElementById(
 
                 `${section.prefix}Pos${index+1}`
 
@@ -567,35 +509,37 @@ function applyResults(data) {
 
             if(input){
 
-                input.value = driver;
-
-                input.classList.add("loaded");
+                input.value=driver;
 
             }
 
-            if(pos){
+            if(position){
 
-                if(index===0){
+                switch(index){
 
-                    pos.textContent="🏆 1°";
+                    case 0:
 
-                }
+                        position.textContent="🏆 1°";
 
-                else if(index===1){
+                        break;
 
-                    pos.textContent="🥈 2°";
+                    case 1:
 
-                }
+                        position.textContent="🥈 2°";
 
-                else if(index===2){
+                        break;
 
-                    pos.textContent="🥉 3°";
+                    case 2:
 
-                }
+                        position.textContent="🥉 3°";
 
-                else{
+                        break;
 
-                    pos.textContent=`${index+1}°`;
+                    default:
+
+                        position.textContent=`${index+1}°`;
+
+                        break;
 
                 }
 
@@ -607,7 +551,7 @@ function applyResults(data) {
 
 }
 /* ==========================================
-   CALCOLO PUNTEGGI
+   CALCOLO PUNTEGGIO
 ========================================== */
 
 function calculateScore(config){
@@ -616,76 +560,119 @@ function calculateScore(config){
 
     let detail = "";
 
-    const prediction = [];
-    const result = [];
+    const predictions = [];
+
+    const results = [];
+
+    /* Legge pronostici */
 
     for(let i=1;i<=config.positions;i++){
 
-        prediction.push(
+        predictions.push(
 
             document
-            .getElementById(`${config.predictionPrefix}${i}`)
-            ?.value
-            ?.trim()
-            .toLowerCase() || ""
 
-        );
+                .getElementById(`${config.predictionPrefix}${i}`)
 
-        result.push(
+                ?.value
 
-            document
-            .getElementById(`${config.resultPrefix}${i}`)
-            ?.value
-            ?.trim()
-            .toLowerCase() || ""
+                ?.trim()
+
+                .toLowerCase() || ""
 
         );
 
     }
 
-    prediction.forEach((driver,index)=>{
+    /* Legge risultati */
+
+    for(let i=1;i<=config.positions;i++){
+
+        results.push(
+
+            document
+
+                .getElementById(`${config.resultPrefix}${i}`)
+
+                ?.value
+
+                ?.trim()
+
+                .toLowerCase() || ""
+
+        );
+
+    }
+
+    /* Confronto */
+
+    predictions.forEach((driver,index)=>{
 
         if(driver==="") return;
 
-        /* posizione esatta */
+        /* Posizione esatta */
 
-        if(driver===result[index]){
+        if(driver===results[index]){
 
-            const pts =
-                config.points.exact[index+1] || 0;
+            const points =
 
-            total += pts;
+                config.exactPoints[index] || 0;
+
+            total += points;
 
             detail +=
-                `🏁 ${index+1}° ${driver} +${pts}<br>`;
+
+                `🏁 ${index+1}° ${driver} +${points}<br>`;
 
             return;
 
         }
 
-        /* pilota presente */
+        /* Pilota presente */
 
-        if(result.includes(driver)){
+        if(results.includes(driver)){
 
-            total += config.points.bonus;
+            total += config.bonus;
 
             detail +=
-                `✔ ${driver} +${config.points.bonus}<br>`;
+
+                `✔ ${driver} +${config.bonus}<br>`;
 
             return;
 
         }
+
+        /* Nessun punto */
 
         detail +=
+
             `✖ ${driver} +0<br>`;
 
     });
 
-    document.getElementById(config.score).textContent =
-        `${total} punti`;
+    /* Aggiorna HTML */
 
-    document.getElementById(config.detail).innerHTML =
-        detail;
+    const scoreElement =
+
+        document.getElementById(config.scoreId);
+
+    if(scoreElement){
+
+        scoreElement.textContent =
+
+            `${total} punti`;
+
+    }
+
+    const detailElement =
+
+        document.getElementById(config.detailId);
+
+    if(detailElement){
+
+        detailElement.innerHTML = detail;
+
+    }
 
     return total;
 
@@ -708,38 +695,41 @@ function calculateAllScores(){
     if(DOM.totalScore){
 
         DOM.totalScore.textContent =
+
             `Totale Weekend: ${weekendTotal} punti`;
 
     }
 
 }
 /* ==========================================
-   BOTTONI CALCOLO
+   COLLEGAMENTO PULSANTI
 ========================================== */
 
 function initializeButtons(){
 
-    TABLES.forEach(config => {
+    const buttonMap={
 
-        const map = {
+        qp:"calculateQuali",
 
-            qp: "calculateQuali",
+        sqp:"calculateSprintQuali",
 
-            sqp: "calculateSprintQuali",
+        sp:"calculateSprintRace",
 
-            sp: "calculateSprintRace",
+        rp:"calculateRace"
 
-            rp: "calculateRace"
+    };
 
-        };
+    TABLES.forEach(config=>{
 
-        const buttonId = map[config.predictionPrefix];
+        const buttonId=
 
-        const button = document.getElementById(buttonId);
+            buttonMap[config.predictionPrefix];
+
+        const button=document.getElementById(buttonId);
 
         if(!button) return;
 
-        button.addEventListener("click", () => {
+        button.addEventListener("click",()=>{
 
             calculateScore(config);
 
@@ -750,116 +740,119 @@ function initializeButtons(){
 }
 
 /* ==========================================
-   CALCOLO TOTALE
+   BOTTONE TOTALE WEEKEND
 ========================================== */
 
 function initializeTotalButton(){
 
-    const button = document.getElementById("calculateTotal");
+    const button=document.getElementById(
+
+        "calculateTotal"
+
+    );
 
     if(!button) return;
 
-    button.addEventListener("click", calculateAllScores);
+    button.addEventListener(
+
+        "click",
+
+        calculateAllScores
+
+    );
 
 }
 /* ==========================================
-   INIZIALIZZAZIONE ADMIN
+   COSTRUZIONE RESULTS.JSON
 ========================================== */
 
-async function initAdmin(){
+function getResultsArray(prefix,total){
 
-    console.log("🚀 Avvio Admin...");
+    const results=[];
 
-    /* Costruisce tutte le tabelle */
+    for(let i=1;i<=total;i++){
 
-    buildTables();
+        results.push(
 
-    /* Blocca i piloti duplicati */
+            document
 
-    initializeDuplicateProtection();
+                .getElementById(`${prefix}${i}`)
 
-    /* Collega i pulsanti */
+                ?.value || ""
 
-    initializeButtons();
-
-    initializeTotalButton();
-
-    /* Carica i risultati */
-
-    initializeJSONButtons();
-   
-    await loadResults();
-
-    /* Carica OpenF1 */
-
-    if(typeof initAPI === "function"){
-
-        await initAPI();
+        );
 
     }
 
-    initializeMenu();
+    return results;
 
-    initializeRules();
-    
-   showSection("home");
-   
-    console.log("✅ Admin pronto");
+}
+
+function buildResultsJSON(){
+
+    return{
+
+        qualifying:
+
+            getResultsArray("qr",5),
+
+        sprintQualifying:
+
+            getResultsArray("sqr",5),
+
+        sprint:
+
+            getResultsArray("sr",8),
+
+        race:
+
+            getResultsArray("rr",10)
+
+    };
 
 }
 
 /* ==========================================
-   AVVIO APPLICAZIONE
+   GENERA JSON
 ========================================== */
 
-document.addEventListener(
+function exportJSON(){
 
-    "DOMContentLoaded",
+    const json = JSON.stringify(
 
-    () => {
+        buildResultsJSON(),
 
-        initAdmin();
+        null,
+
+        2
+
+    );
+
+    if(DOM.jsonOutput){
+
+        DOM.jsonOutput.value = json;
 
     }
 
-);
+}
+
 /* ==========================================
-   OPENF1
+   COPIA JSON
 ========================================== */
 
-async function loadWeekendData(){
+async function copyJSON(){
+
+    if(!DOM.jsonOutput) return;
 
     try{
 
-        const response = await fetch(
+        await navigator.clipboard.writeText(
 
-            `${API_BASE}/meetings?year=2026`
-
-        );
-
-        const meetings = await response.json();
-
-        if(!Array.isArray(meetings)) return;
-
-        const now = new Date();
-
-        currentMeeting = meetings.find(meeting =>
-
-            new Date(meeting.date_start) > now
+            DOM.jsonOutput.value
 
         );
 
-        if(!currentMeeting){
-
-            console.warn("Nessun GP trovato");
-
-            return;
-
-        }
-
-        gpDate = new Date(currentMeeting.date_start);
-
-        updateWeekendUI();
+        alert("✅ JSON copiato negli appunti.");
 
     }
 
@@ -872,371 +865,16 @@ async function loadWeekendData(){
 }
 
 /* ==========================================
-   AGGIORNA HOME
-========================================== */
-
-function updateWeekendUI(){
-
-    if(!currentMeeting) return;
-
-    const map = {
-
-        gpName:
-            `${currentMeeting.country_name} ${currentMeeting.meeting_name}`,
-
-        gpCardName:
-            `${currentMeeting.country_name} ${currentMeeting.meeting_name}`,
-
-        gpCircuit:
-            currentMeeting.circuit_short_name,
-
-        gpCardWeekend:
-
-            currentMeeting.meeting_name.includes("Sprint")
-
-            ? "Weekend Sprint"
-
-            : "Weekend Normale",
-
-        weekendType:
-
-            currentMeeting.meeting_name.includes("Sprint")
-
-            ? "Weekend Sprint"
-
-            : "Weekend Normale"
-
-    };
-
-    Object.entries(map).forEach(([id,value])=>{
-
-        const el=document.getElementById(id);
-
-        if(el) el.textContent=value;
-
-    });
-
-    const gpDateElement=document.getElementById("gpDate");
-
-    if(gpDateElement){
-
-        gpDateElement.textContent=
-
-            new Date(currentMeeting.date_start)
-
-            .toLocaleDateString(
-
-                "it-IT",
-
-                {
-
-                    day:"numeric",
-
-                    month:"long",
-
-                    year:"numeric"
-
-                }
-
-            );
-
-    }
-
-    const status=document.getElementById("gpCardStatus");
-
-    if(status){
-
-        status.textContent="🟢 Pronostici aperti";
-
-    }
-
-    updateCountdown();
-
-}
-
-/* ==========================================
-   COUNTDOWN
-========================================== */
-
-function updateCountdown(){
-
-    if(!gpDate) return;
-
-    const countdown=document.getElementById("countdown");
-
-    if(!countdown) return;
-
-    const now=new Date();
-
-    const diff=gpDate-now;
-
-    if(diff<=0){
-
-        countdown.textContent="Weekend iniziato!";
-
-        return;
-
-    }
-
-    const days=Math.floor(diff/(1000*60*60*24));
-
-    const hours=Math.floor(
-
-        (diff%(1000*60*60*24))
-
-        /(1000*60*60)
-
-    );
-
-    const minutes=Math.floor(
-
-        (diff%(1000*60*60))
-
-        /(1000*60)
-
-    );
-
-    countdown.textContent=
-
-        `${days}g ${hours}h ${minutes}m`;
-
-}
-
-setInterval(() => {
-
-    if(gpDate){
-
-        updateCountdown();
-
-    }
-
-},60000);
-
-/* ==========================================
-   API
-========================================== */
-
-async function initAPI(){
-
-    await loadWeekendData();
-
-}
-/* ==========================================
-   NAVIGAZIONE PANNELLI
-========================================== */
-
-function showSection(id){
-
-    document.querySelectorAll(".panel").forEach(panel=>{
-
-        panel.style.display="none";
-
-    });
-
-    const target=document.getElementById(id);
-
-    if(target){
-
-        target.style.display="block";
-
-    }
-
-    const sideMenu=document.getElementById("sideMenu");
-    const menuToggle=document.getElementById("menuToggle");
-
-    if(sideMenu){
-
-        sideMenu.classList.remove("open");
-
-    }
-
-    if(menuToggle){
-
-        menuToggle.classList.remove("active");
-
-    }
-
-}
-
-/* ==========================================
-   MENU HAMBURGER
-========================================== */
-
-function initializeMenu(){
-
-    const menuToggle=document.getElementById("menuToggle");
-    const sideMenu=document.getElementById("sideMenu");
-
-    if(!menuToggle || !sideMenu) return;
-
-    menuToggle.addEventListener("click",()=>{
-
-        menuToggle.classList.toggle("active");
-
-        sideMenu.classList.toggle("open");
-
-    });
-
-}
-
-/* ==========================================
-   REGOLAMENTO
-========================================== */
-
-function initializeRules(){
-
-    const sections=document.querySelectorAll(".admin-panel");
-
-    const links=document.querySelectorAll(".rules-index a");
-
-    if(!sections.length) return;
-
-    const observer=new IntersectionObserver(entries=>{
-
-        entries.forEach(entry=>{
-
-            if(entry.isIntersecting){
-
-                entry.target.classList.add("show");
-
-            }
-
-        });
-
-    },{
-
-        threshold:0.15
-
-    });
-
-    sections.forEach(section=>{
-
-        observer.observe(section);
-
-    });
-
-    window.addEventListener("scroll",()=>{
-
-        let current="";
-
-        sections.forEach(section=>{
-
-            const top=section.offsetTop-150;
-
-            if(window.scrollY>=top){
-
-                current=section.id;
-
-            }
-
-        });
-
-        links.forEach(link=>{
-
-            link.classList.remove("active");
-
-            if(link.getAttribute("href")==="#"+current){
-
-                link.classList.add("active");
-
-            }
-
-        });
-
-    });
-
-}
-/* ==========================================
-   JSON RESULTS
-========================================== */
-
-function buildResultsJSON(){
-
-    return {
-
-        qualifying:getResultsArray("qr",5),
-
-        sprintQualifying:getResultsArray("sqr",5),
-
-        sprint:getResultsArray("sr",8),
-
-        race:getResultsArray("rr",10)
-
-    };
-
-}
-
-function getResultsArray(prefix,total){
-
-    const results=[];
-
-    for(let i=1;i<=total;i++){
-
-        results.push(
-
-            document.getElementById(`${prefix}${i}`)?.value || ""
-
-        );
-
-    }
-
-    return results;
-
-}
-
-/* ==========================================
-   ESPORTA JSON
-========================================== */
-
-function exportJSON(){
-
-    const json=JSON.stringify(
-
-        buildResultsJSON(),
-
-        null,
-
-        2
-
-    );
-
-    const output=document.getElementById("jsonOutput");
-
-    if(output){
-
-        output.value=json;
-
-    }
-
-}
-
-/* ==========================================
-   COPIA JSON
-========================================== */
-
-async function copyJSON(){
-
-    const output=document.getElementById("jsonOutput");
-
-    if(!output) return;
-
-    await navigator.clipboard.writeText(output.value);
-
-    alert("JSON copiato negli appunti!");
-
-}
-
-/* ==========================================
    DOWNLOAD JSON
 ========================================== */
 
 function downloadJSON(){
 
-    const json=document.getElementById("jsonOutput").value;
+    if(!DOM.jsonOutput) return;
 
-    const blob=new Blob(
+    const blob = new Blob(
 
-        [json],
+        [DOM.jsonOutput.value],
 
         {
 
@@ -1246,22 +884,22 @@ function downloadJSON(){
 
     );
 
-    const url=URL.createObjectURL(blob);
+    const url = URL.createObjectURL(blob);
 
-    const a=document.createElement("a");
+    const link = document.createElement("a");
 
-    a.href=url;
+    link.href = url;
 
-    a.download="results.json";
+    link.download = "results.json";
 
-    a.click();
+    link.click();
 
     URL.revokeObjectURL(url);
 
 }
 
 /* ==========================================
-   BOTTONI JSON
+   PULSANTI JSON
 ========================================== */
 
 function initializeJSONButtons(){
@@ -1303,3 +941,330 @@ function initializeJSONButtons(){
         );
 
 }
+/* ==========================================
+   OPENF1
+========================================== */
+
+async function loadWeekendData(){
+
+    try{
+
+        const response = await fetch(
+
+            `${API_BASE}/meetings?year=2026`
+
+        );
+
+        const meetings = await response.json();
+
+        if(!Array.isArray(meetings)) return;
+
+        const now = new Date();
+
+        currentMeeting = meetings.find(meeting=>
+
+            new Date(meeting.date_start) > now
+
+        );
+
+        if(!currentMeeting){
+
+            console.warn("Nessun GP trovato.");
+
+            return;
+
+        }
+
+        gpDate = new Date(currentMeeting.date_start);
+
+        updateDashboard();
+
+    }
+
+    catch(error){
+
+        console.error(
+
+            "Errore OpenF1:",
+
+            error
+
+        );
+
+    }
+
+}
+
+/* ==========================================
+   DASHBOARD
+========================================== */
+
+function updateDashboard(){
+
+    if(!currentMeeting) return;
+
+    if(DOM.gpName){
+
+        DOM.gpName.textContent =
+
+            `${currentMeeting.country_name} ${currentMeeting.meeting_name}`;
+
+    }
+
+    if(DOM.gpCircuit){
+
+        DOM.gpCircuit.textContent =
+
+            currentMeeting.circuit_short_name;
+
+    }
+
+    if(DOM.gpDate){
+
+        DOM.gpDate.textContent =
+
+            gpDate.toLocaleDateString(
+
+                "it-IT",
+
+                {
+
+                    day:"numeric",
+
+                    month:"long",
+
+                    year:"numeric"
+
+                }
+
+            );
+
+    }
+
+    if(DOM.weekendType){
+
+        DOM.weekendType.textContent =
+
+            currentMeeting.meeting_name.includes("Sprint")
+
+            ? "Weekend Sprint"
+
+            : "Weekend Normale";
+
+    }
+
+    if(DOM.gpCardStatus){
+
+        DOM.gpCardStatus.textContent =
+
+            "🟢 Pronostici aperti";
+
+    }
+
+    updateCountdown();
+
+}
+
+/* ==========================================
+   COUNTDOWN
+========================================== */
+
+function updateCountdown(){
+
+    if(!gpDate) return;
+
+    if(!DOM.countdown) return;
+
+    const now = new Date();
+
+    const diff = gpDate - now;
+
+    if(diff <= 0){
+
+        DOM.countdown.textContent =
+
+            "Weekend iniziato";
+
+        return;
+
+    }
+
+    const days = Math.floor(
+
+        diff / (1000*60*60*24)
+
+    );
+
+    const hours = Math.floor(
+
+        (diff % (1000*60*60*24))
+
+        /
+
+        (1000*60*60)
+
+    );
+
+    const minutes = Math.floor(
+
+        (diff % (1000*60*60))
+
+        /
+
+        (1000*60)
+
+    );
+
+    DOM.countdown.textContent =
+
+        `${days}g ${hours}h ${minutes}m`;
+
+}
+
+/* ==========================================
+   TIMER
+========================================== */
+
+setInterval(
+
+    updateCountdown,
+
+    60000
+
+);
+
+/* ==========================================
+   API
+========================================== */
+
+async function initAPI(){
+
+    await loadWeekendData();
+
+}
+/* ==========================================
+   NAVIGAZIONE PANNELLI
+========================================== */
+
+function showSection(sectionId){
+
+    document
+
+        .querySelectorAll(".panel")
+
+        .forEach(panel=>{
+
+            panel.style.display="none";
+
+        });
+
+    const target=document.getElementById(sectionId);
+
+    if(target){
+
+        target.style.display="block";
+
+    }
+
+    window.scrollTo({
+
+        top:0,
+
+        behavior:"smooth"
+
+    });
+
+}
+
+/* ==========================================
+   MENU LATERALE
+========================================== */
+
+function initializeMenu(){
+
+    const buttons=document.querySelectorAll(
+
+        ".sidebar button"
+
+    );
+
+    buttons.forEach(button=>{
+
+        button.addEventListener("click",()=>{
+
+            buttons.forEach(btn=>
+
+                btn.classList.remove("active")
+
+            );
+
+            button.classList.add("active");
+
+        });
+
+    });
+
+    if(buttons.length){
+
+        buttons[0].classList.add("active");
+
+    }
+
+}
+/* ==========================================
+   INIZIALIZZAZIONE
+========================================== */
+
+async function initAdmin(){
+
+    console.log("🚀 Avvio Admin...");
+
+    /* Costruisce tutte le tabelle */
+
+    buildTables();
+
+    /* Protezione piloti duplicati */
+
+    initializeDuplicateProtection();
+
+    /* Pulsanti punteggi */
+
+    initializeButtons();
+
+    initializeTotalButton();
+
+    /* Pulsanti JSON */
+
+    initializeJSONButtons();
+
+    /* Carica results.json */
+
+    await loadResults();
+
+    /* Dashboard OpenF1 */
+
+    await initAPI();
+
+    /* Menu laterale */
+
+    initializeMenu();
+
+    console.log("✅ Admin pronto");
+
+}
+
+/* ==========================================
+   AVVIO APPLICAZIONE
+========================================== */
+
+document.addEventListener(
+
+    "DOMContentLoaded",
+
+    ()=>{
+
+        initAdmin();
+
+    }
+
+);
