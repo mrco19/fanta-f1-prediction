@@ -10,7 +10,7 @@
    OPENF1
 ========================================== */
 
-const API_BASE = "https://api.openf1.org/v1";
+const currentYear = new Date().getFullYear();
 
 let currentMeeting = null;
 let gpDate = null;
@@ -951,7 +951,7 @@ async function loadWeekendData(){
 
         const response = await fetch(
 
-            `${API_BASE}/meetings?year=2026`
+            `${API_BASE}/meetings?year=${currentYear}`
 
         );
 
@@ -961,11 +961,30 @@ async function loadWeekendData(){
 
         const now = new Date();
 
-        currentMeeting = meetings.find(meeting=>
+        /* Cerca prima il weekend attualmente in corso */
 
-            new Date(meeting.date_start) > now
+        currentMeeting = meetings.find(meeting=>{
 
-        );
+            const start = new Date(meeting.date_start);
+
+            const end = new Date(meeting.date_end);
+
+            return now >= start && now <= end;
+
+        });
+
+        /* Se non c'è un weekend in corso,
+           prende il prossimo */
+
+        if(!currentMeeting){
+
+            currentMeeting = meetings.find(meeting=>
+
+                new Date(meeting.date_start) > now
+
+            );
+
+        }
 
         if(!currentMeeting){
 
