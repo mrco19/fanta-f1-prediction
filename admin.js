@@ -10,7 +10,9 @@
    OPENF1
 ========================================== */
 
+const API_BASE = "https://api.openf1.org/v1";
 const currentYear = new Date().getFullYear();
+
 
 let currentMeeting = null;
 let gpDate = null;
@@ -950,32 +952,31 @@ async function loadWeekendData(){
     try{
 
         const response = await fetch(
-
             `${API_BASE}/meetings?year=${currentYear}`
-
         );
 
-        const meetings = await response.json();
+        let meetings = await response.json();
 
         if(!Array.isArray(meetings)) return;
 
+        // Ordina per data
+        meetings.sort((a,b)=>
+            new Date(a.date_start) - new Date(b.date_start)
+        );
+
         const now = new Date();
 
-        /* Cerca prima il weekend attualmente in corso */
-
+        // Weekend in corso
         currentMeeting = meetings.find(meeting=>{
 
             const start = new Date(meeting.date_start);
-
-            const end = new Date(meeting.date_end);
+            const end   = new Date(meeting.date_end);
 
             return now >= start && now <= end;
 
         });
 
-        /* Se non c'è un weekend in corso,
-           prende il prossimo */
-
+        // Se non c'è, prende il prossimo
         if(!currentMeeting){
 
             currentMeeting = meetings.find(meeting=>
@@ -989,7 +990,6 @@ async function loadWeekendData(){
         if(!currentMeeting){
 
             console.warn("Nessun GP trovato.");
-
             return;
 
         }
@@ -1002,18 +1002,11 @@ async function loadWeekendData(){
 
     catch(error){
 
-        console.error(
-
-            "Errore OpenF1:",
-
-            error
-
-        );
+        console.error("Errore OpenF1:", error);
 
     }
 
 }
-
 /* ==========================================
    DASHBOARD
 ========================================== */
