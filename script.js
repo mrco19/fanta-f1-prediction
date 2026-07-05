@@ -1,678 +1,622 @@
-const drivers = [
-  "Max VERSTAPPEN",
-  "Lando NORRIS",
-  "Charles LECLERC",
-  "Oscar PIASTRI",
-  "George RUSSELL",
-  "Lewis HAMILTON",
-  "Carlos SAINZ",
-  "Fernando ALONSO",
-  "Lance STROLL",
-  "Pierre GASLY",
-  "Esteban OCON",
-  "Isack HADJAR",
-  "Alexander ALBON",
-  "Nico HULKENBERG",
-  "Valtteri BOTTAS",
-  "Gabriel BORTOLETO",
-  "Liam LAWSON",
-  "Arvin LINDBLAD",
-  "Oliver BEARMAN",
-  "Franco COLAPINTO",
-  "Sergio PEREZ",
-  "Kimi ANTONELLI"
-];
+"use strict";
 
-const driversSorted = [...drivers].sort((a, b) =>
-  a.localeCompare(b)
-);
+/* ==========================================================
+   FANTA F1 PREDICTION
+   SCRIPT.JS
+   Versione 2.0
 
-/* =========================
-   CONTENITORI DOM
-========================= */
+   Compatibile con:
+   ✔ index.html
+   ✔ styles.css
+   ✔ admin.html
+   ✔ admin.js
+   ✔ weekend.json
+   ✔ results.json
 
-const qualiContainer =
-  document.getElementById("quali-predictions");
+========================================================== */
 
-const qualiResults =
-  document.getElementById("quali-results");
 
-const sprintQualiPredictions =
-  document.getElementById("sprintquali-predictions");
+/* ==========================================================
+   CONFIGURAZIONE GENERALE
+========================================================== */
 
-const sprintQualiResults =
-  document.getElementById("sprintquali-results");
+const CONFIG = {
 
-const sprintPredictions =
-  document.getElementById("sprint-predictions");
+    resultsFile: "results.json",
 
-const sprintResults =
-  document.getElementById("sprint-results");
+    weekendFile: "weekend.json",
 
-const racePredictions =
-  document.getElementById("race-predictions");
+    rankingFile: "ranking.json"
 
-const raceResults =
-  document.getElementById("race-results");
-
-/* =========================
-   GENERAZIONE QUALIFICHE
-========================= */
-
-for (let i = 1; i <= 5; i++) {
-
-  const options =
-    `<option value="">Seleziona pilota</option>` +
-    driversSorted.map(
-      d => `<option value="${d}">${d}</option>`
-    ).join("");
-
-  qualiContainer.innerHTML += `
-    <div class="input-row">
-      <span>${i}°</span>
-      <select id="qp${i}" class="driver-select">
-        ${options}
-      </select>
-    </div>
-  `;
-
- qualiResults.innerHTML += `
-  <div class="result-row">
-    <span id="qrPos${i}">${i}°</span>
-    <input id="qr${i}" class="result-field" readonly>
-  </div>
-`;
-}
-
-/* =========================
-   GENERAZIONE SPRINT QUALIFYING
-========================= */
-
-for (let i = 1; i <= 5; i++) {
-
-  const options =
-    `<option value="">Seleziona pilota</option>` +
-    driversSorted.map(
-      d => `<option value="${d}">${d}</option>`
-    ).join("");
-
-  sprintQualiPredictions.innerHTML += `
-    <div class="input-row">
-      <span>${i}°</span>
-      <select id="sqp${i}" class="driver-select">
-        ${options}
-      </select>
-    </div>
-  `;
-
-  sprintQualiResults.innerHTML += `
-  <div class="result-row">
-   <span id="sqrPos${i}">${i}°</span>
-    <input id="sqr${i}" class="result-field" readonly>
-  </div>
-`;
-}
-
-/* =========================
-   GENERAZIONE SPRINT RACE
-========================= */
-
-for (let i = 1; i <= 8; i++) {
-
-  const options =
-    `<option value="">Seleziona pilota</option>` +
-    driversSorted.map(
-      d => `<option value="${d}">${d}</option>`
-    ).join("");
-
-  sprintPredictions.innerHTML += `
-    <div class="input-row">
-      <span>${i}°</span>
-      <select id="sp${i}" class="driver-select">
-        ${options}
-      </select>
-    </div>
-  `;
-
-  sprintResults.innerHTML += `
-  <div class="result-row">
-    <span id="srPos${i}">${i}°</span>
-    <input id="sr${i}" class="result-field" readonly>
-  </div>
-`;
-}
-
-/* =========================
-   GENERAZIONE GARA
-========================= */
-
-for (let i = 1; i <= 10; i++) {
-
-  const options =
-    `<option value="">Seleziona pilota</option>` +
-    driversSorted.map(
-      d => `<option value="${d}">${d}</option>`
-    ).join("");
-
-  racePredictions.innerHTML += `
-    <div class="input-row">
-      <span>${i}°</span>
-      <select id="rp${i}" class="driver-select">
-        ${options}
-      </select>
-    </div>
-  `;
-
-  raceResults.innerHTML += `
-  <div class="result-row">
-    <span id="rrPos${i}">${i}°</span>
-    <input id="rr${i}" class="result-field" readonly>
-  </div>
-`;
-}
-
-/* =========================
-   BLOCCO DUPLICATI
-========================= */
-
-function getSelectsInContainer(containerId) {
-
-  const container =
-    document.getElementById(containerId);
-
-  if (!container) return [];
-
-  return Array.from(
-    container.querySelectorAll(".driver-select")
-  );
-}
-
-function updateDriverLocks(containerId) {
-
-  const selects =
-    getSelectsInContainer(containerId);
-
-  selects.forEach(select => {
-
-    Array.from(select.options).forEach(option => {
-      option.disabled = false;
-    });
-
-  });
-
-  const selectedDrivers = selects
-    .map(select => select.value)
-    .filter(value => value !== "");
-
-  selects.forEach(select => {
-
-    Array.from(select.options).forEach(option => {
-
-      if (option.value === "") return;
-
-      if (
-        selectedDrivers.includes(option.value) &&
-        option.value !== select.value
-      ) {
-        option.disabled = true;
-      }
-
-    });
-
-  });
-}
-
-/* =========================
-   AVVIO PAGINA
-========================= */
-
-const containers = [
-  "quali-predictions",
-  "quali-results",
-  "sprintquali-predictions",
-  "sprintquali-results",
-  "sprint-predictions",
-  "sprint-results",
-  "race-predictions",
-  "race-results"
-];
-
-containers.forEach(containerId => {
-
-  const selects =
-    getSelectsInContainer(containerId);
-
-  selects.forEach(select => {
-
-    select.addEventListener("change", () => {
-      updateDriverLocks(containerId);
-    });
-
-  });
-
-  updateDriverLocks(containerId);
-
-});
-
-/* =========================
-   PUNTEGGI QUALIFICHE
-========================= */
-
-const qualiBonus = {
-  1: 10,
-  2: 8,
-  3: 6,
-  4: 4,
-  5: 2
-};
-/* =========================
-   SPRINT RACE
-========================= */
-
-const sprintRacePoints = {
-  1: 8,
-  2: 7,
-  3: 6,
-  4: 5,
-  5: 4,
-  6: 3,
-  7: 2,
-  8: 1
 };
 
-/* =========================
-   GARA
-========================= */
 
-const racePoints = {
-  1: 25,
-  2: 18,
-  3: 15,
-  4: 12,
-  5: 10,
-  6: 8,
-  7: 6,
-  8: 4,
-  9: 2,
-  10: 1
-};
+/* ==========================================================
+   ELENCO PILOTI
+========================================================== */
 
-/* =========================
-   FUNZIONE GENERICA PUNTEGGI
-========================= */
+const DRIVERS = [
 
-function calculateScore({
-  predictionPrefix,
-  resultPrefix,
-  positions,
-  pointsTable,
-  wrongPositionPoints,
-  scoreElement,
-  detailElement
-}) {
+    "Alexander ALBON",
+    "Arvin LINDBLAD",
+    "Carlos SAINZ",
+    "Charles LECLERC",
+    "Esteban OCON",
+    "Fernando ALONSO",
+    "Franco COLAPINTO",
+    "Gabriel BORTOLETO",
+    "George RUSSELL",
+    "Isack HADJAR",
+    "Kimi ANTONELLI",
+    "Lando NORRIS",
+    "Lance STROLL",
+    "Lewis HAMILTON",
+    "Liam LAWSON",
+    "Max VERSTAPPEN",
+    "Nico HULKENBERG",
+    "Oliver BEARMAN",
+    "Oscar PIASTRI",
+    "Pierre GASLY",
+    "Sergio PEREZ",
+    "Valtteri BOTTAS"
 
-  let score = 0;
-  let details = "";
+].sort((a, b) => a.localeCompare(b));
 
-  const prediction = [];
-  const result = [];
 
-  for (let i = 1; i <= positions; i++) {
+/* ==========================================================
+   PUNTEGGI UFFICIALI
+========================================================== */
 
-    prediction.push(
-      document.getElementById(`${predictionPrefix}${i}`)
-        ?.value
-        ?.trim()
-        .toLowerCase() || ""
-    );
+const POINTS = {
 
-    result.push(
-      document.getElementById(`${resultPrefix}${i}`)
-        ?.value
-        ?.trim()
-        .toLowerCase() || ""
-    );
-  }
+    qualifying: {
+        1: 10,
+        2: 8,
+        3: 6,
+        4: 4,
+        5: 2,
+        wrong: 1
+    },
 
-  for (let i = 0; i < positions; i++) {
+    sprintQualifying: {
+        1: 10,
+        2: 8,
+        3: 6,
+        4: 4,
+        5: 2,
+        wrong: 1
+    },
 
-    const driver = prediction[i];
+    sprintRace: {
+        1: 8,
+        2: 7,
+        3: 6,
+        4: 5,
+        5: 4,
+        6: 3,
+        7: 2,
+        8: 1,
+        wrong: 1
+    },
 
-    if (driver === result[i]) {
-
-      const pts = pointsTable[i + 1] || 0;
-
-      score += pts;
-
-      details +=
-        `${i + 1}° ${driver} ✔️ +${pts}<br>`;
-
-    } else if (
-      result.includes(driver) &&
-      driver !== ""
-    ) {
-
-      score += wrongPositionPoints;
-
-      details +=
-        `${i + 1}° ${driver} ✔️ +${wrongPositionPoints}<br>`;
-
-    } else {
-
-      details +=
-        `${i + 1}° ${driver} ❌ +0<br>`;
+    race: {
+        1: 25,
+        2: 18,
+        3: 15,
+        4: 12,
+        5: 10,
+        6: 8,
+        7: 6,
+        8: 4,
+        9: 2,
+        10: 1,
+        wrong: 2
     }
-  }
 
-  document.getElementById(scoreElement).textContent =
-    `${score} punti`;
+};
 
-  document.getElementById(detailElement).innerHTML =
-    details;
 
-  return score;
+/* ==========================================================
+   STATO DEL SITO
+========================================================== */
+
+const APP = {
+
+    weekend: null,
+
+    results: null,
+
+    ranking: null,
+
+    countdownTimer: null
+
+};
+
+
+/* ==========================================================
+   RIFERIMENTI DOM
+========================================================== */
+
+const DOM = {
+
+    panels:
+
+        document.querySelectorAll(".panel"),
+
+    menuToggle:
+
+        document.getElementById("menuToggle"),
+
+    sideMenu:
+
+        document.getElementById("sideMenu"),
+
+
+    /* HOME */
+
+    gpName:
+
+        document.getElementById("gpName"),
+
+    weekendType:
+
+        document.getElementById("weekendType"),
+
+    gpStatus:
+
+        document.getElementById("gpStatus"),
+
+    gpCardName:
+
+        document.getElementById("gpCardName"),
+
+    gpCardWeekend:
+
+        document.getElementById("gpCardWeekend"),
+
+    gpCardStatus:
+
+        document.getElementById("gpCardStatus"),
+
+    gpDate:
+
+        document.getElementById("gpDate"),
+
+    gpCircuit:
+
+        document.getElementById("gpCircuit"),
+
+    countdown:
+
+        document.getElementById("countdown"),
+
+    leader:
+
+        document.getElementById("leader"),
+
+    leaderPoints:
+
+        document.getElementById("leaderPoints"),
+
+    totalGP:
+
+        document.getElementById("totalGP"),
+
+    lastWinner:
+
+        document.getElementById("lastWinner"),
+
+    lastPole:
+
+        document.getElementById("lastPole")
+
+};
+
+
+/* ==========================================================
+   CONTENITORI PRONOSTICI
+========================================================== */
+
+const CONTAINERS = {
+
+    qualifyingPrediction:
+
+        document.getElementById("quali-predictions"),
+
+    qualifyingResult:
+
+        document.getElementById("quali-results"),
+
+    sprintQualifyingPrediction:
+
+        document.getElementById("sprintquali-predictions"),
+
+    sprintQualifyingResult:
+
+        document.getElementById("sprintquali-results"),
+
+    sprintPrediction:
+
+        document.getElementById("sprint-predictions"),
+
+    sprintResult:
+
+        document.getElementById("sprint-results"),
+
+    racePrediction:
+
+        document.getElementById("race-predictions"),
+
+    raceResult:
+
+        document.getElementById("race-results")
+
+};
+
+
+/* ==========================================================
+   FUNZIONI DI UTILITÀ
+========================================================== */
+
+function $(id) {
+
+    return document.getElementById(id);
+
 }
-/* =========================
-   FUNZIONI CALCOLO
-========================= */
 
-function calculateQuali() {
+function createDriverOptions() {
 
-  return calculateScore({
-    predictionPrefix: "qp",
-    resultPrefix: "qr",
-    positions: 5,
-    pointsTable: qualiBonus,
-    wrongPositionPoints: 1,
-    scoreElement: "qualiScore",
-    detailElement: "qualiDetail"
-  });
+    return [
+
+        `<option value="">Seleziona pilota</option>`,
+
+        ...DRIVERS.map(driver =>
+
+            `<option value="${driver}">${driver}</option>`
+
+        )
+
+    ].join("");
+
+}
+/* ==========================================================
+   GENERAZIONE CAMPI PRONOSTICI
+========================================================== */
+
+function createPredictionRows(container, prefix, positions) {
+
+    if (!container) return;
+
+    const options = createDriverOptions();
+
+    let html = "";
+
+    for (let i = 1; i <= positions; i++) {
+
+        html += `
+            <div class="input-row">
+
+                <span>${i}°</span>
+
+                <select
+                    id="${prefix}${i}"
+                    class="driver-select">
+
+                    ${options}
+
+                </select>
+
+            </div>
+        `;
+
+    }
+
+    container.innerHTML = html;
 
 }
 
-function calculateSprintQuali() {
 
-  return calculateScore({
-    predictionPrefix: "sqp",
-    resultPrefix: "sqr",
-    positions: 5,
-    pointsTable: qualiBonus,
-    wrongPositionPoints: 1,
-    scoreElement: "sprintQualiScore",
-    detailElement: "sprintQualiDetail"
-  });
+/* ==========================================================
+   GENERAZIONE CAMPI RISULTATI
+========================================================== */
+
+function createResultRows(container, prefix, positions) {
+
+    if (!container) return;
+
+    let html = "";
+
+    for (let i = 1; i <= positions; i++) {
+
+        html += `
+            <div class="result-row">
+
+                <span id="${prefix}Pos${i}">
+                    ${i}°
+                </span>
+
+                <input
+                    id="${prefix}${i}"
+                    class="result-field"
+                    readonly>
+
+            </div>
+        `;
+
+    }
+
+    container.innerHTML = html;
+
+}
+
+
+/* ==========================================================
+   COSTRUZIONE PAGINA PRONOSTICI
+========================================================== */
+
+function buildPredictionPage() {
+
+    createPredictionRows(
+
+        CONTAINERS.qualifyingPrediction,
+
+        "qp",
+
+        5
+
+    );
+
+    createResultRows(
+
+        CONTAINERS.qualifyingResult,
+
+        "qr",
+
+        5
+
+    );
+
+
+
+    createPredictionRows(
+
+        CONTAINERS.sprintQualifyingPrediction,
+
+        "sqp",
+
+        5
+
+    );
+
+    createResultRows(
+
+        CONTAINERS.sprintQualifyingResult,
+
+        "sqr",
+
+        5
+
+    );
+
+
+
+    createPredictionRows(
+
+        CONTAINERS.sprintPrediction,
+
+        "sp",
+
+        8
+
+    );
+
+    createResultRows(
+
+        CONTAINERS.sprintResult,
+
+        "sr",
+
+        8
+
+    );
+
+
+
+    createPredictionRows(
+
+        CONTAINERS.racePrediction,
+
+        "rp",
+
+        10
+
+    );
+
+    createResultRows(
+
+        CONTAINERS.raceResult,
+
+        "rr",
+
+        10
+
+    );
 
 }
 
-function calculateSprintRace() {
 
-  return calculateScore({
-    predictionPrefix: "sp",
-    resultPrefix: "sr",
-    positions: 8,
-    pointsTable: sprintRacePoints,
-    wrongPositionPoints: 1, // metti 2 se vuoi come la gara
-    scoreElement: "sprintRaceScore",
-    detailElement: "sprintRaceDetail"
-  });
+/* ==========================================================
+   BLOCCO PILOTI DUPLICATI
+========================================================== */
+
+function updateDriverLocks(container) {
+
+    const selects =
+
+        Array.from(
+
+            container.querySelectorAll(".driver-select")
+
+        );
+
+    selects.forEach(select => {
+
+        Array.from(select.options).forEach(option => {
+
+            option.disabled = false;
+
+        });
+
+    });
+
+    const selected =
+
+        selects
+
+        .map(s => s.value)
+
+        .filter(Boolean);
+
+    selects.forEach(select => {
+
+        Array.from(select.options).forEach(option => {
+
+            if (option.value === "") return;
+
+            if (
+
+                selected.includes(option.value) &&
+
+                option.value !== select.value
+
+            ) {
+
+                option.disabled = true;
+
+            }
+
+        });
+
+    });
 
 }
 
-function calculateRace() {
 
-  return calculateScore({
-    predictionPrefix: "rp",
-    resultPrefix: "rr",
-    positions: 10,
-    pointsTable: racePoints,
-    wrongPositionPoints: 2,
-    scoreElement: "raceScore",
-    detailElement: "raceDetail"
-  });
+/* ==========================================================
+   ATTIVA BLOCCO DUPLICATI
+========================================================== */
+
+function enableDriverLocks() {
+
+    document
+
+        .querySelectorAll(
+
+            "#quali-predictions," +
+            "#sprintquali-predictions," +
+            "#sprint-predictions," +
+            "#race-predictions"
+
+        )
+
+        .forEach(container => {
+
+            const selects =
+
+                container.querySelectorAll(
+
+                    ".driver-select"
+
+                );
+
+            selects.forEach(select => {
+
+                select.addEventListener(
+
+                    "change",
+
+                    () => updateDriverLocks(container)
+
+                );
+
+            });
+
+            updateDriverLocks(container);
+
+        });
 
 }
-/* =========================
-   BOTTONI
-========================= */
 
-document
-  .getElementById("calculateQuali")
-  .addEventListener("click", calculateQuali);
 
-document
-  .getElementById("calculateSprintQuali")
-  .addEventListener("click", calculateSprintQuali);
-
-document
-  .getElementById("calculateSprintRace")
-  .addEventListener("click", calculateSprintRace);
-
-document
-  .getElementById("calculateRace")
-  .addEventListener("click", calculateRace);
-
-/* =========================
-   TOTALE WEEKEND
-========================= */
-
-document
-  .getElementById("calculateTotal")
-  .addEventListener("click", () => {
-
-    const total =
-      calculateQuali() +
-      calculateSprintQuali() +
-      calculateSprintRace() +
-      calculateRace();
-
-    document.getElementById("totalScore").textContent =
-      `Totale Weekend: ${total} punti`;
-
-  });
-
-/* ==========================================
-   NAVIGAZIONE PAGINE
-========================================== */
-
+/* ==========================================================
+   NAVIGAZIONE
+========================================================== */
 
 function showSection(id) {
 
-    document.querySelectorAll(".panel").forEach(panel => {
+    DOM.panels.forEach(panel => {
+
         panel.style.display = "none";
+
     });
 
-    const target = document.getElementById(id);
+    const target = $(id);
 
     if (target) {
+
         target.style.display = "block";
+
     }
 
-    if (sideMenu) {
-        sideMenu.classList.remove("open");
+    if (DOM.sideMenu) {
+
+        DOM.sideMenu.classList.remove("open");
+
     }
 
-    if (menuToggle) {
-        menuToggle.classList.remove("active");
+    if (DOM.menuToggle) {
+
+        DOM.menuToggle.classList.remove("active");
+
     }
 
 }
 
-/* =========================
+
+/* ==========================================================
    MENU HAMBURGER
-========================= */
+========================================================== */
 
-const menuToggle = document.getElementById("menuToggle");
-const sideMenu = document.getElementById("sideMenu");
+function initializeMenu() {
 
-if (menuToggle && sideMenu) {
+    if (
 
-    menuToggle.addEventListener("click", () => {
+        !DOM.menuToggle ||
 
-        menuToggle.classList.toggle("active");
-        sideMenu.classList.toggle("open");
+        !DOM.sideMenu
 
-    });
+    ) return;
 
-}
+    DOM.menuToggle.addEventListener(
 
-showSection("home");
+        "click",
 
-/* =========================
-   CARICAMENTO RISULTATI
-========================= */
+        () => {
 
-async function loadResults() {
+            DOM.menuToggle.classList.toggle(
 
-    const response = await fetch("results.json");
-    const data = await response.json();
+                "active"
 
-    setResultPositions("qr", data.qualifying);
-    setResultPositions("sqr", data.sprintQualifying);
-    setResultPositions("sr", data.sprint);
-    setResultPositions("rr", data.race);
+            );
 
-}
+            DOM.sideMenu.classList.toggle(
 
-/* ==========================================
-   POSIZIONI RISULTATI
-========================================== */
+                "open"
 
-function setResultPositions(prefix, results) {
-
-    results.forEach((driver, index) => {
-
-        const field = document.getElementById(`${prefix}${index + 1}`);
-        const pos = document.getElementById(`${prefix}Pos${index + 1}`);
-
-        if (!field) return;
-
-        field.value = driver;
-
-        if (pos) {
-
-            if (index === 0) {
-
-                pos.textContent = "🏆 1°";
-
-            } else if (index === 1) {
-
-                pos.textContent = "🥈 2°";
-
-            } else if (index === 2) {
-
-                pos.textContent = "🥉 3°";
-
-            } else {
-
-                pos.textContent = `${index + 1}°`;
-
-            }
+            );
 
         }
 
-    });
+    );
 
 }
-
-
-/* ==========================================
-   AVVIO DEL SITO
-========================================== */
-
-loadResults();
-
-/* =========================
-   REGOLAMENTO
-========================= */
-
-document.addEventListener("DOMContentLoaded", () => {
-
-    const sections = document.querySelectorAll(".admin-panel");
-    const links = document.querySelectorAll(".rules-index a");
-
-    if (sections.length === 0) return;
-
-/* ==========================================
-   ANIMAZIONI
-========================================== */
-    const observer = new IntersectionObserver((entries) => {
-
-        entries.forEach(entry => {
-
-            if (entry.isIntersecting) {
-
-                entry.target.classList.add("show");
-
-            }
-
-        });
-
-    }, {
-
-        threshold: 0.15
-
-    });
-
-    sections.forEach(section => observer.observe(section));
-
-    /* Evidenzia indice */
-
-    window.addEventListener("scroll", () => {
-
-        let current = "";
-
-        sections.forEach(section => {
-
-            const top = section.offsetTop - 150;
-
-            if (window.scrollY >= top) {
-
-                current = section.id;
-
-            }
-
-        });
-
-        links.forEach(link => {
-
-            link.classList.remove("active");
-
-            if (link.getAttribute("href") === "#" + current) {
-
-                link.classList.add("active");
-
-            }
-
-        });
-
-    });
-
-});
-/* =========================
-   COUNTDOWN PROSSIMO GP
-========================= */
-
-let gpDate;
-
-function updateCountdown() {
-
-    const now = new Date();
-    const diff = gpDate - now;
-
-    if (diff <= 0) {
-        document.getElementById("countdown").textContent =
-            "Weekend iniziato!";
-        return;
-    }
-
-    const days = Math.floor(diff / (1000*60*60*24));
-    const hours = Math.floor((diff % (1000*60*60*24))/(1000*60*60));
-    const minutes = Math.floor((diff % (1000*60*60))/(1000*60));
-
-    document.getElementById("countdown").textContent =
-        `${days}g ${hours}h ${minutes}m`;
-}
-
-setInterval(updateCountdown,60000);
-
-loadWeekendData();
