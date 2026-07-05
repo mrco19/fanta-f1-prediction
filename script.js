@@ -620,3 +620,805 @@ function initializeMenu() {
     );
 
 }
+/* ==========================================================
+   FETCH JSON
+========================================================== */
+
+async function loadJSON(file) {
+
+    try {
+
+        const response = await fetch(file);
+
+        if (!response.ok) {
+
+            throw new Error(
+                `Errore caricamento ${file}`
+            );
+
+        }
+
+        return await response.json();
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        return null;
+
+    }
+
+}
+
+
+/* ==========================================================
+   CARICAMENTO DATI
+========================================================== */
+
+async function loadWeekend() {
+
+    APP.weekend =
+        await loadJSON(CONFIG.weekendFile);
+
+}
+
+
+async function loadResults() {
+
+    APP.results =
+        await loadJSON(CONFIG.resultsFile);
+
+}
+
+
+async function loadRanking() {
+
+    APP.ranking =
+        await loadJSON(CONFIG.rankingFile);
+
+}
+
+
+/* ==========================================================
+   VERIFICA WEEKEND SPRINT
+========================================================== */
+
+function isSprintWeekend() {
+
+    if (!APP.weekend) return false;
+
+    return APP.weekend.type
+        .toLowerCase()
+        .includes("sprint");
+
+}
+
+
+/* ==========================================================
+   MOSTRA / NASCONDI SEZIONI SPRINT
+========================================================== */
+
+function updateSprintVisibility() {
+
+    const sprintQualifyingSection =
+
+        CONTAINERS
+            .sprintQualifyingPrediction
+            ?.closest("section")
+            ?.parentElement;
+
+    const sprintRaceSection =
+
+        CONTAINERS
+            .sprintPrediction
+            ?.closest("section")
+            ?.parentElement;
+
+    if (!sprintQualifyingSection) return;
+
+    if (!sprintRaceSection) return;
+
+    if (isSprintWeekend()) {
+
+        sprintQualifyingSection.style.display =
+            "grid";
+
+        sprintRaceSection.style.display =
+            "grid";
+
+    }
+
+    else {
+
+        sprintQualifyingSection.style.display =
+            "none";
+
+        sprintRaceSection.style.display =
+            "none";
+
+    }
+
+}
+
+
+/* ==========================================================
+   SCRIVE I RISULTATI
+========================================================== */
+
+function writeResults(prefix, list) {
+
+    if (!list) return;
+
+    list.forEach((driver, index) => {
+
+        const input =
+
+            $(`${prefix}${index + 1}`);
+
+        if (!input) return;
+
+        input.value = driver;
+
+        const position =
+
+            $(`${prefix}Pos${index + 1}`);
+
+        if (!position) return;
+
+        switch (index) {
+
+            case 0:
+
+                position.textContent =
+                    "🏆 1°";
+
+                break;
+
+            case 1:
+
+                position.textContent =
+                    "🥈 2°";
+
+                break;
+
+            case 2:
+
+                position.textContent =
+                    "🥉 3°";
+
+                break;
+
+            default:
+
+                position.textContent =
+                    `${index + 1}°`;
+
+        }
+
+    });
+
+}
+
+
+/* ==========================================================
+   CARICA RISULTATI NELLA PAGINA
+========================================================== */
+
+function updateResultsPage() {
+
+    if (!APP.results) return;
+
+    writeResults(
+
+        "qr",
+
+        APP.results.qualifying
+
+    );
+
+    writeResults(
+
+        "sqr",
+
+        APP.results.sprintQualifying
+
+    );
+
+    writeResults(
+
+        "sr",
+
+        APP.results.sprint
+
+    );
+
+    writeResults(
+
+        "rr",
+
+        APP.results.race
+
+    );
+
+}
+/* ==========================================================
+   LETTURA PRONOSTICI
+========================================================== */
+
+function getPredictions(prefix, positions) {
+
+    const prediction = [];
+
+    for (let i = 1; i <= positions; i++) {
+
+        prediction.push(
+
+            $(`${prefix}${i}`)
+                ?.value
+                ?.trim()
+                .toLowerCase() || ""
+
+        );
+
+    }
+
+    return prediction;
+
+}
+
+
+/* ==========================================================
+   LETTURA RISULTATI
+========================================================== */
+
+function getResults(prefix, positions) {
+
+    const result = [];
+
+    for (let i = 1; i <= positions; i++) {
+
+        result.push(
+
+            $(`${prefix}${i}`)
+                ?.value
+                ?.trim()
+                .toLowerCase() || ""
+
+        );
+
+    }
+
+    return result;
+
+}
+
+
+/* ==========================================================
+   CALCOLO GENERICO
+========================================================== */
+
+function calculateSession({
+
+    predictionPrefix,
+
+    resultPrefix,
+
+    positions,
+
+    table,
+
+    wrongPoints,
+
+    scoreId,
+
+    detailId
+
+}) {
+
+    const prediction =
+
+        getPredictions(
+
+            predictionPrefix,
+
+            positions
+
+        );
+
+    const result =
+
+        getResults(
+
+            resultPrefix,
+
+            positions
+
+        );
+
+    let total = 0;
+
+    let html = "";
+
+
+    prediction.forEach((driver, index) => {
+
+        const position = index + 1;
+
+        if (!driver) {
+
+            html +=
+                `${position}° — nessun pronostico<br>`;
+
+            return;
+
+        }
+
+        /* posizione esatta */
+
+        if (driver === result[index]) {
+
+            const pts =
+
+                table[position] || 0;
+
+            total += pts;
+
+            html +=
+
+                `🏆 ${position}° ${driver}
+                 +${pts}<br>`;
+
+            return;
+
+        }
+
+        /* pilota presente */
+
+        if (result.includes(driver)) {
+
+            total += wrongPoints;
+
+            html +=
+
+                `✔ ${position}° ${driver}
+                 +${wrongPoints}<br>`;
+
+            return;
+
+        }
+
+        /* errore */
+
+        html +=
+
+            `✖ ${position}° ${driver}
+             +0<br>`;
+
+    });
+
+    $(scoreId).textContent =
+
+        `${total} punti`;
+
+    $(detailId).innerHTML =
+
+        html;
+
+    return total;
+
+}
+
+
+/* ==========================================================
+   QUALIFICHE
+========================================================== */
+
+function calculateQualifying() {
+
+    return calculateSession({
+
+        predictionPrefix: "qp",
+
+        resultPrefix: "qr",
+
+        positions: 5,
+
+        table: POINTS.qualifying,
+
+        wrongPoints: POINTS.qualifying.wrong,
+
+        scoreId: "qualiScore",
+
+        detailId: "qualiDetail"
+
+    });
+
+}
+
+
+/* ==========================================================
+   SPRINT QUALIFYING
+========================================================== */
+
+function calculateSprintQualifying() {
+
+    return calculateSession({
+
+        predictionPrefix: "sqp",
+
+        resultPrefix: "sqr",
+
+        positions: 5,
+
+        table: POINTS.sprintQualifying,
+
+        wrongPoints:
+
+            POINTS.sprintQualifying.wrong,
+
+        scoreId: "sprintQualiScore",
+
+        detailId: "sprintQualiDetail"
+
+    });
+
+}
+
+
+/* ==========================================================
+   SPRINT RACE
+========================================================== */
+
+function calculateSprintRace() {
+
+    return calculateSession({
+
+        predictionPrefix: "sp",
+
+        resultPrefix: "sr",
+
+        positions: 8,
+
+        table: POINTS.sprintRace,
+
+        wrongPoints:
+
+            POINTS.sprintRace.wrong,
+
+        scoreId: "sprintRaceScore",
+
+        detailId: "sprintRaceDetail"
+
+    });
+
+}
+
+
+/* ==========================================================
+   GARA
+========================================================== */
+
+function calculateRace() {
+
+    return calculateSession({
+
+        predictionPrefix: "rp",
+
+        resultPrefix: "rr",
+
+        positions: 10,
+
+        table: POINTS.race,
+
+        wrongPoints:
+
+            POINTS.race.wrong,
+
+        scoreId: "raceScore",
+
+        detailId: "raceDetail"
+
+    });
+
+}
+/* ==========================================================
+   PERFECT RACE BONUS
+========================================================== */
+
+function hasPerfectRace() {
+
+    const prediction =
+        getPredictions("rp", 10);
+
+    const result =
+        getResults("rr", 10);
+
+    if (
+        prediction.includes("") ||
+        result.includes("")
+    ) {
+        return false;
+    }
+
+    return prediction.every(driver =>
+        result.includes(driver)
+    );
+
+}
+
+
+/* ==========================================================
+   PERFECT WEEKEND BONUS
+========================================================== */
+
+function hasPerfectWeekend() {
+
+    const perfectQualifying =
+
+        getPredictions("qp", 5)
+            .every(driver =>
+                getResults("qr", 5)
+                    .includes(driver)
+            );
+
+    const perfectRace =
+        hasPerfectRace();
+
+    if (!isSprintWeekend()) {
+
+        return (
+            perfectQualifying &&
+            perfectRace
+        );
+
+    }
+
+    const perfectSprintQualifying =
+
+        getPredictions("sqp", 5)
+            .every(driver =>
+                getResults("sqr", 5)
+                    .includes(driver)
+            );
+
+    const perfectSprintRace =
+
+        getPredictions("sp", 8)
+            .every(driver =>
+                getResults("sr", 8)
+                    .includes(driver)
+            );
+
+    return (
+
+        perfectQualifying &&
+        perfectSprintQualifying &&
+        perfectSprintRace &&
+        perfectRace
+
+    );
+
+}
+
+
+/* ==========================================================
+   CALCOLO BONUS
+========================================================== */
+
+function calculateBonus() {
+
+    let totalBonus = 0;
+
+    if (hasPerfectRace()) {
+
+        totalBonus +=
+            CONFIG.perfectRaceBonus;
+
+    }
+
+    if (hasPerfectWeekend()) {
+
+        totalBonus +=
+            CONFIG.perfectWeekendBonus;
+
+    }
+
+    return totalBonus;
+
+}
+
+
+/* ==========================================================
+   CALCOLO TOTALE WEEKEND
+========================================================== */
+
+function calculateWeekend() {
+
+    let total = 0;
+
+    total += calculateQualifying();
+
+    if (isSprintWeekend()) {
+
+        total +=
+            calculateSprintQualifying();
+
+        total +=
+            calculateSprintRace();
+
+    }
+
+    total += calculateRace();
+
+    const bonus =
+        calculateBonus();
+
+    total += bonus;
+
+    const totalLabel =
+        $("totalScore");
+
+    if (bonus > 0) {
+
+        totalLabel.innerHTML =
+
+            `
+            Totale Weekend
+
+            <br><br>
+
+            ${total} punti
+
+            <br>
+
+            ⭐ Bonus: +${bonus}
+            `;
+
+    }
+
+    else {
+
+        totalLabel.innerHTML =
+
+            `
+            Totale Weekend
+
+            <br><br>
+
+            ${total} punti
+            `;
+
+    }
+
+    return total;
+
+}
+
+
+/* ==========================================================
+   EVENTI PULSANTI
+========================================================== */
+
+$("calculateQuali")
+?.addEventListener(
+
+    "click",
+
+    calculateQualifying
+
+);
+
+$("calculateSprintQuali")
+?.addEventListener(
+
+    "click",
+
+    calculateSprintQualifying
+
+);
+
+$("calculateSprintRace")
+?.addEventListener(
+
+    "click",
+
+    calculateSprintRace
+
+);
+
+$("calculateRace")
+?.addEventListener(
+
+    "click",
+
+    calculateRace
+
+);
+
+$("calculateTotal")
+?.addEventListener(
+
+    "click",
+
+    calculateWeekend
+
+);
+/* ==========================================================
+   INIZIALIZZAZIONE
+========================================================== */
+
+async function initializeApp() {
+
+    console.log("🏁 Avvio Fanta F1 Prediction");
+
+
+    /* --------------------------
+       CARICA FILE JSON
+    -------------------------- */
+
+    await loadWeekend();
+
+    await loadResults();
+
+    await loadRanking();
+
+
+    /* --------------------------
+       CREA SELECT
+    -------------------------- */
+
+    createQualifying();
+
+    createSprintQualifying();
+
+    createSprintRace();
+
+    createRace();
+
+
+    /* --------------------------
+       DUPLICATI
+    -------------------------- */
+
+    initializeDriverLocks();
+
+
+    /* --------------------------
+       CARICA RISULTATI
+    -------------------------- */
+
+    updateResultsPage();
+
+
+    /* --------------------------
+       HOME
+    -------------------------- */
+
+    updateHome();
+
+
+    /* --------------------------
+       SPRINT
+    -------------------------- */
+
+    updateSprintVisibility();
+
+
+    console.log("✅ Applicazione pronta");
+
+}
+
+
+/* ==========================================================
+   AVVIO
+========================================================== */
+
+document.addEventListener(
+
+    "DOMContentLoaded",
+
+    initializeApp
+
+);
