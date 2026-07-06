@@ -1422,3 +1422,1074 @@ document.addEventListener(
     initializeApp
 
 );
+/* ==========================================================
+   TEMPLATE SELECT PILOTI
+========================================================== */
+
+function createDriverOptions() {
+
+    let html = '<option value="">Seleziona pilota</option>';
+
+    DRIVERS.forEach(driver => {
+
+        html += `
+            <option value="${driver}">
+                ${driver}
+            </option>
+        `;
+
+    });
+
+    return html;
+
+}
+
+
+/* ==========================================================
+   TEMPLATE RIGA PRONOSTICO
+========================================================== */
+
+function createPredictionRow(position, prefix) {
+
+    return `
+
+        <div class="input-row">
+
+            <span>${position}°</span>
+
+            <select
+                id="${prefix}${position}"
+                class="driver-select">
+
+                ${createDriverOptions()}
+
+            </select>
+
+        </div>
+
+    `;
+
+}
+
+
+/* ==========================================================
+   TEMPLATE RIGA RISULTATO
+========================================================== */
+
+function createResultRow(position, prefix) {
+
+    return `
+
+        <div class="result-row">
+
+            <span id="${prefix}Pos${position}">
+                ${position}°
+            </span>
+
+            <input
+                id="${prefix}${position}"
+                class="result-field"
+                readonly>
+
+        </div>
+
+    `;
+
+}
+
+
+/* ==========================================================
+   CREA UNA SESSIONE COMPLETA
+========================================================== */
+
+function createSession({
+
+    predictionContainer,
+    resultContainer,
+
+    predictionPrefix,
+    resultPrefix,
+
+    positions
+
+}) {
+
+    const prediction =
+        $(predictionContainer);
+
+    const result =
+        $(resultContainer);
+
+    prediction.innerHTML = "";
+
+    result.innerHTML = "";
+
+    for (let i = 1; i <= positions; i++) {
+
+        prediction.innerHTML +=
+
+            createPredictionRow(
+
+                i,
+
+                predictionPrefix
+
+            );
+
+        result.innerHTML +=
+
+            createResultRow(
+
+                i,
+
+                resultPrefix
+
+            );
+
+    }
+
+}
+
+
+/* ==========================================================
+   QUALIFICHE
+========================================================== */
+
+function createQualifying() {
+
+    createSession({
+
+        predictionContainer:
+            "quali-predictions",
+
+        resultContainer:
+            "quali-results",
+
+        predictionPrefix:
+            "qp",
+
+        resultPrefix:
+            "qr",
+
+        positions: 5
+
+    });
+
+}
+
+
+/* ==========================================================
+   SPRINT QUALIFYING
+========================================================== */
+
+function createSprintQualifying() {
+
+    createSession({
+
+        predictionContainer:
+            "sprintquali-predictions",
+
+        resultContainer:
+            "sprintquali-results",
+
+        predictionPrefix:
+            "sqp",
+
+        resultPrefix:
+            "sqr",
+
+        positions: 5
+
+    });
+
+}
+
+
+/* ==========================================================
+   SPRINT RACE
+========================================================== */
+
+function createSprintRace() {
+
+    createSession({
+
+        predictionContainer:
+            "sprint-predictions",
+
+        resultContainer:
+            "sprint-results",
+
+        predictionPrefix:
+            "sp",
+
+        resultPrefix:
+            "sr",
+
+        positions: 8
+
+    });
+
+}
+
+
+/* ==========================================================
+   GARA
+========================================================== */
+
+function createRace() {
+
+    createSession({
+
+        predictionContainer:
+            "race-predictions",
+
+        resultContainer:
+            "race-results",
+
+        predictionPrefix:
+            "rp",
+
+        resultPrefix:
+            "rr",
+
+        positions: 10
+
+    });
+
+}
+/* ==========================================================
+   GESTIONE PILOTI DUPLICATI
+========================================================== */
+
+function getSessionSelects(containerId) {
+
+    const container = $(containerId);
+
+    if (!container) {
+        return [];
+    }
+
+    return Array.from(
+
+        container.querySelectorAll(
+
+            ".driver-select"
+
+        )
+
+    );
+
+}
+
+
+/* ==========================================================
+   AGGIORNA BLOCCHI DUPLICATI
+========================================================== */
+
+function updateDriverLocks(containerId) {
+
+    const selects =
+
+        getSessionSelects(containerId);
+
+    if (selects.length === 0) {
+        return;
+    }
+
+
+    /* --------------------------
+       SBLOCCA TUTTO
+    -------------------------- */
+
+    selects.forEach(select => {
+
+        Array.from(select.options).forEach(option => {
+
+            option.disabled = false;
+
+        });
+
+    });
+
+
+    /* --------------------------
+       PILOTI GIÀ SCELTI
+    -------------------------- */
+
+    const selectedDrivers =
+
+        selects
+
+            .map(select => select.value)
+
+            .filter(value => value !== "");
+
+
+    /* --------------------------
+       BLOCCA DUPLICATI
+    -------------------------- */
+
+    selects.forEach(select => {
+
+        Array.from(select.options).forEach(option => {
+
+            if (option.value === "") {
+                return;
+            }
+
+            if (
+
+                selectedDrivers.includes(option.value)
+
+                &&
+
+                option.value !== select.value
+
+            ) {
+
+                option.disabled = true;
+
+            }
+
+        });
+
+    });
+
+}
+
+
+/* ==========================================================
+   INIZIALIZZA BLOCCO DUPLICATI
+========================================================== */
+
+function initializeDriverLocks() {
+
+    const sessions = [
+
+        "quali-predictions",
+
+        "sprintquali-predictions",
+
+        "sprint-predictions",
+
+        "race-predictions"
+
+    ];
+
+    sessions.forEach(containerId => {
+
+        const selects =
+
+            getSessionSelects(containerId);
+
+        selects.forEach(select => {
+
+            select.addEventListener(
+
+                "change",
+
+                () => {
+
+                    updateDriverLocks(
+
+                        containerId
+
+                    );
+
+                }
+
+            );
+
+        });
+
+        updateDriverLocks(containerId);
+
+    });
+
+}
+fillResultSession({
+
+    prefix: "xyz",
+
+    results: RESULTS.special
+
+});
+/* ==========================================================
+   HOME
+========================================================== */
+
+function updateHome() {
+
+    if (!WEEKEND) return;
+
+
+    /* --------------------------
+       GP
+    -------------------------- */
+
+    setText(
+
+        "gpName",
+
+        WEEKEND.name
+
+    );
+
+    setText(
+
+        "gpCardName",
+
+        WEEKEND.name
+
+    );
+
+
+    /* --------------------------
+       CIRCUITO
+    -------------------------- */
+
+    setText(
+
+        "gpCircuit",
+
+        WEEKEND.circuit
+
+    );
+
+
+    /* --------------------------
+       DATA
+    -------------------------- */
+
+    setText(
+
+        "gpDate",
+
+        WEEKEND.date
+
+    );
+
+
+    /* --------------------------
+       WEEKEND
+    -------------------------- */
+
+    const weekendType =
+
+        WEEKEND.sprint
+
+            ? "Weekend Sprint"
+
+            : "Weekend Normale";
+
+    setText(
+
+        "weekendType",
+
+        weekendType
+
+    );
+
+    setText(
+
+        "gpCardWeekend",
+
+        weekendType
+
+    );
+
+
+    /* --------------------------
+       STATO
+    -------------------------- */
+
+    const status =
+
+        getWeekendStatus();
+
+    setText(
+
+        "gpStatus",
+
+        status
+
+    );
+
+    setText(
+
+        "gpCardStatus",
+
+        status
+
+    );
+
+
+    /* --------------------------
+       LEADER
+    -------------------------- */
+
+    if (
+
+        RANKING.length > 0
+
+    ) {
+
+        setText(
+
+            "leader",
+
+            RANKING[0].name
+
+        );
+
+        setText(
+
+            "leaderPoints",
+
+            RANKING[0].points
+
+        );
+
+    }
+
+
+    /* --------------------------
+       ULTIMO GP
+    -------------------------- */
+
+    if (
+
+        RESULTS.race.length > 0
+
+    ) {
+
+        setText(
+
+            "lastWinner",
+
+            RESULTS.race[0]
+
+        );
+
+    }
+
+    if (
+
+        RESULTS.qualifying.length > 0
+
+    ) {
+
+        setText(
+
+            "lastPole",
+
+            RESULTS.qualifying[0]
+
+        );
+
+    }
+
+
+    /* --------------------------
+       NUMERO GP
+    -------------------------- */
+
+    setText(
+
+        "totalGP",
+
+        WEEKEND.round
+
+    );
+
+
+    /* --------------------------
+       COUNTDOWN
+    -------------------------- */
+
+    startCountdown();
+
+}
+
+
+/* ==========================================================
+   STATO WEEKEND
+========================================================== */
+
+function getWeekendStatus() {
+
+    if (!WEEKEND) {
+
+        return "Caricamento...";
+
+    }
+
+    const now = new Date();
+
+    const close =
+
+        new Date(
+
+            WEEKEND.closePrediction
+
+        );
+
+    if (now < close) {
+
+        return "🟢 Pronostici aperti";
+
+    }
+
+    return "🔴 Pronostici chiusi";
+
+}
+
+
+/* ==========================================================
+   COUNTDOWN
+========================================================== */
+
+let countdownTimer = null;
+
+function startCountdown() {
+
+    if (!WEEKEND) return;
+
+    if (countdownTimer) {
+
+        clearInterval(
+
+            countdownTimer
+
+        );
+
+    }
+
+    function update() {
+
+        const now = new Date();
+
+        const target =
+
+            new Date(
+
+                WEEKEND.closePrediction
+
+            );
+
+        const diff = target - now;
+
+        if (diff <= 0) {
+
+            setText(
+
+                "countdown",
+
+                "Weekend iniziato"
+
+            );
+
+            return;
+
+        }
+
+        const days =
+
+            Math.floor(
+
+                diff /
+
+                1000 /
+
+                60 /
+
+                60 /
+
+                24
+
+            );
+
+        const hours =
+
+            Math.floor(
+
+                (
+
+                    diff %
+
+                    (
+
+                        1000 *
+
+                        60 *
+
+                        60 *
+
+                        24
+
+                    )
+
+                )
+
+                /
+
+                (
+
+                    1000 *
+
+                    60 *
+
+                    60
+
+                )
+
+            );
+
+        const minutes =
+
+            Math.floor(
+
+                (
+
+                    diff %
+
+                    (
+
+                        1000 *
+
+                        60 *
+
+                        60
+
+                    )
+
+                )
+
+                /
+
+                (
+
+                    1000 *
+
+                    60
+
+                )
+
+            );
+
+        setText(
+
+            "countdown",
+
+            `${days}g ${hours}h ${minutes}m`
+
+        );
+
+    }
+
+    update();
+
+    countdownTimer =
+
+        setInterval(
+
+            update,
+
+            60000
+
+        );
+
+}
+/* ==========================================================
+   NAVIGAZIONE PANNELLI
+========================================================== */
+
+function hidePanels() {
+
+    document
+
+        .querySelectorAll(".panel")
+
+        .forEach(panel => {
+
+            panel.style.display = "none";
+
+        });
+
+}
+
+
+function showPanel(id) {
+
+    hidePanels();
+
+    const panel = $(id);
+
+    if (!panel) {
+        return;
+    }
+
+    panel.style.display = "block";
+
+}
+
+
+/* ==========================================================
+   MENU
+========================================================== */
+
+function closeMenu() {
+
+    const menu = $("sideMenu");
+
+    const button = $("menuToggle");
+
+    if (menu) {
+
+        menu.classList.remove("open");
+
+    }
+
+    if (button) {
+
+        button.classList.remove("active");
+
+    }
+
+}
+
+
+function openMenu() {
+
+    const menu = $("sideMenu");
+
+    const button = $("menuToggle");
+
+    if (menu) {
+
+        menu.classList.add("open");
+
+    }
+
+    if (button) {
+
+        button.classList.add("active");
+
+    }
+
+}
+
+
+function toggleMenu() {
+
+    const menu = $("sideMenu");
+
+    if (!menu) {
+        return;
+    }
+
+    if (
+
+        menu.classList.contains("open")
+
+    ) {
+
+        closeMenu();
+
+    } else {
+
+        openMenu();
+
+    }
+
+}
+
+
+/* ==========================================================
+   MENU HAMBURGER
+========================================================== */
+
+function initializeMenu() {
+
+    const button = $("menuToggle");
+
+    if (!button) {
+        return;
+    }
+
+    button.addEventListener(
+
+        "click",
+
+        toggleMenu
+
+    );
+
+}
+
+
+/* ==========================================================
+   CAMBIO PAGINA
+========================================================== */
+
+function showSection(id) {
+
+    showPanel(id);
+
+    closeMenu();
+
+}
+
+
+/* ==========================================================
+   CLICK FUORI MENU
+========================================================== */
+
+function initializeOutsideClick() {
+
+    document.addEventListener(
+
+        "click",
+
+        event => {
+
+            const menu = $("sideMenu");
+
+            const button = $("menuToggle");
+
+            if (
+
+                !menu ||
+
+                !button
+
+            ) {
+
+                return;
+
+            }
+
+            const insideMenu =
+
+                menu.contains(event.target);
+
+            const insideButton =
+
+                button.contains(event.target);
+
+            if (
+
+                !insideMenu &&
+
+                !insideButton
+
+            ) {
+
+                closeMenu();
+
+            }
+
+        }
+
+    );
+
+}
+/* ==========================================================
+   INIZIALIZZAZIONE APPLICAZIONE
+========================================================== */
+
+async function initializeApplication() {
+
+    try {
+
+        /* --------------------------
+           CARICAMENTO DATI
+        -------------------------- */
+
+        await loadAllData();
+
+
+        /* --------------------------
+           CREAZIONE SESSIONI
+        -------------------------- */
+
+        createQualifying();
+
+        createSprintQualifying();
+
+        createSprintRace();
+
+        createRace();
+
+
+        /* --------------------------
+           RISULTATI
+        -------------------------- */
+
+        updateResultsPage();
+
+
+        /* --------------------------
+           BLOCCHI DUPLICATI
+        -------------------------- */
+
+        initializeDriverLocks();
+
+
+        /* --------------------------
+           HOME
+        -------------------------- */
+
+        updateHome();
+
+
+        /* --------------------------
+           MENU
+        -------------------------- */
+
+        initializeMenu();
+
+        initializeOutsideClick();
+
+
+        /* --------------------------
+           PAGINA INIZIALE
+        -------------------------- */
+
+        showSection("home");
+
+
+        console.log(
+
+            "✅ Fanta F1 Prediction avviato"
+
+        );
+
+    }
+
+    catch (error) {
+
+        console.error(
+
+            "Errore durante l'avvio:",
+
+            error
+
+        );
+
+    }
+
+}
+
+
+/* ==========================================================
+   AVVIO PAGINA
+========================================================== */
+
+document.addEventListener(
+
+    "DOMContentLoaded",
+
+    initializeApplication
+
+);
