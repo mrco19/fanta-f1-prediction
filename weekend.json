@@ -1,19 +1,50 @@
 {
+  "id": 12,
+
   "name": "Gran Premio di Gran Bretagna",
-  "circuit": "Silverstone",
+
   "country": "Regno Unito",
 
-  "type": "Sprint",
+  "circuit": "Silverstone",
 
-  "status": "Weekend aperto",
+  "flag": "🇬🇧",
 
-  "deadline": "2026-07-11T11:30:00",
+  "type": "Weekend Normale",
+
+  "status": "open",
+
+  "season": 2026,
+
+  "round": 12,
+
+  "startDate": "2026-07-10T13:30:00",
+
+  "endDate": "2026-07-12T18:00:00",
+
+  "predictionsClose": "2026-07-11T15:45:00",
 
   "leader": "Marco",
-  "leaderPoints": 0,
+
+  "leaderPoints": 287,
 
   "totalGP": 12,
 
-  "lastWinner": "George Russell",
-  "lastPole": "George Russell"
+  "lastGP": {
+
+    "name": "Austria",
+
+    "winner": "George RUSSELL",
+
+    "pole": "George RUSSELL"
+
+  },
+
+  "statistics": {
+
+    "perfectRace": 5,
+
+    "perfectWeekend": 2
+
+  }
+
 }
