@@ -1,22 +1,41 @@
-[
-  {
+{
+  "leader": {
     "name": "Marco",
-    "points": 840
+    "points": 287
   },
-  {
-    "name": "Luca",
-    "points": 812
-  },
-  {
-    "name": "Andrea",
-    "points": 790
-  },
-  {
-    "name": "Simone",
-    "points": 765
-  },
-  {
-    "name": "Davide",
-    "points": 744
-  }
-]
+
+  "championship": [
+
+    {
+      "position": 1,
+      "name": "Marco",
+      "points": 287
+    },
+
+    {
+      "position": 2,
+      "name": "Luca",
+      "points": 274
+    },
+
+    {
+      "position": 3,
+      "name": "Andrea",
+      "points": 261
+    },
+
+    {
+      "position": 4,
+      "name": "Simone",
+      "points": 244
+    },
+
+    {
+      "position": 5,
+      "name": "Davide",
+      "points": 231
+    }
+
+  ]
+
+}
