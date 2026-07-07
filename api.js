@@ -688,6 +688,8 @@ async function refreshSite() {
 
     loadResults();
 
+   updateRanking();
+
 }
 
 
@@ -733,3 +735,57 @@ document.addEventListener("DOMContentLoaded", async () => {
     startAutoRefresh();
 
 });
+/* ==========================================================
+   CLASSIFICA
+========================================================== */
+
+function updateRanking() {
+
+    if (!rankingData) return;
+
+    /* ==========================
+       LEADER
+    ========================== */
+
+    if (rankingData.leader) {
+
+        setText(
+
+            "leader",
+
+            rankingData.leader.name
+
+        );
+
+        setText(
+
+            "leaderPoints",
+
+            rankingData.leader.points
+
+        );
+
+    }
+
+    /* ==========================
+       TOP 5
+    ========================== */
+
+    const list = document.querySelector("#home ol");
+
+    if (!list) return;
+
+    list.innerHTML = "";
+
+    rankingData.championship.forEach(driver => {
+
+        const li = document.createElement("li");
+
+        li.textContent =
+            `${driver.name} - ${driver.points}`;
+
+        list.appendChild(li);
+
+    });
+
+}
