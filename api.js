@@ -1,218 +1,735 @@
-/* ==========================================
-   API FORMULA 1
-   Fanta F1 Prediction
-========================================== */
+/* ==========================================================
+   FANTA F1 PREDICTION
+   api.js
+   Versione 2.0
+   Compatibile con:
 
-/* ==========================================
-   CONFIGURAZIONE
-========================================== */
+   - admin.html
+   - admin.css
+   - admin.js
+   - index.html
+   - styles.css
+   - script.js
 
-const API_BASE = "https://api.openf1.org/v1";
+   Questa versione NON dipende da OpenF1.
 
-let currentMeeting = null;
+   Tutti i dati arrivano dai file JSON creati
+   dall'Admin Panel.
+========================================================== */
 
-/* ==========================================
-   PAUSA TRA LE RICHIESTE
-========================================== */
 
-function sleep(ms) {
+/* ==========================================================
+   FILE JSON
+========================================================== */
 
-    return new Promise(resolve => setTimeout(resolve, ms));
+const WEEKEND_FILE = "weekend.json";
+const RESULTS_FILE = "results.json";
+const RANKING_FILE = "ranking.json";
 
-}
 
-/* ==========================================
-   PROSSIMO GRAN PREMIO
-========================================== */
+/* ==========================================================
+   DATI GLOBALI
+========================================================== */
 
-async function loadWeekendData() {
+let weekendData = null;
+let resultsData = null;
+let rankingData = null;
+
+let countdownTimer = null;
+
+
+/* ==========================================================
+   CARICAMENTO JSON
+========================================================== */
+
+async function loadJSON(file) {
 
     try {
 
-        const response = await fetch(`${API_BASE}/meetings?year=2026`);
+        const response = await fetch(file + "?v=" + Date.now());
 
-        const meetings = await response.json();
-
-        if (!Array.isArray(meetings)) {
-
-            console.error(meetings);
-
-            return;
-
+        if (!response.ok) {
+            throw new Error(file);
         }
 
-        const now = new Date();
-
-        currentMeeting = meetings.find(meeting =>
-            new Date(meeting.date_start) > now
-        );
-
-        if (!currentMeeting) {
-
-            console.warn("Nessun GP trovato");
-
-            return;
-
-        }
-
-        updateWeekendUI(currentMeeting);
+        return await response.json();
 
     }
 
     catch (error) {
 
-        console.error(error);
+        console.error("Errore caricamento:", file);
+
+        return null;
 
     }
 
 }
 
-/* ==========================================
-   AGGIORNA HOME
-========================================== */
 
-function updateWeekendUI(gp) {
+/* ==========================================================
+   CARICA TUTTI I FILE
+========================================================== */
 
-    document.getElementById("gpName").textContent =
-        `${gp.country_name} ${gp.meeting_name}`;
+async function loadSiteData() {
 
-    document.getElementById("weekendType").textContent =
-        gp.meeting_name.includes("Sprint")
-        ? "Weekend Sprint"
-        : "Weekend Normale";
+    weekendData = await loadJSON(WEEKEND_FILE);
 
-    document.getElementById("gpCardName").textContent =
-        `${gp.country_name} ${gp.meeting_name}`;
+    resultsData = await loadJSON(RESULTS_FILE);
 
-    document.getElementById("gpCardWeekend").textContent =
-        gp.meeting_name.includes("Sprint")
-        ? "Weekend Sprint"
-        : "Weekend Normale";
+    rankingData = await loadJSON(RANKING_FILE);
 
-    document.getElementById("gpCardStatus").textContent =
-        "🟢 Pronostici aperti";
+}
 
-    document.getElementById("gpDate").textContent =
-        new Date(gp.date_start).toLocaleDateString("it-IT", {
+
+/* ==========================================================
+   UTILITA'
+========================================================== */
+
+function get(id) {
+
+    return document.getElementById(id);
+
+}
+
+
+function setText(id, value) {
+
+    const el = get(id);
+
+    if (!el) return;
+
+    el.textContent = value;
+
+}
+
+
+function setHTML(id, value) {
+
+    const el = get(id);
+
+    if (!el) return;
+
+    el.innerHTML = value;
+
+}
+
+
+/* ==========================================================
+   FORMATTA DATA
+========================================================== */
+
+function formatDate(dateString) {
+
+    if (!dateString) return "";
+
+    const date = new Date(dateString);
+
+    return date.toLocaleDateString(
+
+        "it-IT",
+
+        {
+
+            weekday: "long",
 
             day: "numeric",
+
             month: "long",
+
             year: "numeric"
 
-        });
+        }
 
-    document.getElementById("gpCircuit").textContent =
-        gp.circuit_short_name;
-
-    gpDate = new Date(gp.date_start);
-
-    updateCountdown();
+    );
 
 }
 
-/* ==========================================
-   CLASSIFICA PILOTI
-========================================== */
 
-async function loadDriverStandings() {
+/* ==========================================================
+   FORMATTA ORA
+========================================================== */
 
-    if (!currentMeeting) return;
+function formatTime(dateString) {
 
-    console.log("Classifica piloti...");
+    if (!dateString) return "";
+
+    const date = new Date(dateString);
+
+    return date.toLocaleTimeString(
+
+        "it-IT",
+
+        {
+
+            hour: "2-digit",
+
+            minute: "2-digit"
+
+        }
+
+    );
 
 }
 
-/* ==========================================
-   RISULTATI QUALIFICHE
-========================================== */
 
-async function loadQualifyingResults() {
+/* ==========================================================
+   FORMATTA DATA + ORA
+========================================================== */
 
-    if (!currentMeeting) return;
+function formatDateTime(dateString) {
 
-    try {
+    if (!dateString) return "";
 
-        const response = await fetch(
+    return `${formatDate(dateString)} • ${formatTime(dateString)}`;
 
-            `${API_BASE}/sessions?meeting_key=${currentMeeting.meeting_key}`
+}
+/* ==========================================================
+   AGGIORNA HOME
+========================================================== */
 
-        );
+function updateHome() {
 
-        const sessions = await response.json();
+    if (!weekendData) {
 
-        console.log("Sessioni del weekend:", sessions);
+        console.warn("weekend.json non trovato.");
 
-        const qualifying = sessions.find(session =>
-            session.session_name === "Qualifying"
-        );
-
-       const responseResults = await fetch(
-
-    `${API_BASE}/session_result?session_key=${qualifying.session_key}`
-
-);
-
-const results = await responseResults.json();
-
-console.log("Risultati Qualifica:", results);
+        return;
 
     }
 
-    catch(error){
+    /* ==========================
+       DATI GP
+    ========================== */
 
-        console.error(error);
+    const gpName =
+        weekendData.name || "";
+
+    const circuit =
+        weekendData.circuit || "";
+
+    const weekendType =
+        weekendData.type || "Weekend Normale";
+
+    const status =
+        weekendData.status || "open";
+
+    const startDate =
+        weekendData.startDate || "";
+
+    const endDate =
+        weekendData.endDate || "";
+
+
+
+    /* ==========================
+       HERO
+    ========================== */
+
+    setText("gpName", gpName);
+
+    setText("weekendType", weekendType);
+
+
+
+    /* ==========================
+       CARD GP
+    ========================== */
+
+    setText("gpCardName", gpName);
+
+    setText("gpCardWeekend", weekendType);
+
+    setText("gpDate", formatDate(startDate));
+
+    setText("gpCircuit", circuit);
+
+
+
+    /* ==========================
+       STATO WEEKEND
+    ========================== */
+
+    const statusElement = get("gpStatus");
+
+    const cardStatus = get("gpCardStatus");
+
+    let statusText = "";
+    let statusClass = "";
+
+    switch (status) {
+
+        case "open":
+
+            statusText = "🟢 Pronostici aperti";
+
+            statusClass = "status-open";
+
+            break;
+
+        case "closed":
+
+            statusText = "🔴 Pronostici chiusi";
+
+            statusClass = "status-closed";
+
+            break;
+
+        case "live":
+
+            statusText = "🏁 Weekend in corso";
+
+            statusClass = "status-live";
+
+            break;
+
+        case "finished":
+
+            statusText = "🏆 Weekend concluso";
+
+            statusClass = "status-finished";
+
+            break;
+
+        default:
+
+            statusText = "⚪ Nessuno stato";
+
+            statusClass = "";
 
     }
 
+    if (statusElement) {
+
+        statusElement.textContent = statusText;
+
+        statusElement.className = "gp-status " + statusClass;
+
+    }
+
+    if (cardStatus) {
+
+        cardStatus.textContent = statusText;
+
+        cardStatus.className = "gp-status " + statusClass;
+
+    }
+
+
+
+    /* ==========================
+       COUNTDOWN
+    ========================== */
+
+    startCountdown(startDate);
+
+
+
+    /* ==========================
+       ULTIMO GP
+    ========================== */
+
+    if (weekendData.lastGP) {
+
+        setText(
+
+            "lastWinner",
+
+            weekendData.lastGP.winner || "-"
+
+        );
+
+        setText(
+
+            "lastPole",
+
+            weekendData.lastGP.pole || "-"
+
+        );
+
+    }
+
+
+
+    /* ==========================
+       STATISTICHE
+    ========================== */
+
+    setText(
+
+        "totalGP",
+
+        weekendData.totalGP || "-"
+
+    );
+
+    setText(
+
+        "leader",
+
+        weekendData.leader || "-"
+
+    );
+
+    setText(
+
+        "leaderPoints",
+
+        weekendData.leaderPoints || "-"
+
+    );
+
 }
-/* ==========================================
-   RISULTATI SPRINT
-========================================== */
+/* ==========================================================
+   COUNTDOWN
+========================================================== */
 
-async function loadSprintResults() {
+function startCountdown(dateString) {
 
-    if (!currentMeeting) return;
+    if (!dateString) return;
 
-    console.log("Risultati sprint...");
+    if (countdownTimer) {
+
+        clearInterval(countdownTimer);
+
+    }
+
+    updateCountdown(dateString);
+
+    countdownTimer = setInterval(() => {
+
+        updateCountdown(dateString);
+
+    }, 1000);
 
 }
 
-/* ==========================================
-   RISULTATI GARA
-========================================== */
 
-async function loadRaceResults() {
+/* ==========================================================
+   AGGIORNA COUNTDOWN
+========================================================== */
 
-    if (!currentMeeting) return;
+function updateCountdown(dateString) {
 
-    console.log("Risultati gara...");
+    const countdownElement = get("countdown");
+
+    if (!countdownElement) return;
+
+    const targetDate = new Date(dateString);
+
+    const now = new Date();
+
+    const diff = targetDate.getTime() - now.getTime();
+
+
+
+    /* ==========================
+       GP INIZIATO
+    ========================== */
+
+    if (diff <= 0) {
+
+        countdownElement.textContent = "Weekend iniziato";
+
+        return;
+
+    }
+
+
+
+    /* ==========================
+       CALCOLO TEMPO
+    ========================== */
+
+    const totalSeconds = Math.floor(diff / 1000);
+
+    const days = Math.floor(totalSeconds / 86400);
+
+    const hours = Math.floor((totalSeconds % 86400) / 3600);
+
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+
+    const seconds = totalSeconds % 60;
+
+
+
+    /* ==========================
+       FORMATO
+    ========================== */
+
+    let text = "";
+
+    if (days > 0) {
+
+        text += days + "g ";
+
+    }
+
+    text +=
+        String(hours).padStart(2, "0") +
+        ":" +
+        String(minutes).padStart(2, "0") +
+        ":" +
+        String(seconds).padStart(2, "0");
+
+
+
+    countdownElement.textContent = text;
 
 }
 
-/* ==========================================
-   AVVIO API
-========================================== */
+
+
+/* ==========================================================
+   STATO WEEKEND AUTOMATICO
+========================================================== */
+
+function getWeekendStatus() {
+
+    if (!weekendData) return "closed";
+
+    return weekendData.status || "closed";
+
+}
+
+
+
+/* ==========================================================
+   PRONOSTICI APERTI?
+========================================================== */
+
+function predictionsOpen() {
+
+    return getWeekendStatus() === "open";
+
+}
+
+
+
+/* ==========================================================
+   WEEKEND SPRINT?
+========================================================== */
+
+function isSprintWeekend() {
+
+    if (!weekendData) return false;
+
+    return weekendData.type === "Weekend Sprint";
+
+}
+/* ==========================================================
+   CARICAMENTO RISULTATI
+========================================================== */
+
+function loadResults() {
+
+    if (!resultsData) {
+
+        console.warn("results.json non disponibile.");
+
+        return;
+
+    }
+
+    updateQualifyingResults();
+
+    updateSprintQualifyingResults();
+
+    updateSprintRaceResults();
+
+    updateRaceResults();
+
+}
+
+
+
+/* ==========================================================
+   QUALIFICHE
+========================================================== */
+
+function updateQualifyingResults() {
+
+    if (!resultsData.qualifying) return;
+
+    setResultPositions(
+
+        "qr",
+
+        resultsData.qualifying
+
+    );
+
+}
+
+
+
+/* ==========================================================
+   SPRINT QUALIFYING
+========================================================== */
+
+function updateSprintQualifyingResults() {
+
+    if (!resultsData.sprintQualifying) return;
+
+    setResultPositions(
+
+        "sqr",
+
+        resultsData.sprintQualifying
+
+    );
+
+}
+
+
+
+/* ==========================================================
+   SPRINT RACE
+========================================================== */
+
+function updateSprintRaceResults() {
+
+    if (!resultsData.sprint) return;
+
+    setResultPositions(
+
+        "sr",
+
+        resultsData.sprint
+
+    );
+
+}
+
+
+
+/* ==========================================================
+   GARA
+========================================================== */
+
+function updateRaceResults() {
+
+    if (!resultsData.race) return;
+
+    setResultPositions(
+
+        "rr",
+
+        resultsData.race
+
+    );
+
+}
+
+
+
+/* ==========================================================
+   INSERIMENTO RISULTATI
+========================================================== */
+
+function setResultPositions(prefix, array) {
+
+    if (!Array.isArray(array)) return;
+
+    array.forEach((driver, index) => {
+
+        const field = get(prefix + (index + 1));
+
+        const position = get(prefix + "Pos" + (index + 1));
+
+        if (!field) return;
+
+        field.value = driver || "";
+
+
+
+        if (!position) return;
+
+
+
+        switch (index + 1) {
+
+            case 1:
+
+                position.textContent = "🏆 1°";
+
+                break;
+
+            case 2:
+
+                position.textContent = "🥈 2°";
+
+                break;
+
+            case 3:
+
+                position.textContent = "🥉 3°";
+
+                break;
+
+            default:
+
+                position.textContent = (index + 1) + "°";
+
+        }
+
+    });
+
+}
+/* ==========================================================
+   AGGIORNA TUTTO IL SITO
+========================================================== */
+
+async function refreshSite() {
+
+    await loadSiteData();
+
+    updateHome();
+
+    loadResults();
+
+}
+
+
+/* ==========================================================
+   INIZIALIZZAZIONE
+========================================================== */
 
 async function initAPI() {
 
-    await loadWeekendData();
+    console.log("================================");
+    console.log("Fanta F1 Prediction");
+    console.log("API v2");
+    console.log("================================");
 
-    await sleep(500);
-
-    await loadDriverStandings();
-
-    await sleep(500);
-
-    await loadQualifyingResults();
-
-    await sleep(500);
-
-    await loadSprintResults();
-
-    await sleep(500);
-
-    await loadRaceResults();
+    await refreshSite();
 
 }
 
-initAPI();
+
+/* ==========================================================
+   REFRESH AUTOMATICO
+========================================================== */
+
+function startAutoRefresh() {
+
+    setInterval(async () => {
+
+        await refreshSite();
+
+    }, 60000);
+
+}
+
+
+/* ==========================================================
+   PAGINA PRONTA
+========================================================== */
+
+document.addEventListener("DOMContentLoaded", async () => {
+
+    await initAPI();
+
+    startAutoRefresh();
+
+});
