@@ -124,9 +124,14 @@ const APP = {
 
     weekend: null,
 
-    results: null,
+    results: {
+        qualifying: [],
+        sprintQualifying: [],
+        sprint: [],
+        race: []
+    },
 
-    ranking: null,
+    ranking: [],
 
     countdownTimer: null
 
@@ -1958,7 +1963,7 @@ function updateHome() {
 
     if (
 
-        RESULTS.race.length > 0
+        APP.results.race.length > 0
 
     ) {
 
@@ -1974,7 +1979,7 @@ function updateHome() {
 
     if (
 
-        RESULTS.qualifying.length > 0
+        APP.results.qualifying.length > 0
 
     ) {
 
