@@ -1820,7 +1820,7 @@ fillResultSession({
 
 function updateHome() {
 
-    if (!WEEKEND) return;
+    if (!APP.weekend) return;
 
 
     /* --------------------------
@@ -1831,7 +1831,7 @@ function updateHome() {
 
         "gpName",
 
-        WEEKEND.name
+        APP.weekend.name
 
     );
 
@@ -1839,7 +1839,7 @@ function updateHome() {
 
         "gpCardName",
 
-        WEEKEND.name
+        APP.weekend.name
 
     );
 
@@ -1852,7 +1852,7 @@ function updateHome() {
 
         "gpCircuit",
 
-        WEEKEND.circuit
+        APP.weekend.circuit
 
     );
 
@@ -1865,8 +1865,7 @@ function updateHome() {
 
         "gpDate",
 
-        WEEKEND.date
-
+        APP.weekend.date
     );
 
 
@@ -1876,7 +1875,7 @@ function updateHome() {
 
     const weekendType =
 
-        WEEKEND.sprint
+        APP.weekend.sprint
 
             ? "Weekend Sprint"
 
@@ -1930,7 +1929,7 @@ function updateHome() {
 
     if (
 
-        RANKING.length > 0
+       APP.ranking.length > 0
 
     ) {
 
@@ -1938,7 +1937,7 @@ function updateHome() {
 
             "leader",
 
-            RANKING[0].name
+            APP.ranking[0].name
 
         );
 
@@ -1946,7 +1945,7 @@ function updateHome() {
 
             "leaderPoints",
 
-            RANKING[0].points
+            APP.ranking[0].points
 
         );
 
@@ -1967,7 +1966,7 @@ function updateHome() {
 
             "lastWinner",
 
-            RESULTS.race[0]
+            APP.results.race[0]
 
         );
 
@@ -1983,7 +1982,7 @@ function updateHome() {
 
             "lastPole",
 
-            RESULTS.qualifying[0]
+           APP.results.qualifying[0]
 
         );
 
@@ -1998,7 +1997,7 @@ function updateHome() {
 
         "totalGP",
 
-        WEEKEND.round
+        APP.weekend.round
 
     );
 
@@ -2018,7 +2017,7 @@ function updateHome() {
 
 function getWeekendStatus() {
 
-    if (!WEEKEND) {
+    if (!APP.weekend) {
 
         return "Caricamento...";
 
@@ -2030,7 +2029,7 @@ function getWeekendStatus() {
 
         new Date(
 
-            WEEKEND.closePrediction
+           APP.weekend.closePrediction
 
         );
 
@@ -2051,7 +2050,7 @@ function getWeekendStatus() {
 
 function startCountdown() {
 
-    if (!WEEKEND) return;
+    if (!APP.weekend) return;
 
    if (APP.countdownTimer) {
 
@@ -2070,7 +2069,7 @@ function startCountdown() {
 
             new Date(
 
-                WEEKEND.closePrediction
+                APP.weekend.closePrediction
 
             );
 
