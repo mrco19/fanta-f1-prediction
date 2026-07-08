@@ -2049,22 +2049,19 @@ function getWeekendStatus() {
    COUNTDOWN
 ========================================================== */
 
-let countdownTimer = null;
-
 function startCountdown() {
 
     if (!WEEKEND) return;
 
-    if (countdownTimer) {
+   if (APP.countdownTimer) {
 
-        clearInterval(
+    clearInterval(
 
-            countdownTimer
+        APP.countdownTimer
 
-        );
+    );
 
-    }
-
+}
     function update() {
 
         const now = new Date();
@@ -2189,15 +2186,15 @@ function startCountdown() {
 
     update();
 
-    countdownTimer =
+    APP.countdownTimer =
 
-        setInterval(
+    setInterval(
 
-            update,
+        update,
 
-            60000
+        60000
 
-        );
+    );
 
 }
 /* ==========================================================
