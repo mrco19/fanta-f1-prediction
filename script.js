@@ -1812,13 +1812,7 @@ function initializeDriverLocks() {
     });
 
 }
-fillResultSession({
 
-    prefix: "xyz",
-
-    results: RESULTS.special
-
-});
 /* ==========================================================
    HOME
 ========================================================== */
