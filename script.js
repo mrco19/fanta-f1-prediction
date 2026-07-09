@@ -2488,3 +2488,14 @@ document.addEventListener(
     initializeApplication
 
 );
+/* ==========================================================
+   AVVIO SITO
+========================================================== */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    console.log("Avvio Fanta F1 Prediction");
+
+    buildPredictionPage();
+
+});
