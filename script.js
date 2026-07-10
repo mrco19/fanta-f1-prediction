@@ -1638,7 +1638,7 @@ function fillResultSession(config){
    CARICAMENTO COMPLETO APPLICAZIONE
 ========================================================== */
 
-async function loadAllData(){
+async function loadAllData() {
 
     await loadWeekend();
 
@@ -1652,55 +1652,50 @@ async function loadAllData(){
    INIZIALIZZAZIONE
 ========================================================== */
 
-async function initializeApplication(){
+async function initializeApplication() {
 
-    try{
+    try {
 
-        console.log(
-
-            "🏁 Avvio Fanta F1 Prediction..."
-
-        );
+        console.log("🏁 Avvio Fanta F1 Prediction...");
 
         /* --------------------------
-           CARICA FILE JSON
+           Caricamento dati
         -------------------------- */
 
         await loadAllData();
 
         /* --------------------------
-           CREA TUTTE LE TABELLE
+           Costruzione tabelle
         -------------------------- */
 
-        buildPredictionPage();
+        buildPredictionTables();
 
         /* --------------------------
-           BLOCCA DUPLICATI
+           Protezione duplicati
         -------------------------- */
 
         initializeDriverLocks();
 
         /* --------------------------
-           CARICA RESULTS.JSON
+           Carica risultati
         -------------------------- */
 
         updateResultsPage();
 
         /* --------------------------
-           AGGIORNA HOME
+           Aggiorna Home
         -------------------------- */
 
         updateHome();
 
         /* --------------------------
-           NASCONDE O MOSTRA
-           LE SESSIONI SPRINT
+           Sprint Weekend
         -------------------------- */
 
         updateSprintVisibility();
 
         /* --------------------------
-           MENU
+           Menu
         -------------------------- */
 
         initializeMenu();
@@ -1708,34 +1703,24 @@ async function initializeApplication(){
         initializeOutsideClick();
 
         /* --------------------------
-           PULSANTI
+           Pulsanti
         -------------------------- */
 
         initializeButtons();
 
         /* --------------------------
-           HOME
+           Pagina iniziale
         -------------------------- */
 
         showSection("home");
 
-        console.log(
-
-            "✅ Applicazione pronta."
-
-        );
+        console.log("✅ Applicazione pronta.");
 
     }
 
     catch(error){
 
-        console.error(
-
-            "Errore inizializzazione:",
-
-            error
-
-        );
+        console.error("Errore inizializzazione:", error);
 
     }
 
