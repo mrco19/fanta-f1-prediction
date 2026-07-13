@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Fanta F1 Prediction - Admin</title>
+
+<link rel="stylesheet" href="admin.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="admin-container">
+
+    <aside class="sidebar">
+
+        <h1>🏁 Admin</h1>
+
+        <button class="menu-btn active" data-page="dashboard">
+            🏠 Dashboard
+        </button>
+
+        <button class="menu-btn" data-page="weekend">
+            🏎 Weekend
+        </button>
+
+        <button class="menu-btn" data-page="results">
+            🏆 Risultati
+        </button>
+
+        <button class="menu-btn" data-page="ranking">
+            📊 Classifica
+        </button>
+
+        <button class="menu-btn" data-page="drivers">
+            👥 Piloti
+        </button>
+
+        <button class="menu-btn" data-page="settings">
+            ⚙️ Impostazioni
+        </button>
+
+    </aside>
+
+    <main class="content">
+
+        <!-- DASHBOARD -->
+
+        <section id="dashboard" class="page active">
+
+            <h2>Dashboard</h2>
+
+            <div class="cards">
+
+                <div class="card">
+
+                    <h3>GP Corrente</h3>
+
+                    <p id="currentGP">-</p>
+
+                </div>
+
+                <div class="card">
+
+                    <h3>Round</h3>
+
+                    <p id="currentRound">-</p>
+
+                </div>
+
+                <div class="card">
+
+                    <h3>Weekend</h3>
+
+                    <p id="currentWeekendType">-</p>
+
+                </div>
+
+                <div class="card">
+
+                    <h3>Pronostici</h3>
+
+                    <p id="predictionStatus">-</p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- WEEKEND -->
+
+        <section id="weekend" class="page">
+
+            <h2>Weekend</h2>
+
+            <p>Qui verrà compilato automaticamente il weekend.json.</p>
+
+        </section>
+
+        <!-- RISULTATI -->
+
+        <section id="results" class="page">
+
+            <h2>Risultati</h2>
+
+            <p>Qui inserirai Qualifiche, Sprint e Gara.</p>
+
+        </section>
+
+        <!-- CLASSIFICA -->
+
+        <section id="ranking" class="page">
+
+            <h2>Classifica</h2>
+
+            <p>Qui aggiornerai la classifica generale.</p>
+
+        </section>
+
+        <!-- PILOTI -->
+
+        <section id="drivers" class="page">
+
+            <h2>Piloti</h2>
+
+            <p>Qui gestirai l'elenco piloti.</p>
+
+        </section>
+
+        <!-- IMPOSTAZIONI -->
+
+        <section id="settings" class="page">
+
+            <h2>Impostazioni</h2>
+
+            <p>Qui gestirai bonus e punteggi.</p>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script src="admin.js"></script>
+
+</body>
+
+</html>
