@@ -1,50 +1,33 @@
 {
-  "id": 12,
-
-  "name": "Gran Premio di Gran Bretagna",
-
-  "country": "Regno Unito",
-
-  "circuit": "Silverstone",
-
-  "flag": "🇬🇧",
-
-  "type": "Weekend Normale",
-
+  "id": 13,
+  "name": "Gran Premio del Belgio",
+  "country": "Belgio",
+  "circuit": "Spa-Francorchamps",
+  "flag": "🇧🇪",
+  "type": "Weekend Sprint",
   "status": "open",
-
   "season": 2026,
+  "round": 13,
 
-  "round": 12,
+  "startDate": "2026-07-24T12:30:00",
+  "endDate": "2026-07-26T18:00:00",
 
-  "startDate": "2026-07-10T13:30:00",
-
-  "endDate": "2026-07-12T18:00:00",
-
-  "predictionsClose": "2026-07-11T15:45:00",
+  "predictionsClose": "2026-07-24T15:30:00",
 
   "leader": "Marco",
-
   "leaderPoints": 287,
-
-  "totalGP": 12,
+  "totalGP": 13,
 
   "lastGP": {
-
-    "name": "Austria",
-
-    "winner": "George RUSSELL",
-
-    "pole": "George RUSSELL"
-
+    "name": "Gran Bretagna",
+    "winner": "Max VERSTAPPEN",
+    "pole": "Lando NORRIS"
   },
 
   "statistics": {
-
     "perfectRace": 5,
-
     "perfectWeekend": 2
+  },
 
-  }
-
+  "sprint": true
 }
