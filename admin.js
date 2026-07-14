@@ -1018,3 +1018,18 @@ function prepareNextWeekend(){
     );
 
 }
+/* ==========================================================
+   PULSANTE PROSSIMO GP
+========================================================== */
+
+document
+
+.getElementById("nextWeekend")
+
+.addEventListener(
+
+    "click",
+
+    prepareNextWeekend
+
+);
