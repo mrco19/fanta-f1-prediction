@@ -500,3 +500,121 @@ document
     loadResults
 
 );
+/* ==========================================================
+   CREA OGGETTO RESULTS
+========================================================== */
+
+function buildResultsJSON(){
+
+    return{
+
+        qualifying:
+            getSessionValues("aq",5),
+
+        sprintQualifying:
+            getSessionValues("asq",5),
+
+        sprint:
+            getSessionValues("asr",8),
+
+        race:
+            getSessionValues("ar",10)
+
+    };
+
+}
+/* ==========================================================
+   LEGGE UNA SESSIONE
+========================================================== */
+
+function getSessionValues(prefix,total){
+
+    const array=[];
+
+    for(let i=1;i<=total;i++){
+
+        const value=
+
+            document
+
+            .getElementById(prefix+i)
+
+            ?.value
+
+            || "";
+
+        if(value!==""){
+
+            array.push(value);
+
+        }
+
+    }
+
+    return array;
+
+}
+/* ==========================================================
+   SALVA RESULTS.JSON
+========================================================== */
+
+function saveResults(){
+
+    const results=buildResultsJSON();
+
+    const json=JSON.stringify(
+
+        results,
+
+        null,
+
+        2
+
+    );
+
+    const blob=new Blob(
+
+        [json],
+
+        {
+
+            type:"application/json"
+
+        }
+
+    );
+
+    const url=
+
+        URL.createObjectURL(blob);
+
+    const link=
+
+        document.createElement("a");
+
+    link.href=url;
+
+    link.download="results.json";
+
+    link.click();
+
+    URL.revokeObjectURL(url);
+
+    console.log("✅ results.json creato");
+
+}
+/* ==========================================================
+   PULSANTE SALVA RESULTS
+========================================================== */
+
+document
+
+.getElementById("saveResults")
+
+.addEventListener(
+
+    "click",
+
+    saveResults
+
+);
