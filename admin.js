@@ -5,7 +5,36 @@
    ADMIN.JS
    Versione 1.0
 ========================================================== */
+/* ==========================================================
+   ELENCO PILOTI 2026
+========================================================== */
 
+const DRIVERS = [
+
+    "Alexander ALBON",
+    "Arvin LINDBLAD",
+    "Carlos SAINZ",
+    "Charles LECLERC",
+    "Esteban OCON",
+    "Fernando ALONSO",
+    "Franco COLAPINTO",
+    "Gabriel BORTOLETO",
+    "George RUSSELL",
+    "Isack HADJAR",
+    "Kimi ANTONELLI",
+    "Lando NORRIS",
+    "Lance STROLL",
+    "Lewis HAMILTON",
+    "Liam LAWSON",
+    "Max VERSTAPPEN",
+    "Nico HULKENBERG",
+    "Oliver BEARMAN",
+    "Oscar PIASTRI",
+    "Pierre GASLY",
+    "Sergio PEREZ",
+    "Valtteri BOTTAS"
+
+].sort((a,b)=>a.localeCompare(b));
 /* ==========================================================
    CACHE DOM
 ========================================================== */
@@ -297,3 +326,101 @@ document
     saveWeekend
 
 );
+/* ==========================================================
+   CREA SELECT PILOTI
+========================================================== */
+
+function createDriverSelect(id){
+
+    let html=`<select id="${id}">`;
+
+    html+=`<option value="">--</option>`;
+
+    DRIVERS.forEach(driver=>{
+
+        html+=`<option value="${driver}">${driver}</option>`;
+
+    });
+
+    html+=`</select>`;
+
+    return html;
+
+}
+/* ==========================================================
+   CREA TABELLE RESULTS
+========================================================== */
+
+function buildResultsPage(){
+
+    createSession(
+
+        "adminQualifying",
+
+        "aq",
+
+        5
+
+    );
+
+    createSession(
+
+        "adminSprintQualifying",
+
+        "asq",
+
+        5
+
+    );
+
+    createSession(
+
+        "adminSprintRace",
+
+        "asr",
+
+        8
+
+    );
+
+    createSession(
+
+        "adminRace",
+
+        "ar",
+
+        10
+
+    );
+
+}
+function createSession(container,prefix,total){
+
+    const div=document.getElementById(container);
+
+    let html="";
+
+    for(let i=1;i<=total;i++){
+
+        html+=`
+
+        <div class="admin-row">
+
+            <span>${i}°</span>
+
+            ${createDriverSelect(prefix+i)}
+
+        </div>
+
+        `;
+
+    }
+
+    div.innerHTML=html;
+
+}
+/* ==========================================================
+   COSTRUZIONE PAGINA RISULTATI
+========================================================== */
+
+buildResultsPage();
