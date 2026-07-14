@@ -1069,3 +1069,39 @@ function clearSession(prefix,total){
     }
 
 }
+<section id="settings" class="page">
+
+    <h2>Impostazioni</h2>
+
+    <div class="admin-actions">
+
+        <button id="nextWeekend">
+
+            ⏭️ Passa al prossimo Gran Premio
+
+        </button>
+
+        <button id="generateAll">
+
+            🚀 Genera tutti i JSON
+
+        </button>
+
+    </div>
+
+</section>
+/* ==========================================================
+   PULSANTE GENERA TUTTO
+========================================================== */
+
+document
+
+.getElementById("generateAll")
+
+.addEventListener(
+
+    "click",
+
+    generateAllJSON
+
+);
