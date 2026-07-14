@@ -101,13 +101,129 @@
 
         <!-- WEEKEND -->
 
-        <section id="weekend" class="page">
+       <section id="weekend" class="page">
 
-            <h2>Weekend</h2>
+<h2>Weekend</h2>
 
-            <p>Qui verrà compilato automaticamente il weekend.json.</p>
+<div class="form-grid">
 
-        </section>
+    <div class="form-group">
+
+        <label>Nome Gran Premio</label>
+
+        <input
+            id="gpNameInput"
+            type="text">
+
+    </div>
+
+    <div class="form-group">
+
+        <label>Circuito</label>
+
+        <input
+            id="gpCircuitInput"
+            type="text">
+
+    </div>
+
+    <div class="form-group">
+
+        <label>Nazione</label>
+
+        <input
+            id="gpCountryInput"
+            type="text">
+
+    </div>
+
+    <div class="form-group">
+
+        <label>Bandiera</label>
+
+        <input
+            id="gpFlagInput"
+            type="text">
+
+    </div>
+
+    <div class="form-group">
+
+        <label>Round</label>
+
+        <input
+            id="gpRoundInput"
+            type="number">
+
+    </div>
+
+    <div class="form-group">
+
+        <label>Weekend</label>
+
+        <select id="gpSprintInput">
+
+            <option value="false">
+                Weekend Normale
+            </option>
+
+            <option value="true">
+                Weekend Sprint
+            </option>
+
+        </select>
+
+    </div>
+
+    <div class="form-group">
+
+        <label>Data Inizio</label>
+
+        <input
+            id="gpStartInput"
+            type="datetime-local">
+
+    </div>
+
+    <div class="form-group">
+
+        <label>Data Fine</label>
+
+        <input
+            id="gpEndInput"
+            type="datetime-local">
+
+    </div>
+
+    <div class="form-group">
+
+        <label>Chiusura Pronostici</label>
+
+        <input
+            id="gpCloseInput"
+            type="datetime-local">
+
+    </div>
+
+</div>
+
+<div class="admin-actions">
+
+<button id="loadWeekend">
+
+📥 Carica Weekend
+
+</button>
+
+<button id="saveWeekend">
+
+💾 Salva Weekend
+
+</button>
+
+</div>
+
+</section>
 
         <!-- RISULTATI -->
 
