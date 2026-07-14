@@ -1011,13 +1011,15 @@ function prepareNextWeekend(){
     document.getElementById("gpSprintInput").value =
         next.sprint ? "true" : "false";
 
-    alert(
+   clearResults();
 
-        "Gran Premio aggiornato.\nRicorda di inserire le nuove date."
+   alert(
+
+   "Weekend aggiornato.\n\nI risultati sono stati azzerati.\nInserisci le nuove date e salva il weekend."
 
     );
 
-}
+  }
 /* ==========================================================
    PULSANTE PROSSIMO GP
 ========================================================== */
@@ -1033,3 +1035,37 @@ document
     prepareNextWeekend
 
 );
+/* ==========================================================
+   AZZERA RESULTS
+========================================================== */
+
+function clearResults(){
+
+    clearSession("aq",5);
+
+    clearSession("asq",5);
+
+    clearSession("asr",8);
+
+    clearSession("ar",10);
+
+}
+/* ==========================================================
+   AZZERA UNA SESSIONE
+========================================================== */
+
+function clearSession(prefix,total){
+
+    for(let i=1;i<=total;i++){
+
+        const select=document.getElementById(prefix+i);
+
+        if(select){
+
+            select.value="";
+
+        }
+
+    }
+
+}
