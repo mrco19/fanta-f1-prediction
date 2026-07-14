@@ -618,3 +618,106 @@ document
     saveResults
 
 );
+/* ==========================================================
+   CREA RIGA CLASSIFICA
+========================================================== */
+
+function createRankingRow(name="",points=""){
+
+    return `
+
+    <div class="ranking-row">
+
+        <input
+
+            class="player-name"
+
+            placeholder="Nome"
+
+            value="${name}"
+
+        >
+
+        <input
+
+            class="player-points"
+
+            type="number"
+
+            placeholder="Punti"
+
+            value="${points}"
+
+        >
+
+        <button
+
+            class="remove-player">
+
+            ✖
+
+        </button>
+
+    </div>
+
+    `;
+
+}
+/* ==========================================================
+   AGGIUNGE GIOCATORE
+========================================================== */
+
+function addPlayerRow(name="",points=""){
+
+    const container=
+
+        document.getElementById("rankingEditor");
+
+    container.insertAdjacentHTML(
+
+        "beforeend",
+
+        createRankingRow(name,points)
+
+    );
+
+    updateRemoveButtons();
+
+}
+/* ==========================================================
+   ELIMINA GIOCATORE
+========================================================== */
+
+function updateRemoveButtons(){
+
+    document
+
+    .querySelectorAll(".remove-player")
+
+    .forEach(button=>{
+
+        button.onclick=()=>{
+
+            button.parentElement.remove();
+
+        };
+
+    });
+
+}
+
+document
+
+.getElementById("addPlayer")
+
+.addEventListener(
+
+    "click",
+
+    ()=>{
+
+        addPlayerRow();
+
+    }
+
+);
