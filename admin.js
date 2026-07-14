@@ -182,3 +182,118 @@ document
     loadWeekend
 
 );
+/* ==========================================================
+   CREA OGGETTO WEEKEND
+========================================================== */
+
+function buildWeekendJSON(){
+
+    return{
+
+        id: Number(
+
+            document.getElementById("gpRoundInput").value
+
+        ),
+
+        name:
+
+            document.getElementById("gpNameInput").value,
+
+        country:
+
+            document.getElementById("gpCountryInput").value,
+
+        circuit:
+
+            document.getElementById("gpCircuitInput").value,
+
+        flag:
+
+            document.getElementById("gpFlagInput").value,
+
+        round: Number(
+
+            document.getElementById("gpRoundInput").value
+
+        ),
+
+        sprint:
+
+            document.getElementById("gpSprintInput").value==="true",
+
+        startDate:
+
+            document.getElementById("gpStartInput").value,
+
+        endDate:
+
+            document.getElementById("gpEndInput").value,
+
+        predictionsClose:
+
+            document.getElementById("gpCloseInput").value
+
+    };
+
+}
+/* ==========================================================
+   SCARICA WEEKEND.JSON
+========================================================== */
+
+function saveWeekend(){
+
+    const weekend = buildWeekendJSON();
+
+    const json = JSON.stringify(
+
+        weekend,
+
+        null,
+
+        2
+
+    );
+
+    const blob = new Blob(
+
+        [json],
+
+        {
+
+            type:"application/json"
+
+        }
+
+    );
+
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement("a");
+
+    link.href = url;
+
+    link.download = "weekend.json";
+
+    link.click();
+
+    URL.revokeObjectURL(url);
+
+    console.log("✅ weekend.json creato");
+
+}
+/* ==========================================================
+   PULSANTE SALVA WEEKEND
+========================================================== */
+
+document
+
+.getElementById("saveWeekend")
+
+.addEventListener(
+
+    "click",
+
+    saveWeekend
+
+);
