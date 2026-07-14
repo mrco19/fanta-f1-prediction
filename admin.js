@@ -424,3 +424,79 @@ function createSession(container,prefix,total){
 ========================================================== */
 
 buildResultsPage();
+/* ==========================================================
+   CARICA RESULTS.JSON
+========================================================== */
+
+async function loadResults(){
+
+    try{
+
+        const response = await fetch("results.json");
+
+        if(!response.ok){
+
+            throw new Error("results.json non trovato");
+
+        }
+
+        const results = await response.json();
+
+        fillSession("aq", results.qualifying);
+        fillSession("asq", results.sprintQualifying);
+        fillSession("asr", results.sprint);
+        fillSession("ar", results.race);
+
+        console.log("✅ Results caricati");
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        alert("Errore caricamento results.json");
+
+    }
+
+}
+/* ==========================================================
+   RIEMPI UNA SESSIONE
+========================================================== */
+
+function fillSession(prefix,list){
+
+    if(!Array.isArray(list)) return;
+
+    list.forEach((driver,index)=>{
+
+        const select = document.getElementById(
+
+            prefix+(index+1)
+
+        );
+
+        if(select){
+
+            select.value = driver;
+
+        }
+
+    });
+
+}
+/* ==========================================================
+   PULSANTE CARICA RESULTS
+========================================================== */
+
+document
+
+.getElementById("loadResults")
+
+.addEventListener(
+
+    "click",
+
+    loadResults
+
+);
