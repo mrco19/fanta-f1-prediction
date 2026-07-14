@@ -721,3 +721,179 @@ document
     }
 
 );
+/* ==========================================================
+   CARICA RANKING.JSON
+========================================================== */
+
+async function loadRanking(){
+
+    try{
+
+        const response = await fetch("ranking.json");
+
+        if(!response.ok){
+
+            throw new Error("ranking.json non trovato");
+
+        }
+
+        const ranking = await response.json();
+
+        const container =
+
+            document.getElementById("rankingEditor");
+
+        container.innerHTML = "";
+
+        ranking.forEach(player=>{
+
+            addPlayerRow(
+
+                player.name,
+
+                player.points
+
+            );
+
+        });
+
+        console.log("✅ Classifica caricata");
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        alert("Errore caricamento ranking.json");
+
+    }
+
+}
+/* ==========================================================
+   CREA RANKING.JSON
+========================================================== */
+
+function buildRankingJSON(){
+
+    const players = [];
+
+    document
+
+    .querySelectorAll(".ranking-row")
+
+    .forEach(row=>{
+
+        const name =
+
+            row.querySelector(".player-name")
+
+            .value
+
+            .trim();
+
+        const points =
+
+            Number(
+
+                row.querySelector(".player-points")
+
+                .value
+
+            );
+
+        if(name!==""){
+
+            players.push({
+
+                name,
+
+                points
+
+            });
+
+        }
+
+    });
+
+    players.sort(
+
+        (a,b)=>b.points-a.points
+
+    );
+
+    return players;
+
+}
+/* ==========================================================
+   SALVA RANKING.JSON
+========================================================== */
+
+function saveRanking(){
+
+    const ranking = buildRankingJSON();
+
+    const json = JSON.stringify(
+
+        ranking,
+
+        null,
+
+        2
+
+    );
+
+    const blob = new Blob(
+
+        [json],
+
+        {
+
+            type:"application/json"
+
+        }
+
+    );
+
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement("a");
+
+    link.href = url;
+
+    link.download = "ranking.json";
+
+    link.click();
+
+    URL.revokeObjectURL(url);
+
+    console.log("✅ ranking.json creato");
+
+}
+/* ==========================================================
+   PULSANTI CLASSIFICA
+========================================================== */
+
+document
+
+.getElementById("loadRanking")
+
+.addEventListener(
+
+    "click",
+
+    loadRanking
+
+);
+
+document
+
+.getElementById("saveRanking")
+
+.addEventListener(
+
+    "click",
+
+    saveRanking
+
+);
