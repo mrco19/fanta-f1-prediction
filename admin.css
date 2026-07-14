@@ -333,3 +333,46 @@ box-shadow:0 10px 25px rgba(225,6,0,.35);
 }
 
 }
+.admin-session{
+
+margin-bottom:30px;
+
+}
+
+.admin-row{
+
+display:flex;
+
+align-items:center;
+
+gap:15px;
+
+margin-bottom:12px;
+
+}
+
+.admin-row span{
+
+width:40px;
+
+font-weight:700;
+
+}
+
+.admin-row select{
+
+flex:1;
+
+padding:12px;
+
+border:none;
+
+border-radius:10px;
+
+background:#202020;
+
+color:white;
+
+font-size:15px;
+
+}
