@@ -1069,22 +1069,4 @@ function clearSession(prefix,total){
     }
 
 }
-<section id="settings" class="page">
 
-    <h2>Impostazioni</h2>
-
-/* ==========================================================
-   PULSANTE GENERA TUTTO
-========================================================== */
-
-document
-
-.getElementById("generateAll")
-
-.addEventListener(
-
-    "click",
-
-    generateAllJSON
-
-);
