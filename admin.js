@@ -902,13 +902,19 @@ document
    CERCA GP SUCCESSIVO
 ========================================================== */
 
-function getNextWeekend(currentRound){
+function getWeekend(round){
 
     return CALENDAR.find(
 
-        gp=>gp.round===currentRound+1
+        gp => gp.round === round
 
     );
+
+}
+
+function getNextWeekend(currentRound){
+
+    return getWeekend(currentRound + 1);
 
 }
 /* ==========================================================
@@ -933,33 +939,43 @@ function prepareNextWeekend(){
 
     }
 
-    document.getElementById("gpNameInput").value =
-        next.name;
+    document.getElementById("gpNameInput").value = next.name;
 
-    document.getElementById("gpCountryInput").value =
-        next.country;
+    document.getElementById("gpCountryInput").value = next.country;
 
-    document.getElementById("gpCircuitInput").value =
-        next.circuit;
+    document.getElementById("gpCircuitInput").value = next.circuit;
 
-    document.getElementById("gpFlagInput").value =
-        next.flag;
+    document.getElementById("gpFlagInput").value = next.flag;
 
-    document.getElementById("gpRoundInput").value =
-        next.round;
+    document.getElementById("gpRoundInput").value = next.round;
 
     document.getElementById("gpSprintInput").value =
+
         next.sprint ? "true" : "false";
 
-   clearResults();
+    document.getElementById("gpStartInput").value =
 
-   alert(
+        next.startDate;
 
-   "Weekend aggiornato.\n\nI risultati sono stati azzerati.\nInserisci le nuove date e salva il weekend."
+    document.getElementById("gpEndInput").value =
+
+        next.endDate;
+
+    document.getElementById("gpCloseInput").value =
+
+        next.predictionsClose;
+
+    clearResults();
+
+    alert(
+
+        "Weekend aggiornato.\n\n" +
+
+        "Controlla le date e salva il weekend."
 
     );
 
-  }
+}
 /* ==========================================================
    PULSANTE PROSSIMO GP
 ========================================================== */
