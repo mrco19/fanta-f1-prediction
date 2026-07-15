@@ -897,67 +897,7 @@ document
     saveRanking
 
 );
-/* ==========================================================
-   CALENDARIO F1 2026
-========================================================== */
 
-const CALENDAR = [
-
-{
-    round:13,
-    name:"Gran Premio del Belgio",
-    country:"Belgio",
-    circuit:"Spa-Francorchamps",
-    flag:"🇧🇪",
-    sprint:true
-},
-
-{
-    round:14,
-    name:"Gran Premio d'Ungheria",
-    country:"Ungheria",
-    circuit:"Hungaroring",
-    flag:"🇭🇺",
-    sprint:false
-},
-
-{
-    round:15,
-    name:"Gran Premio d'Olanda",
-    country:"Paesi Bassi",
-    circuit:"Zandvoort",
-    flag:"🇳🇱",
-    sprint:false
-},
-
-{
-    round:16,
-    name:"Gran Premio d'Italia",
-    country:"Italia",
-    circuit:"Monza",
-    flag:"🇮🇹",
-    sprint:false
-},
-
-{
-    round:17,
-    name:"Gran Premio dell'Azerbaijan",
-    country:"Azerbaijan",
-    circuit:"Baku",
-    flag:"🇦🇿",
-    sprint:false
-},
-
-{
-    round:18,
-    name:"Gran Premio di Singapore",
-    country:"Singapore",
-    circuit:"Marina Bay",
-    flag:"🇸🇬",
-    sprint:false
-}
-
-];
 /* ==========================================================
    CERCA GP SUCCESSIVO
 ========================================================== */
