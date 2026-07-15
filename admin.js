@@ -1025,4 +1025,45 @@ function clearSession(prefix,total){
     }
 
 }
+/* ==========================================================
+   GENERA TUTTI I JSON
+========================================================== */
 
+function generateAllJSON(){
+
+    saveWeekend();
+
+    saveResults();
+
+    saveRanking();
+
+    alert(
+
+        "✅ File generati!\n\n" +
+
+        "- weekend.json\n" +
+
+        "- results.json\n" +
+
+        "- ranking.json"
+
+    );
+
+}
+/* ==========================================================
+   PULSANTE GENERA TUTTO
+========================================================== */
+
+const generateAllButton = document.getElementById("generateAll");
+
+if(generateAllButton){
+
+    generateAllButton.addEventListener(
+
+        "click",
+
+        generateAllJSON
+
+    );
+
+}
