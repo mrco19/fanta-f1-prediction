@@ -114,3 +114,60 @@ window.addEventListener(
     }
 
 );
+/* ==========================================================
+   TEST CONNESSIONE GITHUB
+========================================================== */
+
+async function testGithubConnection(){
+
+    const token = getGithubToken();
+
+    if(token===""){
+
+        alert("Inserisci il token.");
+
+        return;
+
+    }
+
+    try{
+
+        const response = await fetch(
+
+            `https://api.github.com/repos/${GITHUB.owner}/${GITHUB.repo}`,
+
+            {
+
+                headers:{
+
+                    Authorization:`Bearer ${token}`,
+
+                    Accept:"application/vnd.github+json"
+
+                }
+
+            }
+
+        );
+
+        if(response.ok){
+
+            alert("✅ Connessione GitHub riuscita!");
+
+        }else{
+
+            alert("❌ Token non valido oppure repository non accessibile.");
+
+        }
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        alert("Errore di connessione.");
+
+    }
+
+}
