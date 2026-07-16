@@ -242,3 +242,89 @@ function toBase64(text){
     );
 
 }
+/* ==========================================================
+   CARICA FILE SU GITHUB
+========================================================== */
+
+async function uploadFile(path, content, message){
+
+    const token = getGithubToken();
+
+    const sha = await getFileSHA(path);
+
+    const response = await fetch(
+
+        `https://api.github.com/repos/${GITHUB.owner}/${GITHUB.repo}/contents/${path}`,
+
+        {
+
+            method:"PUT",
+
+            headers:{
+
+                Authorization:`Bearer ${token}`,
+
+                Accept:"application/vnd.github+json",
+
+                "Content-Type":"application/json"
+
+            },
+
+            body:JSON.stringify({
+
+                message,
+
+                content:toBase64(content),
+
+                branch:GITHUB.branch,
+
+                sha
+
+            })
+
+        }
+
+    );
+
+    if(!response.ok){
+
+        throw new Error("Errore upload");
+
+    }
+
+    return await response.json();
+
+}
+/* ==========================================================
+   PUBBLICA WEEKEND.JSON
+========================================================== */
+
+async function publishWeekend(){
+
+    try{
+
+        const weekend = buildWeekendJSON();
+
+        await uploadFile(
+
+            "weekend.json",
+
+            JSON.stringify(weekend,null,2),
+
+            "Aggiornamento weekend"
+
+        );
+
+        alert("✅ weekend.json aggiornato su GitHub");
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        alert("Errore durante il caricamento.");
+
+    }
+
+}
