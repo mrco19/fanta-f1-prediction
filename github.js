@@ -188,3 +188,57 @@ if(testButton){
     );
 
 }
+/* ==========================================================
+   LEGGE SHA FILE
+========================================================== */
+
+async function getFileSHA(path){
+
+    const token = getGithubToken();
+
+    const response = await fetch(
+
+        `https://api.github.com/repos/${GITHUB.owner}/${GITHUB.repo}/contents/${path}`,
+
+        {
+
+            headers:{
+
+                Authorization:`Bearer ${token}`,
+
+                Accept:"application/vnd.github+json"
+
+            }
+
+        }
+
+    );
+
+    if(!response.ok){
+
+        throw new Error("SHA non trovato");
+
+    }
+
+    const data = await response.json();
+
+    return data.sha;
+
+}
+/* ==========================================================
+   CONVERTE TESTO IN BASE64
+========================================================== */
+
+function toBase64(text){
+
+    return btoa(
+
+        unescape(
+
+            encodeURIComponent(text)
+
+        )
+
+    );
+
+}
