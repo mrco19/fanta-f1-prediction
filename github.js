@@ -171,3 +171,20 @@ async function testGithubConnection(){
     }
 
 }
+/* ==========================================================
+   TEST GITHUB
+========================================================== */
+
+const testButton = document.getElementById("testGithub");
+
+if(testButton){
+
+    testButton.addEventListener(
+
+        "click",
+
+        testGithubConnection
+
+    );
+
+}
