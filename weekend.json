@@ -4,30 +4,9 @@
   "country": "Belgio",
   "circuit": "Spa-Francorchamps",
   "flag": "🇧🇪",
-  "type": "Weekend Sprint",
-  "status": "open",
-  "season": 2026,
   "round": 13,
-
-  "startDate": "2026-07-24T12:30:00",
-  "endDate": "2026-07-26T18:00:00",
-
-  "predictionsClose": "2026-07-24T15:30:00",
-
-  "leader": "Marco",
-  "leaderPoints": 287,
-  "totalGP": 13,
-
-  "lastGP": {
-    "name": "Gran Bretagna",
-    "winner": "Max VERSTAPPEN",
-    "pole": "Lando NORRIS"
-  },
-
-  "statistics": {
-    "perfectRace": 5,
-    "perfectWeekend": 2
-  },
-
-  "sprint": true
+  "sprint": true,
+  "startDate": "2026-07-24T12:30",
+  "endDate": "2026-07-26T18:00",
+  "predictionsClose": "2026-07-24T15:30"
 }
