@@ -328,3 +328,26 @@ async function publishWeekend(){
     }
 
 }
+/* ==========================================================
+   PULSANTE PUBBLICA WEEKEND
+========================================================== */
+
+const publishWeekendButton =
+
+document.getElementById(
+
+"publishWeekend"
+
+);
+
+if(publishWeekendButton){
+
+    publishWeekendButton.addEventListener(
+
+        "click",
+
+        publishWeekend
+
+    );
+
+}
