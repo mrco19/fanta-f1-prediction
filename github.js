@@ -40,3 +40,77 @@ function saveGithubToken(token){
     );
 
 }
+/* ==========================================================
+   SALVA TOKEN
+========================================================== */
+
+const saveButton = document.getElementById(
+
+    "saveGithubToken"
+
+);
+
+if(saveButton){
+
+    saveButton.addEventListener(
+
+        "click",
+
+        ()=>{
+
+            const token =
+
+                document
+
+                .getElementById("githubToken")
+
+                .value
+
+                .trim();
+
+            if(token===""){
+
+                alert("Inserisci il token.");
+
+                return;
+
+            }
+
+            saveGithubToken(token);
+
+            alert("✅ Token salvato.");
+
+        }
+
+    );
+
+}
+/* ==========================================================
+   CARICA TOKEN
+========================================================== */
+
+window.addEventListener(
+
+    "DOMContentLoaded",
+
+    ()=>{
+
+        const token = getGithubToken();
+
+        const input =
+
+            document.getElementById(
+
+                "githubToken"
+
+            );
+
+        if(input){
+
+            input.value = token;
+
+        }
+
+    }
+
+);
