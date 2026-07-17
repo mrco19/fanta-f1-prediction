@@ -155,6 +155,45 @@ function validatePublication(){
         }
 
     }
+   /* -------------------------
+   Risultati
+------------------------- */
+
+if(errors.length===0){
+
+    const results = buildResultsJSON();
+
+    if(results.qualifying.length !== 5){
+
+        errors.push("❌ Qualifica incompleta");
+
+    }
+
+    if(results.race.length !== 10){
+
+        errors.push("❌ Gara incompleta");
+
+    }
+
+    const weekend = buildWeekendJSON();
+
+    if(weekend.sprint){
+
+        if(results.sprintQualifying.length !== 5){
+
+            errors.push("❌ Sprint Qualifying incompleta");
+
+        }
+
+        if(results.sprint.length !== 8){
+
+            errors.push("❌ Sprint Race incompleta");
+
+        }
+
+    }
+
+}
 
     return{
 
