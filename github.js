@@ -72,3 +72,98 @@ function publicationReady(){
     );
 
 }
+/* ==========================================================
+   CONTROLLI PUBBLICAZIONE
+========================================================== */
+
+function validatePublication(){
+
+    const errors = [];
+
+    if(typeof buildWeekendJSON !== "function"){
+
+        errors.push("Weekend non disponibile.");
+
+    }
+
+    if(typeof buildResultsJSON !== "function"){
+
+        errors.push("Risultati non disponibili.");
+
+    }
+
+    if(typeof buildRankingJSON !== "function"){
+
+        errors.push("Classifica non disponibile.");
+
+    }
+
+    return{
+
+        valid: errors.length===0,
+
+        errors
+
+    };
+
+}
+/* ==========================================================
+   PULSANTE PUBBLICA
+========================================================== */
+
+function publishProject(){
+
+    const validation = validatePublication();
+
+    if(!validation.valid){
+
+        githubError(
+
+            validation.errors.join("\n")
+
+        );
+
+        return;
+
+    }
+
+    publicationReady();
+
+    alert(
+
+`✅ Tutto è pronto.
+
+1. Apri GitHub Desktop
+
+2. Scrivi il commit
+
+3. Premi Push
+
+Il sito verrà aggiornato automaticamente.`
+
+    );
+
+}
+/* ==========================================================
+   EVENTO PULSANTE PUBBLICA
+========================================================== */
+
+const publishButton =
+
+document.getElementById(
+
+    "publishProject"
+
+);
+
+if(publishButton){
+
+    publishButton.addEventListener(
+
+        "click",
+
+        publishProject
+
+    );
+
+}
