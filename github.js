@@ -92,25 +92,67 @@ function publicationReady(){
    CONTROLLI PUBBLICAZIONE
 ========================================================== */
 
+/* ==========================================================
+   CONTROLLI PUBBLICAZIONE
+========================================================== */
+
 function validatePublication(){
 
     const errors = [];
 
+    /* -------------------------
+       Funzioni presenti
+    ------------------------- */
+
     if(typeof buildWeekendJSON !== "function"){
 
-        errors.push("Weekend non disponibile.");
+        errors.push("❌ Weekend non disponibile");
 
     }
 
     if(typeof buildResultsJSON !== "function"){
 
-        errors.push("Risultati non disponibili.");
+        errors.push("❌ Risultati non disponibili");
 
     }
 
     if(typeof buildRankingJSON !== "function"){
 
-        errors.push("Classifica non disponibile.");
+        errors.push("❌ Classifica non disponibile");
+
+    }
+
+    /* -------------------------
+       Weekend
+    ------------------------- */
+
+    if(errors.length===0){
+
+        const weekend = buildWeekendJSON();
+
+        if(!weekend.name){
+
+            errors.push("❌ Nome GP mancante");
+
+        }
+
+        if(!weekend.round){
+
+            errors.push("❌ Round mancante");
+
+        }
+
+        if(!weekend.startDate){
+
+            errors.push("❌ Data inizio mancante");
+
+        }
+
+        if(!weekend.endDate){
+
+            errors.push("❌ Data fine mancante");
+
+        }
 
     }
 
