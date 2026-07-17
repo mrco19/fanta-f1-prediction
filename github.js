@@ -22,5 +22,53 @@ const GITHUB = {
 
 /* ==========================================================
    GITHUB.JS 2.0
-   (le funzioni verranno aggiunte qui)
+   Utility pubblicazione
 ========================================================== */
+
+/*
+    Questo file NON usa più le GitHub API.
+
+    La pubblicazione avverrà tramite:
+
+    Admin
+        ↓
+    GitHub Desktop
+        ↓
+    Commit
+        ↓
+    Push
+        ↓
+    GitHub Action
+*/
+
+/* ==========================================================
+   MESSAGGI
+========================================================== */
+
+function githubInfo(message){
+
+    console.log("GitHub:", message);
+
+}
+
+function githubError(message){
+
+    console.error("GitHub:", message);
+
+    alert(message);
+
+}
+
+/* ==========================================================
+   STATO PUBBLICAZIONE
+========================================================== */
+
+function publicationReady(){
+
+    githubInfo(
+
+        "I file JSON sono pronti per il commit."
+
+    );
+
+}
