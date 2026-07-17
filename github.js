@@ -67,9 +67,25 @@ function publicationReady(){
 
     githubInfo(
 
-        "I file JSON sono pronti per il commit."
+        "I file JSON sono pronti."
 
     );
+
+    const status =
+
+        document.getElementById(
+
+            "publicationStatus"
+
+        );
+
+    if(status){
+
+        status.innerHTML =
+
+        "🟢 Tutto pronto per Commit e Push";
+
+    }
 
 }
 /* ==========================================================
