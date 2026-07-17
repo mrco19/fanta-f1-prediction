@@ -332,34 +332,39 @@
 
     <hr>
 
-    <h2>GitHub</h2>
+    <!-- PUBBLICAZIONE -->
+
+<section id="publish" class="page">
+
+    <h2>Pubblicazione</h2>
 
     <div class="admin-card">
 
-        <label>GitHub Personal Access Token</label>
+        <h3>Stato progetto</h3>
 
-        <input
-            type="password"
-            id="githubToken"
-            placeholder="github_pat_xxxxxxxxxxxxxxxxx">
+        <p id="publicationStatus">
+
+            ⚪ Controllo non eseguito
+
+        </p>
+
+        <br>
+
+        <button id="publishProject">
+
+            🚀 Pubblica sito
+
+        </button>
 
         <br><br>
 
-        <button id="saveGithubToken">
-            💾 Salva Token
-        </button>
-       
-        <button id="testGithub">
+        <small>
 
-            🔍 Test Connessione
-       </button>
+            Il pulsante controlla che tutti i JSON siano corretti.
+            Successivamente sarà sufficiente fare Commit e Push con GitHub Desktop.
 
-       <button id="publishWeekend">
+        </small>
 
-            ☁️ Pubblica Weekend
-
-       </button>
-        
     </div>
 
 </section>
