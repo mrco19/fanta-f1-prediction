@@ -91,7 +91,7 @@ function publicationReady(){
 
             ✅ Nessun pilota duplicato<br>
 
-            ✅ Classifica disponibile<br>
+            ✅ Classifica valida<br>
 
             <hr>
 
@@ -280,7 +280,21 @@ if(errors.length===0){
     });
 
 }
+/* -------------------------
+   Classifica
+------------------------- */
 
+if(errors.length===0){
+
+    const ranking = buildRankingJSON();
+
+    if(ranking.length===0){
+
+        errors.push("❌ Classifica vuota");
+
+    }
+
+}
     return{
 
         valid: errors.length===0,
