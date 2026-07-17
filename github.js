@@ -67,7 +67,7 @@ function publicationReady(){
 
     githubInfo(
 
-        "I file JSON sono pronti."
+        "Controllo completato."
 
     );
 
@@ -81,16 +81,33 @@ function publicationReady(){
 
     if(status){
 
-        status.innerHTML =
+        status.innerHTML = `
 
-        "🟢 Tutto pronto per Commit e Push";
+        <div class="publish-ok">
+
+            ✅ Weekend completo<br>
+
+            ✅ Risultati completi<br>
+
+            ✅ Nessun pilota duplicato<br>
+
+            ✅ Classifica disponibile<br>
+
+            <hr>
+
+            <strong>
+
+            🚀 Pronto per Commit e Push
+
+            </strong>
+
+        </div>
+
+        `;
 
     }
 
 }
-/* ==========================================================
-   CONTROLLI PUBBLICAZIONE
-========================================================== */
 
 /* ==========================================================
    CONTROLLI PUBBLICAZIONE
@@ -194,6 +211,75 @@ if(errors.length===0){
     }
 
 }
+   /* -------------------------
+   Piloti duplicati
+------------------------- */
+
+if(errors.length===0){
+
+    const results = buildResultsJSON();
+
+    const duplicateChecks = [
+
+        checkDuplicates(
+
+            results.qualifying,
+
+            "Qualifica"
+
+        ),
+
+        checkDuplicates(
+
+            results.race,
+
+            "Gara"
+
+        )
+
+    ];
+
+    const weekend = buildWeekendJSON();
+
+    if(weekend.sprint){
+
+        duplicateChecks.push(
+
+            checkDuplicates(
+
+                results.sprintQualifying,
+
+                "Sprint Qualifying"
+
+            )
+
+        );
+
+        duplicateChecks.push(
+
+            checkDuplicates(
+
+                results.sprint,
+
+                "Sprint Race"
+
+            )
+
+        );
+
+    }
+
+    duplicateChecks.forEach(error=>{
+
+        if(error){
+
+            errors.push(error);
+
+        }
+
+    });
+
+}
 
     return{
 
@@ -202,6 +288,39 @@ if(errors.length===0){
         errors
 
     };
+
+}
+/* ==========================================================
+   CONTROLLA PILOTI DUPLICATI
+========================================================== */
+
+function checkDuplicates(list, sessionName){
+
+    const duplicates = [];
+
+    const unique = new Set();
+
+    list.forEach(driver=>{
+
+        if(driver==="") return;
+
+        if(unique.has(driver)){
+
+            duplicates.push(driver);
+
+        }
+
+        unique.add(driver);
+
+    });
+
+    if(duplicates.length>0){
+
+        return `❌ ${sessionName}: pilota duplicato (${duplicates.join(", ")})`;
+
+    }
+
+    return null;
 
 }
 /* ==========================================================
@@ -214,12 +333,35 @@ function publishProject(){
 
     if(!validation.valid){
 
-        githubError(
+        const status =
 
-            validation.errors.join("\n")
+document.getElementById(
 
-        );
+    "publicationStatus"
 
+);
+
+if(status){
+
+    status.innerHTML =
+
+    validation.errors
+
+    .map(
+
+        error=>`❌ ${error}`
+
+    )
+
+    .join("<br>");
+
+}
+
+githubError(
+
+    validation.errors.join("\n")
+
+);
         return;
 
     }
