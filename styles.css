@@ -1311,3 +1311,34 @@ color:#ccc;
 font-size:.95rem;
 
 }
+/* ==========================================================
+   COUNTDOWN
+========================================================== */
+
+.countdown-card{
+
+    margin-top:30px;
+
+    padding:25px;
+
+    border-radius:18px;
+
+    background:#111;
+
+    text-align:center;
+
+    box-shadow:0 0 20px rgba(0,0,0,.3);
+
+}
+
+#countdown{
+
+    margin-top:15px;
+
+    font-size:34px;
+
+    font-weight:bold;
+
+    color:#E10600;
+
+}
