@@ -209,7 +209,9 @@ function updateHome() {
         weekendData.circuit || "";
 
     const weekendType =
-        weekendData.type || "Weekend Normale";
+    weekendData.sprint
+        ? "Weekend Sprint"
+        : "Weekend Normale";
 
     const status =
         weekendData.status || "open";
