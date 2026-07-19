@@ -217,6 +217,10 @@ document
 
 function buildWeekendJSON(){
 
+   const sprint =
+        document.getElementById("gpSprintInput").value === "true";
+
+
     return{
 
         id: Number(
@@ -247,9 +251,11 @@ function buildWeekendJSON(){
 
         ),
 
-        sprint:
+        sprint: sprint,
 
-            document.getElementById("gpSprintInput").value==="true",
+        type: sprint
+            ? "Weekend Sprint"
+            : "Weekend Normale",
 
         startDate:
 
