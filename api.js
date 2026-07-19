@@ -521,7 +521,7 @@ function isSprintWeekend() {
    CARICAMENTO RISULTATI
 ========================================================== */
 
-function loadResults() {
+function updateResults() {
 
     if (!resultsData) {
 
