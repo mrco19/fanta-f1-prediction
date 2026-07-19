@@ -686,9 +686,9 @@ async function refreshSite() {
 
     updateHome();
 
-    loadResults();
+    updateResults();
 
-   updateRanking();
+    updateRanking();
 
 }
 
