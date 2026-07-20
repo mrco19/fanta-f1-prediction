@@ -323,7 +323,12 @@ function updateHome() {
        COUNTDOWN
     ========================== */
 
-    startCountdown(startDate);
+   console.log("startDate =", startDate);
+   console.log("startCountdown =", typeof startCountdown);
+
+   console.log("Sto chiamando startCountdown()");
+   
+   startCountdown(startDate);
 
 
 
