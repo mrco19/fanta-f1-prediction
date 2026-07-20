@@ -1111,25 +1111,7 @@ function updateHomeBackup(){
 
     );
 
-    /* --------------------------
-       COUNTDOWN
-    -------------------------- */
-
-    startCountdown();
-
-}
-/* ==========================================================
-   COUNTDOWN
-========================================================== */
-
-function startCountdown(){
-
-    if(!APP.weekend){
-
-        return;
-
-    }
-
+  
     /* --------------------------
        FERMA IL TIMER PRECEDENTE
     -------------------------- */
@@ -1952,71 +1934,3 @@ document.addEventListener(
     initializeApplication
 
 );
-/* ==========================================================
-   COUNTDOWN HOME
-========================================================== */
-
-async function startCountdown(){
-
-    try{
-
-        const weekend = await loadWeekend();
-
-        if(!weekend){
-
-            return;
-
-        }
-
-        const countdown =
-
-            document.getElementById("countdown");
-
-        if(!countdown){
-
-            return;
-
-        }
-
-        function update(){
-
-            const time =
-
-                getRemainingTime(
-
-                    weekend.predictionsClose
-
-                );
-
-            if(time.expired){
-
-                countdown.innerHTML =
-
-                    "🔴 Pronostici chiusi";
-
-                return;
-
-            }
-
-            countdown.innerHTML =
-
-                `${time.days}g `
-                +`${time.hours}h `
-                +`${time.minutes}m `
-                +`${time.seconds}s`;
-
-        }
-
-        update();
-
-        setInterval(update,1000);
-
-    }
-
-    catch(error){
-
-        console.error(error);
-
-    }
-
-}
