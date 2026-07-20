@@ -1,13 +1,13 @@
 {
-  "id": 13,
-  "name": "Gran Premio del Belgio",
-  "country": "Belgio",
-  "circuit": "Spa-Francorchamps",
-  "flag": "🇧🇪",
-  "round": 13,
-  "sprint": true,
-  "type": "Weekend Sprint",
-  "startDate": "2026-07-24T12:30",
-  "endDate": "2026-07-26T18:00",
-  "predictionsClose": "2026-07-24T15:30"
+  "id": 14,
+  "name": "Gran Premio d'Ungheria",
+  "country": "Ungheria",
+  "circuit": "Hungaroring",
+  "flag": "🇭🇺",
+  "round": 14,
+  "sprint": false,
+  "type": "Weekend Normale",
+  "startDate": "",
+  "endDate": "",
+  "predictionsClose": ""
 }
