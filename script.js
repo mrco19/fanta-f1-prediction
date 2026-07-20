@@ -943,8 +943,8 @@ function getWeekendStatus(){
    AGGIORNA HOME
 ========================================================== */
 
-function updateHome(){
-
+function updateHomeBackup(){
+   
     if(!APP.weekend){
 
         return;
