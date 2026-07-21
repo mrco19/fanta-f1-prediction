@@ -895,21 +895,6 @@ function createResultTable(config){
 }
 
 /* ==========================================================
-   CREA TUTTE LE TABELLE
-========================================================== */
-
-function buildPredictionTables(){
-
-    TABLES.forEach(config=>{
-
-        createPredictionTable(config);
-
-        createResultTable(config);
-
-    });
-
-}
-/* ==========================================================
    STATO DEL WEEKEND
 ========================================================== */
 
